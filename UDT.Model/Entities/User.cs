@@ -8,7 +8,7 @@ namespace UDT.Model.Entities
     public class User
     {
         public int Id { get; set; }
-        public string Numa { get; set; }
+        public string Name { get; set; }
         public int GroupId { set; get; }
         public Group Group { get; set; }
         public string Email { get; set; }
