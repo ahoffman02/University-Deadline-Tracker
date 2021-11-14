@@ -4,7 +4,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using UDT.Business;
 
 namespace UniversityDeadlineTracker.Controllers
 {
@@ -32,7 +31,6 @@ namespace UniversityDeadlineTracker.Controllers
                 {
                     Date = DateTime.Now.AddDays(index),
                     TemperatureC = rng.Next(-20, 55),
-                    Summary = new ItemBusiness().function()
                 })
                 .ToArray();
         }
