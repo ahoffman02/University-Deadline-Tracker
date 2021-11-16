@@ -4,6 +4,7 @@ import Avatar from '@mui/material/Avatar';
 import {IconButton, ListItemIcon, Menu, MenuItem, Stack} from "@mui/material";
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import {AccountCircle, Logout, Settings} from "@mui/icons-material";
+import Logo from '../Resources/timetable.png'
 
 export const Header = () => {
     const [anchorEl, setAnchorEl] = React.useState(null);
@@ -17,9 +18,14 @@ export const Header = () => {
 
     return (<header>
         <Stack className="navmenu" direction="row" spacing="50px">
-            <div className="title">
-                University Deadline Tracker
-            </div>
+            <Stack direction="row">
+                <div className="logo">
+                    <img src={Logo} alt="logo" height="50px" width="50px"/>
+                </div>
+                <div className="title">
+                    University Deadline Tracker
+                </div>
+            </Stack>
             <div className="link">
                 Boards
             </div>
@@ -27,11 +33,13 @@ export const Header = () => {
                 Community
             </div>
         </Stack>
-        <Stack direction="row" className="avatar"
+        <Stack direction="row" className="right"
                onClick={handleClick}>
-            <Avatar alt="User"
-                    src="https://www.pngkey.com/png/full/230-2301779_best-classified-apps-default-user-profile.png"
-                    sx={{width: 30, height: 30}}/>
+            <div className="avatar">
+                <Avatar alt="User"
+                        src="https://www.pngkey.com/png/full/230-2301779_best-classified-apps-default-user-profile.png"
+                        sx={{width: 30, height: 30}}/>
+            </div>
             <div className="dropdown-icon">
                 <IconButton color="inherit" aria-label="upload picture" component="span">
                     <ArrowDropDownIcon/>

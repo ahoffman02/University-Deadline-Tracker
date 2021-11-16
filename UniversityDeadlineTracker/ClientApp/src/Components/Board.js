@@ -2,5 +2,5 @@
 import './Board.css'
 
 export const Board = () => {
-    return <div className="board"></div>
+    return <div className="board"/>
 }
