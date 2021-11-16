@@ -1,0 +1,57 @@
+﻿header {
+    height: 8vh;
+    background-color: #292929;
+    color: white;
+}
+
+.navmenu {
+    float: left;
+    margin-left: 15px;
+}
+
+.title {
+    margin: 10px 20px;
+    font-size: x-large;
+}
+
+.link {
+    padding-top: 3.3%;
+    cursor: pointer;
+    transition-duration: .5s;
+}
+
+.link:hover {
+    color: yellow;
+}
+
+.link:after {
+    /*background: none repeat scroll 0 0 transparent;*/
+    content: "";
+    position: relative;
+    display: block;
+    height: .5px;
+    background: yellow;
+    transition: width 0.3s ease 0s, left 0.3s ease 0s;
+    width: 0;
+    left: 50%;
+}
+
+.link:hover:after {
+    width: 100%;
+    left: 0;
+}
+
+.avatar {
+    float: right;
+    margin: 15px;
+    cursor: pointer;
+    transition-duration: .2s;
+}
+
+.avatar:hover {
+    filter: brightness(70%);
+}
+
+.dropdown-icon {
+    margin: -3px -7px;
+}

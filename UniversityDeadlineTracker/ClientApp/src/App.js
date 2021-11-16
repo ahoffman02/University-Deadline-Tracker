@@ -1,11 +1,11 @@
 import React from 'react';
 import {Home} from "./Components/Home";
-import {NavMenu} from "./Components/NavMenu";
+import {Header} from "./Components/Header";
 
 export const App = () => {
     return (
         <React.Fragment>
-            <NavMenu/>
+            <Header/>
             <Home/>
         </React.Fragment>
     );
