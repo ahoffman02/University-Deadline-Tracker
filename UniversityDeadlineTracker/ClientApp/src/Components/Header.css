@@ -1,0 +1,69 @@
+﻿header {
+    height: 70px;
+    background-color: #292929;
+    color: white;
+}
+
+.navmenu {
+    float: left;
+    margin-left: 15px;
+}
+
+.logo {
+    height: 70px;
+    line-height: 70px;
+    margin-right: 20px;
+}
+
+.title {
+    height: 70px;
+    line-height: 70px;
+    font-size: x-large;
+}
+
+.link {
+    height: 70px;
+    line-height: 70px;
+    cursor: pointer;
+    transition-duration: .5s;
+}
+
+.link:hover {
+    color: yellow;
+}
+
+.link:after {
+    content: "";
+    position: relative;
+    display: block;
+    height: .5px;
+    background: yellow;
+    transition: width 0.3s ease 0s, left 0.3s ease 0s;
+    width: 0;
+    top: 0;
+    left: 50%;
+}
+
+.link:hover:after {
+    width: 100%;
+    left: 0;
+}
+
+.right{
+    float: right;
+    cursor: pointer;
+    transition-duration: .2s;
+}
+
+.avatar {
+    margin: 30% 0;
+}
+
+.avatar:hover {
+    filter: brightness(70%);
+}
+
+.dropdown-icon {
+    height: 70px;
+    line-height: 70px;
+}
