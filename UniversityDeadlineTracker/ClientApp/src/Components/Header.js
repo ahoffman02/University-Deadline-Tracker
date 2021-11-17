@@ -1,13 +1,15 @@
 import React from 'react';
 import './Header.css';
 import Avatar from '@mui/material/Avatar';
-import {IconButton, ListItemIcon, Menu, MenuItem, MenuList, Paper, Stack} from "@mui/material";
+import {Divider, IconButton, ListItemIcon, Menu, MenuItem, MenuList, Paper, Stack} from "@mui/material";
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import {AccountCircle, Logout, Settings} from "@mui/icons-material";
 import Logo from '../Resources/timetable.png'
 import {Link} from "react-router-dom";
+import {useHistory} from "react-router-dom";
 
 export const Header = () => {
+    let history = useHistory();
     const [anchorEl, setAnchorEl] = React.useState(null);
     const open = Boolean(anchorEl);
     const handleClick = (event) => {
@@ -31,7 +33,10 @@ export const Header = () => {
                 <Link to="/home">Boards</Link>
             </div>
             <div className="link">
-                <Link to="/home">Community</Link>
+                <Link to="/backlog">Backlog</Link>
+            </div>
+            <div className="link">
+                <Link to="/community">Community</Link>
             </div>
         </Stack>
         <Stack direction="row" className="right"
@@ -51,25 +56,38 @@ export const Header = () => {
               className="dropdown"
               anchorOrigin={{vertical: 'center', horizontal: 'right'}}
               transformOrigin={{vertical: 'top', horizontal: 'center'}}>
-            <MenuItem onClick={handleClose}
-                      sx={{width: "200px", maxWidth: '100%'}}
-                      className="dropdown-item">
+            <MenuItem className="dropdown-logged-user">
+                <p>Logged in as</p>
+                <p className="name">PacoPakkun</p>
+            </MenuItem>
+            <Divider light="true"/>
+            <MenuItem className="dropdown-item"
+                      onClick={() => {
+                          handleClose();
+                          history.push('/home');
+                      }}>
                 <ListItemIcon>
-                    <AccountCircle fontSize="small" htmlColor="#9D9D9D"/>
+                    <AccountCircle fontSize="small" htmlColor="#9D9D9D" className="icon"/>
                 </ListItemIcon>
                 <Link to="/home">Profile</Link>
             </MenuItem>
-            <MenuItem onClick={handleClose}
-                      className="dropdown-item">
+            <MenuItem className="dropdown-item"
+                      onClick={() => {
+                          handleClose();
+                          history.push('/home');
+                      }}>
                 <ListItemIcon>
-                    <Settings fontSize="small" htmlColor="#9D9D9D"/>
+                    <Settings fontSize="small" htmlColor="#9D9D9D" className="icon"/>
                 </ListItemIcon>
                 <Link to="/home">Settings</Link>
             </MenuItem>
-            <MenuItem onClick={handleClose}
-                      className="logout">
+            <MenuItem className="logout"
+                      onClick={() => {
+                          handleClose();
+                          history.push('/');
+                      }}>
                 <ListItemIcon>
-                    <Logout fontSize="small" htmlColor="#9D9D9D"/>
+                    <Logout fontSize="small" htmlColor="#9D9D9D" className="logout-icon"/>
                 </ListItemIcon>
                 <Link to="/">Logout</Link>
             </MenuItem>

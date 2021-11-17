@@ -37,6 +37,7 @@
 .link {
     height: 50px;
     line-height: 50px;
+    font-weight: 100;
     cursor: pointer;
     transition-duration: .5s;
 }
@@ -82,13 +83,50 @@
     line-height: 50px;
 }
 
+.MuiPaper-root {
+    background-color: #ffffff00 !important;
+}
+
 .MuiMenu-list {
     background-color: #292929;
     border-radius: 5px;
-    border: .5px solid grey;
+    border: .2px solid #454545;
+}
+
+.dropdown-logged-user {
+    background-color: #292929 !important;
+    color: #9d9d9d !important;
+    flex-direction: column;
+    cursor: auto !important;
+}
+
+.dropdown-logged-user p {
+    margin: 0 !important;
+}
+
+.name {
+    color: white;
+}
+
+.MuiDivider-root {
+    background-color: #454545;
+}
+
+.dropdown-item {
+    background-color: #292929 !important;
+    height: 30px !important;
+    transition-duration: .5s !important;
+}
+
+.dropdown-item:hover {
+    background-color: #343434 !important;
 }
 
 .dropdown-item:hover a {
+    color: white;
+}
+
+.dropdown-item:hover .icon {
     color: white;
 }
 
@@ -103,10 +141,20 @@
     text-decoration: none;
 }
 
+.logout {
+    background-color: #292929 !important;
+    height: 30px !important;
+    transition-duration: .5s !important;
+}
+
+.logout:hover {
+    background-color: #343434 !important;
+}
+
 .logout:hover a {
     color: #ea2a3d;
 }
 
-.logout:hover {
-    color: red;
+.logout:hover .logout-icon {
+    color: #ea2a3d;
 }
