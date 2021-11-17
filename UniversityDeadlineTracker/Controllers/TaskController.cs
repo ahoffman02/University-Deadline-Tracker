@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using UDT.Model.Entities;
@@ -26,6 +27,13 @@ namespace UniversityDeadlineTracker.Controllers
         public IActionResult GetAll()
         {
             return Ok(_taskService.GetAll());
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> AddTask([FromBody] UDT.Model.Entities.Task task)
+        {
+            var dbTask = await _taskService.AddTask(task);
+            return Created(string.Empty, dbTask);
         }
     }
 }
