@@ -4,8 +4,9 @@ import './Home.css'
 
 export const Home = () => {
     return (
-        <div className="homePage">
+        <div>
             <Board/>
         </div>
     );
 }
+export default Home;
