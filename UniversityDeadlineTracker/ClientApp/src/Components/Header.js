@@ -1,10 +1,11 @@
 import React from 'react';
 import './Header.css';
 import Avatar from '@mui/material/Avatar';
-import {IconButton, ListItemIcon, Menu, MenuItem, Stack} from "@mui/material";
+import {IconButton, ListItemIcon, Menu, MenuItem, MenuList, Paper, Stack} from "@mui/material";
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import {AccountCircle, Logout, Settings} from "@mui/icons-material";
 import Logo from '../Resources/timetable.png'
+import {Link} from "react-router-dom";
 
 export const Header = () => {
     const [anchorEl, setAnchorEl] = React.useState(null);
@@ -20,17 +21,17 @@ export const Header = () => {
         <Stack className="navmenu" direction="row" spacing="50px">
             <Stack direction="row">
                 <div className="logo">
-                    <img src={Logo} alt="logo" height="50px" width="50px"/>
+                    <img src={Logo} alt="logo" height="40px" width="40px"/>
                 </div>
                 <div className="title">
-                    University Deadline Tracker
+                    <Link to="/home">University Deadline Tracker</Link>
                 </div>
             </Stack>
             <div className="link">
-                Boards
+                <Link to="/home">Boards</Link>
             </div>
             <div className="link">
-                Community
+                <Link to="/home">Community</Link>
             </div>
         </Stack>
         <Stack direction="row" className="right"
@@ -41,31 +42,36 @@ export const Header = () => {
                         sx={{width: 30, height: 30}}/>
             </div>
             <div className="dropdown-icon">
-                <IconButton color="inherit" aria-label="upload picture" component="span">
-                    <ArrowDropDownIcon/>
-                </IconButton>
+                <ArrowDropDownIcon htmlColor="white"/>
             </div>
         </Stack>
-        <Menu dense anchorEl={anchorEl}
+        <Menu anchorEl={anchorEl}
               open={open}
-              onClose={handleClose}>
-            <MenuItem onClick={handleClose}>
+              onClose={handleClose}
+              className="dropdown"
+              anchorOrigin={{vertical: 'center', horizontal: 'right'}}
+              transformOrigin={{vertical: 'top', horizontal: 'center'}}>
+            <MenuItem onClick={handleClose}
+                      sx={{width: "200px", maxWidth: '100%'}}
+                      className="dropdown-item">
                 <ListItemIcon>
-                    <AccountCircle fontSize="small"/>
+                    <AccountCircle fontSize="small" htmlColor="#9D9D9D"/>
                 </ListItemIcon>
-                Profile
+                <Link to="/home">Profile</Link>
             </MenuItem>
-            <MenuItem onClick={handleClose}>
+            <MenuItem onClick={handleClose}
+                      className="dropdown-item">
                 <ListItemIcon>
-                    <Settings fontSize="small"/>
+                    <Settings fontSize="small" htmlColor="#9D9D9D"/>
                 </ListItemIcon>
-                Settings
+                <Link to="/home">Settings</Link>
             </MenuItem>
-            <MenuItem onClick={handleClose}>
+            <MenuItem onClick={handleClose}
+                      className="logout">
                 <ListItemIcon>
-                    <Logout fontSize="small"/>
+                    <Logout fontSize="small" htmlColor="#9D9D9D"/>
                 </ListItemIcon>
-                Logout
+                <Link to="/">Logout</Link>
             </MenuItem>
         </Menu>
     </header>);

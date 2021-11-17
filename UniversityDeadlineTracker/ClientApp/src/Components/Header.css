@@ -1,5 +1,5 @@
 ﻿header {
-    height: 70px;
+    height: 50px;
     background-color: #292929;
     color: white;
 }
@@ -9,27 +9,40 @@
     margin-left: 15px;
 }
 
+.navmenu a {
+    color: white;
+    text-decoration: none;
+    transition-duration: .2s;
+}
+
+.navmenu a:hover {
+    color: #ff9f60;
+    text-decoration: none;
+}
+
 .logo {
-    height: 70px;
-    line-height: 70px;
+    height: 50px;
+    line-height: 50px;
     margin-right: 20px;
 }
 
 .title {
-    height: 70px;
-    line-height: 70px;
+    height: 50px;
+    line-height: 50px;
     font-size: x-large;
-}
-
-.link {
-    height: 70px;
-    line-height: 70px;
     cursor: pointer;
     transition-duration: .5s;
 }
 
-.link:hover {
-    color: yellow;
+.link {
+    height: 50px;
+    line-height: 50px;
+    cursor: pointer;
+    transition-duration: .5s;
+}
+
+.link:hover a {
+    color: #ff9f60;
 }
 
 .link:after {
@@ -37,10 +50,10 @@
     position: relative;
     display: block;
     height: .5px;
-    background: yellow;
+    background: #ff9f60;
     transition: width 0.3s ease 0s, left 0.3s ease 0s;
     width: 0;
-    top: 0;
+    top: -22%;
     left: 50%;
 }
 
@@ -49,21 +62,51 @@
     left: 0;
 }
 
-.right{
+.right {
     float: right;
     cursor: pointer;
     transition-duration: .2s;
+    margin-right: 10px;
 }
 
-.avatar {
-    margin: 30% 0;
-}
-
-.avatar:hover {
+.right:hover {
     filter: brightness(70%);
 }
 
+.avatar {
+    margin: 20% 0;
+}
+
 .dropdown-icon {
-    height: 70px;
-    line-height: 70px;
+    height: 50px;
+    line-height: 50px;
+}
+
+.MuiMenu-list {
+    background-color: #292929;
+    border-radius: 5px;
+    border: .5px solid grey;
+}
+
+.dropdown-item:hover a {
+    color: white;
+}
+
+.dropdown a {
+    color: #9d9d9d;
+    text-decoration: none;
+    transition-duration: .2s;
+}
+
+.dropdown a:hover {
+    color: white;
+    text-decoration: none;
+}
+
+.logout:hover a {
+    color: #ea2a3d;
+}
+
+.logout:hover {
+    color: red;
 }
