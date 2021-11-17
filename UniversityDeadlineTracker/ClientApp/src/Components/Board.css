@@ -2,6 +2,6 @@
     margin: 30px auto;
     width: 90vw;
     height: 80%;
-    background-color: #343434;
+    background-color: var(--DARK_GREY);
     border-radius: 10px;
 }

@@ -1,11 +1,10 @@
 ﻿import React from 'react';
 import './Community.css'
+import {Default} from "./Default";
 
-const Community = () => {
+const Community = (props) => {
     return (
-        <div>
-
-        </div>
+        <Default/>
     );
 };
 

@@ -2,10 +2,10 @@ import React from 'react';
 import {Board} from "./Board";
 import './Home.css'
 
-export const Home = () => {
+export const Home = (props) => {
     return (
         <div>
-            <Board/>
+            <Board user={props.user}/>
         </div>
     );
 }

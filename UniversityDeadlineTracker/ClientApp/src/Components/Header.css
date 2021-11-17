@@ -1,23 +1,12 @@
 ﻿header {
     height: 50px;
-    background-color: #292929;
+    background-color: var(--DARKER_GREY);
     color: white;
 }
 
 .navmenu {
     float: left;
     margin-left: 15px;
-}
-
-.navmenu a {
-    color: white;
-    text-decoration: none;
-    transition-duration: .2s;
-}
-
-.navmenu a:hover {
-    color: #ff9f60;
-    text-decoration: none;
 }
 
 .logo {
@@ -34,6 +23,10 @@
     transition-duration: .5s;
 }
 
+.title:hover {
+    color: var(--ORANGE_ACCENT);
+}
+
 .link {
     height: 50px;
     line-height: 50px;
@@ -42,8 +35,27 @@
     transition-duration: .5s;
 }
 
-.link:hover a {
-    color: #ff9f60;
+.selected {
+    height: 50px;
+    line-height: 50px;
+    font-weight: 400;
+    color: white;
+}
+
+.selected:after {
+    content: "";
+    position: relative;
+    display: block;
+    height: .5px;
+    background: white;
+    transition: width 0.3s ease 0s, left 0.3s ease 0s;
+    top: -22%;
+    width: 100%;
+    left: 0;
+}
+
+.link:hover {
+    color: var(--ORANGE_ACCENT);
 }
 
 .link:after {
@@ -51,7 +63,7 @@
     position: relative;
     display: block;
     height: .5px;
-    background: #ff9f60;
+    background: var(--ORANGE_ACCENT);
     transition: width 0.3s ease 0s, left 0.3s ease 0s;
     width: 0;
     top: -22%;
@@ -83,21 +95,23 @@
     line-height: 50px;
 }
 
+/* dropdown */
+
 .MuiPaper-root {
-    background-color: #ffffff00 !important;
+    background-color: transparent !important;
 }
 
 .MuiMenu-list {
-    background-color: #292929;
+    background-color: var(--DARKER_GREY);
     border-radius: 5px;
-    border: .2px solid #454545;
+    border: .2px solid var(--LIGHT_GREY);
 }
 
 .dropdown-logged-user {
-    background-color: #292929 !important;
-    color: #9d9d9d !important;
+    background-color: var(--DARKER_GREY) !important;
     flex-direction: column;
     cursor: auto !important;
+    color: var(--LIGHTER_GREY) !important;
 }
 
 .dropdown-logged-user p {
@@ -105,56 +119,41 @@
 }
 
 .name {
-    color: white;
+    color: var(--ORANGE_ACCENT);
 }
 
 .MuiDivider-root {
-    background-color: #454545;
+    background-color: var(--LIGHT_GREY);
 }
 
 .dropdown-item {
-    background-color: #292929 !important;
+    background-color: var(--DARKER_GREY) !important;
     height: 30px !important;
     transition-duration: .5s !important;
+    color: var(--LIGHTER_GREY) !important;
 }
 
 .dropdown-item:hover {
-    background-color: #343434 !important;
-}
-
-.dropdown-item:hover a {
-    color: white;
+    background-color: var(--DARK_GREY) !important;
+    color: white !important;
 }
 
 .dropdown-item:hover .icon {
-    color: white;
-}
-
-.dropdown a {
-    color: #9d9d9d;
-    text-decoration: none;
-    transition-duration: .2s;
-}
-
-.dropdown a:hover {
-    color: white;
-    text-decoration: none;
+    color: white !important;
 }
 
 .logout {
-    background-color: #292929 !important;
+    background-color: var(--DARKER_GREY) !important;
     height: 30px !important;
     transition-duration: .5s !important;
+    color: var(--LIGHTER_GREY) !important;
 }
 
 .logout:hover {
-    background-color: #343434 !important;
-}
-
-.logout:hover a {
-    color: #ea2a3d;
+    background-color: var(--DARK_GREY) !important;
+    color: var(--RED_ACCENT) !important;
 }
 
 .logout:hover .logout-icon {
-    color: #ea2a3d;
+    color: var(--RED_ACCENT);
 }

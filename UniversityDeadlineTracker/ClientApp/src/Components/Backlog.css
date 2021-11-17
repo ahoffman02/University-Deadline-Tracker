@@ -2,73 +2,93 @@
     margin: 30px auto !important;
     width: 90vw !important;
     height: 80% !important;
-    background-color: #343434 !important;
+    background-color: var(--DARK_GREY) !important;
     border-radius: 10px !important;
 }
+
 .table {
 }
+
 .table-head {
 }
+
 .table-head-row {
 }
+
 .table-head-cell {
-    border-right: 0.5px solid #454545 !important;
+    border-right: 0.5px solid var(--LIGHT_GREY) !important;
     border-top: none !important;
-    border-bottom: 1px solid #9d9d9d !important;
+    border-bottom: 1px solid var(--LIGHTER_GREY) !important;
 
     color: white !important;
 }
+
 .table-body {
 }
+
 .table-body-row {
 }
+
 .table-body-cell {
-    border-top: 0.5px solid #454545 !important;
-    border-bottom: 0.5px solid #454545 !important;
+    border-top: 0.5px solid var(--LIGHT_GREY) !important;
+    border-bottom: 0.5px solid var(--LIGHT_GREY) !important;
     color: white !important;
 }
+
 .status-dot {
     margin-left: 10px;
 }
+
 .title-task-icon {
     margin-right: 10px;
 }
+
 #arrow {
     width: 5%;
     border-right: none !important;
 }
+
 #id {
     width: 7%;
 }
+
 #subject {
     width: 15%;
 }
+
 #title {
 }
+
 #deadline {
     width: 20%;
 }
+
 #status {
     width: 13%;
 }
+
 .arrow {
     color: white;
     border-radius: 50%;
-    transition-duration: .2s;
     cursor: pointer;
 }
-.arrow:hover{
-    background-color: #454545;
+
+.arrow:hover {
+    background-color: var(--LIGHT_GREY);
+    color: var(--ORANGE_ACCENT);
 }
+
 .table th {
     vertical-align: middle !important;
 }
+
 .table td {
-    border-top: 0.5px solid #454545 !important;
-    border-bottom: 0.5px solid #454545 !important;
+    border-top: 0.5px solid var(--LIGHT_GREY) !important;
+    border-bottom: 0.5px solid var(--LIGHT_GREY) !important;
 
     vertical-align: middle !important;
 }
+
 .description {
     color: white;
     font-size: 12px !important;

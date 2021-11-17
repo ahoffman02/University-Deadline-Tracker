@@ -1,9 +1,11 @@
-﻿::-webkit-scrollbar {
+﻿@import './Utils/Constants.css';
+
+::-webkit-scrollbar {
     display: none;
 }
 
 body {
-    background-color: #131313;
+    background-color: var(--DARKEST_GREY);
 }
 
 * {

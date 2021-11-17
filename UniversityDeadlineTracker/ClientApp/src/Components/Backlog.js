@@ -16,9 +16,10 @@ import FiberManualRecordIcon from "@mui/icons-material/FiberManualRecord";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import TaskIcon from "@mui/icons-material/Task";
+import {Default} from "./Default";
 
 function createData(id, subject, title, deadline, status, description) {
-    return { id, subject, title, deadline, status, description };
+    return {id, subject, title, deadline, status, description};
 }
 
 const getStatus = (status) => {
@@ -42,7 +43,7 @@ const getStatus = (status) => {
                 className="status-dot"
                 htmlColor={color}
                 fontSize="small"
-            ></FiberManualRecordIcon>
+            />
         </div>
     );
 };
@@ -67,7 +68,7 @@ const getTitle = (title) => {
                 className="title-task-icon"
                 htmlColor={color}
                 fontSize="small"
-            ></TaskIcon>
+            />
             {title}
         </div>
     );
@@ -197,7 +198,7 @@ const rows = [
 ];
 
 const Row = (props) => {
-    const { row } = props;
+    const {row} = props;
     const [open, setOpen] = React.useState(false);
 
     return (
@@ -218,7 +219,7 @@ const Row = (props) => {
                                 className="arrow"
                             />
                         ) : (
-                            <KeyboardArrowDownIcon className="arrow" />
+                            <KeyboardArrowDownIcon className="arrow"/>
                         )}
                     </div>
                 </TableCell>
@@ -244,11 +245,11 @@ const Row = (props) => {
             </TableRow>
             <TableRow>
                 <TableCell
-                    style={{ paddingBottom: 0, paddingTop: 0 }}
+                    style={{paddingBottom: 0, paddingTop: 0}}
                     colSpan={6}
                 >
                     <Collapse in={open} timeout="auto" unmountOnExit>
-                        <Box sx={{ margin: 1 }}>
+                        <Box sx={{margin: 1}}>
                             <Typography
                                 className="description"
                                 variant="h6"
@@ -265,67 +266,72 @@ const Row = (props) => {
     );
 };
 
-const Backlog = () => {
+const Backlog = (props) => {
     return (
-        <TableContainer component={Paper} className="table-container">
-            <Table
-                // stickyHeader
-                aria-label="collapsible table"
-                sx={{ minWidth: 650 }}
-                aria-label="simple table"
-                className="table"
-            >
-                <TableHead className="table-head">
-                    <TableRow className="table-head-row">
-                        <TableCell
-                            className="table-head-cell"
-                            id="arrow"
-                            align="center"
-                        ></TableCell>
-                        <TableCell
-                            className="table-head-cell"
-                            id="id"
-                            align="center"
-                        >
-                            Task ID
-                        </TableCell>
-                        <TableCell
-                            className="table-head-cell"
-                            id="subject"
-                            align="center"
-                        >
-                            Subject
-                        </TableCell>
-                        <TableCell
-                            className="table-head-cell"
-                            id="title"
-                            align="center"
-                        >
-                            Title
-                        </TableCell>
-                        <TableCell
-                            className="table-head-cell"
-                            id="deadline"
-                            align="center"
-                        >
-                            Deadline
-                        </TableCell>
-                        <TableCell
-                            className="table-head-cell"
-                            id="status"
-                            align="center"
-                        >
-                            Status
-                        </TableCell>
-                    </TableRow>
-                </TableHead>
-                <TableBody className="table-body">
-                    {rows.map((row) => (
-                        <Row key={row.id} row={row} />
-                    ))}
-                </TableBody>
-            </Table>
-        </TableContainer>
+        <React.Fragment>
+            {props.user ?
+                <TableContainer component={Paper} className="table-container">
+                    <Table
+                        // stickyHeader
+                        aria-label="collapsible table"
+                        sx={{minWidth: 650}}
+                        aria-label="simple table"
+                        className="table"
+                    >
+                        <TableHead className="table-head">
+                            <TableRow className="table-head-row">
+                                <TableCell
+                                    className="table-head-cell"
+                                    id="arrow"
+                                    align="center"
+                                />
+                                <TableCell
+                                    className="table-head-cell"
+                                    id="id"
+                                    align="center"
+                                >
+                                    Task ID
+                                </TableCell>
+                                <TableCell
+                                    className="table-head-cell"
+                                    id="subject"
+                                    align="center"
+                                >
+                                    Subject
+                                </TableCell>
+                                <TableCell
+                                    className="table-head-cell"
+                                    id="title"
+                                    align="center"
+                                >
+                                    Title
+                                </TableCell>
+                                <TableCell
+                                    className="table-head-cell"
+                                    id="deadline"
+                                    align="center"
+                                >
+                                    Deadline
+                                </TableCell>
+                                <TableCell
+                                    className="table-head-cell"
+                                    id="status"
+                                    align="center"
+                                >
+                                    Status
+                                </TableCell>
+                            </TableRow>
+                        </TableHead>
+                        <TableBody className="table-body">
+                            {rows.map((row) => (
+                                <Row key={row.id} row={row}/>
+                            ))}
+                        </TableBody>
+                    </Table>
+                </TableContainer>
+                :
+                <Default/>}
+        </React.Fragment>
     );
 };
 
