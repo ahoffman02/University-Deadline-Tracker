@@ -1,15 +1,16 @@
 import React from 'react';
 import './Header.css';
 import Avatar from '@mui/material/Avatar';
-import {Divider, IconButton, ListItemIcon, Menu, MenuItem, MenuList, Paper, Stack} from "@mui/material";
+import {Divider, ListItemIcon, Menu, MenuItem, Stack} from "@mui/material";
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
-import {AccountCircle, Logout, Settings} from "@mui/icons-material";
+import {AccountCircle, Logout, Settings, Login} from "@mui/icons-material";
 import Logo from '../Resources/timetable.png'
-import {Link} from "react-router-dom";
-import {useHistory} from "react-router-dom";
+import {useHistory, useLocation} from "react-router-dom";
+import {Pages} from "../Utils/Enums";
 
-export const Header = () => {
+export const Header = (props) => {
     let history = useHistory();
+    const location = useLocation();
     const [anchorEl, setAnchorEl] = React.useState(null);
     const open = Boolean(anchorEl);
     const handleClick = (event) => {
@@ -25,18 +26,26 @@ export const Header = () => {
                 <div className="logo">
                     <img src={Logo} alt="logo" height="40px" width="40px"/>
                 </div>
-                <div className="title">
-                    <Link to="/home">University Deadline Tracker</Link>
+                <div className="title" onClick={() => {
+                    history.push(Pages.HOME);
+                }}>
+                    University Deadline Tracker
                 </div>
             </Stack>
-            <div className="link">
-                <Link to="/home">Boards</Link>
+            <div className={location.pathname === Pages.BOARD ? "selected" : "link"} onClick={() => {
+                history.push(Pages.BOARD);
+            }}>
+                Boards
             </div>
-            <div className="link">
-                <Link to="/backlog">Backlog</Link>
+            <div className={location.pathname === Pages.BACKLOG ? "selected" : "link"} onClick={() => {
+                history.push(Pages.BACKLOG);
+            }}>
+                Backlog
             </div>
-            <div className="link">
-                <Link to="/community">Community</Link>
+            <div className={location.pathname === Pages.COMMUNITY ? "selected" : "link"} onClick={() => {
+                history.push(Pages.COMMUNITY);
+            }}>
+                Community
             </div>
         </Stack>
         <Stack direction="row" className="right"
@@ -56,41 +65,57 @@ export const Header = () => {
               className="dropdown"
               anchorOrigin={{vertical: 'center', horizontal: 'right'}}
               transformOrigin={{vertical: 'top', horizontal: 'center'}}>
-            <MenuItem className="dropdown-logged-user">
-                <p>Logged in as</p>
-                <p className="name">PacoPakkun</p>
-            </MenuItem>
-            <Divider light="true"/>
-            <MenuItem className="dropdown-item"
-                      onClick={() => {
-                          handleClose();
-                          history.push('/home');
-                      }}>
-                <ListItemIcon>
-                    <AccountCircle fontSize="small" htmlColor="#9D9D9D" className="icon"/>
-                </ListItemIcon>
-                <Link to="/home">Profile</Link>
-            </MenuItem>
-            <MenuItem className="dropdown-item"
-                      onClick={() => {
-                          handleClose();
-                          history.push('/home');
-                      }}>
-                <ListItemIcon>
-                    <Settings fontSize="small" htmlColor="#9D9D9D" className="icon"/>
-                </ListItemIcon>
-                <Link to="/home">Settings</Link>
-            </MenuItem>
-            <MenuItem className="logout"
-                      onClick={() => {
-                          handleClose();
-                          history.push('/');
-                      }}>
-                <ListItemIcon>
-                    <Logout fontSize="small" htmlColor="#9D9D9D" className="logout-icon"/>
-                </ListItemIcon>
-                <Link to="/">Logout</Link>
-            </MenuItem>
+            {props.user ?
+                <React.Fragment>
+                    <MenuItem className="dropdown-logged-user">
+                        <p>Logged in as</p>
+                        <p className="name">{props.user.username}</p>
+                    </MenuItem>
+                    <Divider light="true"/>
+                    <MenuItem className="dropdown-item"
+                              onClick={() => {
+                                  handleClose();
+                                  history.push(Pages.BOARD);
+                              }}>
+                        <ListItemIcon>
+                            <AccountCircle fontSize="small" htmlColor="#9D9D9D" className="icon"/>
+                        </ListItemIcon>
+                        Profile
+                    </MenuItem>
+                    <MenuItem className="dropdown-item"
+                              onClick={() => {
+                                  handleClose();
+                                  history.push(Pages.BOARD);
+                              }}>
+                        <ListItemIcon>
+                            <Settings fontSize="small" htmlColor="#9D9D9D" className="icon"/>
+                        </ListItemIcon>
+                        Settings
+                    </MenuItem>
+                    <MenuItem className="logout"
+                              onClick={() => {
+                                  props.setUser(null);
+                                  handleClose();
+                                  history.push(Pages.HOME);
+                              }}>
+                        <ListItemIcon>
+                            <Logout fontSize="small" htmlColor="#9D9D9D" className="logout-icon"/>
+                        </ListItemIcon>
+                        Logout
+                    </MenuItem>
+                </React.Fragment>
+                :
+                <MenuItem className="dropdown-item"
+                          onClick={() => {
+                              handleClose();
+                              history.push(Pages.HOME);
+                          }}
+                          sx={{width: '120px'}}>
+                    <ListItemIcon>
+                        <Login fontSize="small" htmlColor="#9D9D9D" className="icon"/>
+                    </ListItemIcon>
+                    Login
+                </MenuItem>}
         </Menu>
     </header>);
 }

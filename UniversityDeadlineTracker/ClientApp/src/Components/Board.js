@@ -1,11 +1,17 @@
 ﻿import React from "react";
 import "./Board.css";
 import SimpleSlider from "./Slider";
+import {Default} from "./Default";
 
-export const Board = () => {
+export const Board = (props) => {
     return (
-        <div className="board">
-            <SimpleSlider></SimpleSlider>
-        </div>
+        <React.Fragment>{props.user ?
+            <div className="board">
+                <SimpleSlider user={props.user}/>
+            </div>
+            :
+            <Default/>
+        }
+        </React.Fragment>
     );
 };
