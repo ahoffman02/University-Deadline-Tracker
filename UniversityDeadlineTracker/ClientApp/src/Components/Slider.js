@@ -1,5 +1,6 @@
 import React, {Component} from "react";
 import Slider from "react-slick";
+import { TaskCard } from "./TaskCard";
 
 import "./Slider.css";
 import "./Carousel.css";
@@ -50,6 +51,10 @@ function SamplePrevArrow(props) {
     );
 }
 
+const mockCards = [{title: "LFTC", date:"18.11.2021",
+ description:" Description is the pattern of narrative development that aims to make", 
+ penalty: "2p/week penalty"}]
+
 export const SimpleSlider = (props) => {
     const settings = {
         dots: true,
@@ -75,6 +80,11 @@ export const SimpleSlider = (props) => {
                             <FiberManualRecordTwoToneIcon fontSize="small"/>
                         </span>
                     <div className="card"></div>
+                    <TaskCard 
+                    title={mockCards[0].title} 
+                    description={mockCards[0].description} 
+                    penalty={mockCards[0].penalty}>           
+                    </TaskCard>
                     <div className="card"></div>
                 </div>
                 <div className="card-list-container">
