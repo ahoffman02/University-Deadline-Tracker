@@ -42,5 +42,12 @@ namespace UniversityDeadlineTracker.Controllers
             await _taskService.DeleteTask(taskId);
             return NoContent();
         }
+
+        [HttpPut]
+        public async Task<IActionResult> EditTask([FromBody] TaskDto taskDto)
+        {
+            var dbTask = await _taskService.EditTask(taskDto);
+            return Ok(dbTask);
+        }
     }
 }

@@ -29,7 +29,15 @@ namespace UDT.Business.Task
         {
             var task = _dbContext.Tasks.Where(task => task.Id == taskId).Single();
             _dbContext.Tasks.Remove(task);
-           _dbContext.SaveChanges();
+            await _dbContext.SaveChangesAsync();
+        }
+
+        public async Task<TaskDto> EditTask(TaskDto taskDto)
+        {
+            var task = taskDto.ToTask();
+            _dbContext.Tasks.Update(task);
+            await _dbContext.SaveChangesAsync();
+            return taskDto;
         }
 
         public IAsyncEnumerable<Model.Entities.Task> GetAll()

@@ -12,5 +12,6 @@ namespace UDT.Business.Task
         public IAsyncEnumerable<UDT.Model.Entities.Task> GetAll();
         public Task<UDT.Model.Entities.Task> AddTask(TaskDto taskDto);
         public System.Threading.Tasks.Task DeleteTask(int taskId);
+        public Task<TaskDto> EditTask(TaskDto taskDto);
     }
 }
