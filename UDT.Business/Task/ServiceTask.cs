@@ -4,6 +4,7 @@ using System.Text;
 using UDT.Repository;
 using UDT.Model.Entities;
 using System.Threading.Tasks;
+using System.Linq;
 
 namespace UDT.Business.Task
 {
@@ -16,11 +17,19 @@ namespace UDT.Business.Task
             _dbContext = dbContext;
         }
 
-        public async Task<Model.Entities.Task> AddTask(Model.Entities.Task task)
+        public async Task<Model.Entities.Task> AddTask(TaskDto taskDto)
         {
+            var task = taskDto.ToTask();
             await _dbContext.Tasks.AddAsync(task);
             await _dbContext.SaveChangesAsync();
             return task;
+        }
+
+        public async System.Threading.Tasks.Task DeleteTask(int taskId)
+        {
+            var task = _dbContext.Tasks.Where(task => task.Id == taskId).Single();
+            _dbContext.Tasks.Remove(task);
+           _dbContext.SaveChanges();
         }
 
         public IAsyncEnumerable<Model.Entities.Task> GetAll()

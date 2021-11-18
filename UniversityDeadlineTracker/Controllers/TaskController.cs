@@ -30,10 +30,17 @@ namespace UniversityDeadlineTracker.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddTask([FromBody] UDT.Model.Entities.Task task)
+        public async Task<IActionResult> AddTask([FromBody] TaskDto taskDto)
         {
-            var dbTask = await _taskService.AddTask(task);
+            var dbTask = await _taskService.AddTask(taskDto);
             return Created(string.Empty, dbTask);
+        }
+
+        [HttpDelete("{taskId:int}")]
+        public async Task<IActionResult> DeleteTask([FromRoute] int taskId)
+        {
+            await _taskService.DeleteTask(taskId);
+            return NoContent();
         }
     }
 }
