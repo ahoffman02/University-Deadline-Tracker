@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Text;
 using UDT.Repository;
 using UDT.Model.Entities;
+using UDT.Model.ViewModels;
+using UDT.Model.Mappers;
 using System.Threading.Tasks;
 using System.Linq;
 
@@ -17,9 +19,9 @@ namespace UDT.Business.Task
             _dbContext = dbContext;
         }
 
-        public async Task<Model.Entities.Task> AddTask(TaskDto taskDto)
+        public async Task<Model.Entities.Task> AddTask(TaskCreationViewModel taskDto)
         {
-            var task = taskDto.ToTask();
+            var task = TaskMappers.toEntity(taskDto);
             await _dbContext.Tasks.AddAsync(task);
             await _dbContext.SaveChangesAsync();
             return task;
@@ -32,9 +34,9 @@ namespace UDT.Business.Task
             await _dbContext.SaveChangesAsync();
         }
 
-        public async Task<TaskDto> EditTask(TaskDto taskDto)
+        public async Task<TaskUpdateViewModel> EditTask(TaskUpdateViewModel taskDto)
         {
-            var task = taskDto.ToTask();
+            var task = TaskMappers.toEntity(taskDto);
             _dbContext.Tasks.Update(task);
             await _dbContext.SaveChangesAsync();
             return taskDto;
