@@ -11,8 +11,9 @@ namespace UDT.Business.Task
     public interface IServiceTask
     {
         public IAsyncEnumerable<UDT.Model.Entities.Task> GetAll();
+        public Task<UDT.Model.Entities.Task> GetById(int taskId);
         public Task<UDT.Model.Entities.Task> AddTask(TaskCreationViewModel taskDto);
         public System.Threading.Tasks.Task DeleteTask(int taskId);
-        public Task<TaskUpdateViewModel> EditTask(TaskUpdateViewModel taskDto);
+        public Task<UDT.Model.Entities.Task> EditTask(TaskUpdateViewModel taskDto);
     }
 }

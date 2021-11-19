@@ -7,6 +7,7 @@ using UDT.Model.ViewModels;
 using UDT.Model.Mappers;
 using System.Threading.Tasks;
 using System.Linq;
+using Microsoft.EntityFrameworkCore;
 
 namespace UDT.Business.Task
 {
@@ -34,17 +35,22 @@ namespace UDT.Business.Task
             await _dbContext.SaveChangesAsync();
         }
 
-        public async Task<TaskUpdateViewModel> EditTask(TaskUpdateViewModel taskDto)
+        public async Task<UDT.Model.Entities.Task> EditTask(TaskUpdateViewModel taskDto)
         {
             var task = TaskMappers.toEntity(taskDto);
             _dbContext.Tasks.Update(task);
             await _dbContext.SaveChangesAsync();
-            return taskDto;
+            return task;
         }
 
         public IAsyncEnumerable<Model.Entities.Task> GetAll()
         {
             return _dbContext.Tasks.AsAsyncEnumerable();
+        }
+
+        public async Task<Model.Entities.Task> GetById(int taskId)
+        {
+            return await _dbContext.Tasks.FirstOrDefaultAsync(task => task.Id == taskId);
         }
     }
 }

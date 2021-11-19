@@ -30,6 +30,13 @@ namespace UniversityDeadlineTracker.Controllers
             return Ok(_taskService.GetAll());
         }
 
+        [HttpGet("{taskId:int}")]
+        public async Task<IActionResult> GetTaskById([FromRoute] int taskId)
+        {
+            var task = await _taskService.GetById(taskId);
+            return Ok(task);
+        }
+
         [HttpPost]
         public async Task<IActionResult> AddTask([FromBody] TaskCreationViewModel taskDto)
         {
