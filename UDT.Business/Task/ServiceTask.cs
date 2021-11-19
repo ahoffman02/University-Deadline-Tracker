@@ -8,7 +8,7 @@ using System.Linq;
 
 namespace UDT.Business.Task
 {
-    class ServiceTask : IServiceTask
+    public class ServiceTask : IServiceTask
     {
         private readonly DataContext _dbContext;
 

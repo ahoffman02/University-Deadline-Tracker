@@ -10,7 +10,7 @@ using UDT.Business.Task;
 namespace UniversityDeadlineTracker.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("api/tasks")]
     public class TaskController : ControllerBase
     {
         private readonly IServiceTask _taskService;
