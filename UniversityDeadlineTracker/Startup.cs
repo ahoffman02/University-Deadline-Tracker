@@ -27,7 +27,7 @@ namespace UniversityDeadlineTracker
 
             services.AddControllersWithViews();
             
-            services.AddTransient<IBoardService, BoardService>();
+            services.AddScoped<IBoardService, BoardService>();
 
             // In production, the React files will be served from this directory
             services.AddSpaStaticFiles(configuration => { configuration.RootPath = "ClientApp/build"; });

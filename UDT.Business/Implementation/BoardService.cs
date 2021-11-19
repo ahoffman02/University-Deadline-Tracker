@@ -16,14 +16,15 @@ namespace UDT.Business.Implementation
             _dataContext = dataContext;
         }
 
-        public async Task<List<Board>> GetAllAsync()
+        public IAsyncEnumerable<Board> GetAllAsync()
         {
-            return await _dataContext.Board.ToListAsync();
+            return _dataContext.Board.AsAsyncEnumerable();
         }
 
         public async Task<Board> GetByIdAsync(int boardId)
         {
-            return await _dataContext.Board.FindAsync(boardId);
+            return await _dataContext.Board
+                .FirstOrDefaultAsync(board => board.Id == boardId);
         }
 
         public async Task<Board> AddAsync(Board board)
@@ -36,14 +37,15 @@ namespace UDT.Business.Implementation
 
         public async Task<bool> DeleteAsync(int boardId)
         {
-            var board = await _dataContext.Board.FindAsync(boardId);
-            
-            if (board == null)
+            var existingBoard = await _dataContext.Board
+                .FirstOrDefaultAsync(board => board.Id == boardId);
+
+            if (existingBoard == null)
             {
                 return false;
             }
             
-            _dataContext.Board.Remove(board);
+            _dataContext.Board.Remove(existingBoard);
             await _dataContext.SaveChangesAsync();
             
             return true;
@@ -51,20 +53,21 @@ namespace UDT.Business.Implementation
 
         public async Task<Board> UpdateAsync(Board newBoard)
         {
-            var board = await _dataContext.Board.FindAsync(newBoard.Id);
+            var existingBoard = await _dataContext.Board
+                .FirstOrDefaultAsync(board => board.Id == newBoard.Id);
 
-            if (board == null)
+            if (existingBoard == null)
             {
                 return null;
             }
 
-            board.TaskId = newBoard.TaskId;
-            board.UserId = newBoard.UserId;
-            board.Status = newBoard.Status;
+            existingBoard.TaskId = newBoard.TaskId;
+            existingBoard.UserId = newBoard.UserId;
+            existingBoard.Status = newBoard.Status;
             
             await _dataContext.SaveChangesAsync();
 
-            return board;
+            return existingBoard;
         }
     }
 }

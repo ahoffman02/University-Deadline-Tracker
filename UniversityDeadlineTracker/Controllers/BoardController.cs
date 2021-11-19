@@ -8,7 +8,7 @@ using UDT.Model.ViewModels;
 namespace UniversityDeadlineTracker.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("api/board")]
     public class BoardController : ControllerBase
     {
         private readonly IBoardService _boardService;
@@ -19,22 +19,19 @@ namespace UniversityDeadlineTracker.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetAll()
+        public IActionResult GetAll()
         {
-            return Ok((await _boardService.GetAllAsync()).Select(board => board.ToViewModel()));
+            return Ok(_boardService.GetAllAsync().Select(board => board.ToViewModel()));
         }
-        
+
         [HttpGet]
         [Route("{id:int}")]
         public async Task<IActionResult> GetById([FromRoute] int id)
         {
             var board = await _boardService.GetByIdAsync(id);
-            
-            if (board == null)
-            {
-                return NotFound();
-            }
-            
+
+            if (board == null) return NotFound();
+
             return Ok(board.ToViewModel());
         }
 
@@ -54,28 +51,23 @@ namespace UniversityDeadlineTracker.Controllers
         {
             var result = await _boardService.DeleteAsync(id);
 
-            if (!result)
-            {
-                return NotFound(false);
-            }
+            if (!result) return NotFound(false);
 
             return Ok(true);
         }
-        
+
         [HttpPut]
         [Route("{id:int}")]
-        public async Task<IActionResult> UpdateBoard([FromRoute] int id, [FromBody] BoardUpdateViewModel boardUpdateViewModel)
+        public async Task<IActionResult> UpdateBoard([FromRoute] int id,
+            [FromBody] BoardUpdateViewModel boardUpdateViewModel)
         {
             var board = boardUpdateViewModel.ToEntity();
             board.Id = id;
 
             board = await _boardService.UpdateAsync(board);
 
-            if (board == null)
-            {
-                return NotFound();
-            }
-            
+            if (board == null) return NotFound();
+
             return Ok(board.ToViewModel());
         }
     }

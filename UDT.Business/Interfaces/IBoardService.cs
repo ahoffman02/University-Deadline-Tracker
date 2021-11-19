@@ -6,7 +6,7 @@ namespace UDT.Business.Interfaces
 {
     public interface IBoardService
     {
-        Task<List<Board>> GetAllAsync();
+        IAsyncEnumerable<Board> GetAllAsync();
         Task<Board> GetByIdAsync(int boardId);
         Task<Board> AddAsync(Board board);
         Task<bool> DeleteAsync(int boardId);
