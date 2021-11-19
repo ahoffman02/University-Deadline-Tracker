@@ -1,10 +1,36 @@
-﻿body {
-    background-color: #1e1e1e;
+﻿.welcome {
+    font-size: x-large;
+    color: white;
+    width: 40%;
+    margin: 10% auto;
+    text-align: center;
 }
 
-* {
-    margin: 0;
-    padding: 0;
+.welcome .hello {
+    font-size: xx-large;
+}
+
+.welcome span {
+    color: var(--ORANGE_ACCENT);
+}
+
+.welcome .button {
+    margin: 50px auto;
+    font-size: medium;
+    color: white;
+    width: 180px;
+    height: 55px;
+    line-height: 50px;
+    border: 1px solid white;
+    background-color: transparent;
+    cursor: pointer;
+    transition-duration: .5s;
+}
+
+.welcome .button:hover {
+    background-color: white;
+    border: none;
+    color: var(--DARKER_GREY);
 }
 
 .login {
@@ -14,7 +40,7 @@
 
 .form {
     max-width: 330px;
-    margin: 10% auto;
+    margin: 20px auto;
     display: flex;
     flex-direction: column;
     background: white;
@@ -22,11 +48,16 @@
     border-radius: 15px;
 }
 
+.input {
+    margin-bottom: 10px !important;
+}
+
 .form .button {
-    margin-top: 50px;
+    margin-top: 30px;
+    width: 50%;
 }
 
 .form a {
-    color: #1f1f1f;
+    color: var(--DARKER_GREY);
     text-decoration: none;
 }
