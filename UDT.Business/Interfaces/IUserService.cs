@@ -10,7 +10,7 @@ namespace UDT.Business.Interfaces
     {
         Task<User> GetByIDAsync(int id);
 
-        Task<List<User>> GetAllAsync();
+        Task<IEnumerable<User>> GetAllAsync();
 
         Task<User> AddAsync(User user);
 

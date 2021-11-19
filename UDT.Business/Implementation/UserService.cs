@@ -28,7 +28,7 @@ namespace UDT.Business.Implementation
 
         public async Task<bool> DeleteAsync(int id)
         {
-            User existingUser = await _context.Users.SingleAsync(user => user.Id == id);
+            User existingUser = await _context.Users.FirstOrDefaultAsync(user => user.Id == id);
 
             if (existingUser != null)
             {
@@ -40,19 +40,19 @@ namespace UDT.Business.Implementation
             return false;
         }
 
-        public async Task<List<User>> GetAllAsync()
+        public async Task<IEnumerable<User>> GetAllAsync()
         {
             return await _context.Users.ToListAsync();
         }
 
         public async Task<User> GetByIDAsync(int id)
         {
-            return await _context.Users.SingleAsync(user => user.Id == id);
+            return await _context.Users.FirstOrDefaultAsync(user => user.Id == id);
         }
 
         public async Task<User> UpdateAsync(User user)
         {
-            User existingUser = await _context.Users.SingleAsync(user => user.Id == user.Id);
+            User existingUser = await _context.Users.FirstOrDefaultAsync(user => user.Id == user.Id);
 
             if (existingUser != null)
             {
