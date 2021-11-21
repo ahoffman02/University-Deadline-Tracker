@@ -5,12 +5,13 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using UDT.Model.Entities;
+using UDT.Model.ViewModels;
 using UDT.Business.Task;
 
 namespace UniversityDeadlineTracker.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("api/tasks")]
     public class TaskController : ControllerBase
     {
         private readonly IServiceTask _taskService;
@@ -29,8 +30,15 @@ namespace UniversityDeadlineTracker.Controllers
             return Ok(_taskService.GetAll());
         }
 
+        [HttpGet("{taskId:int}")]
+        public async Task<IActionResult> GetTaskById([FromRoute] int taskId)
+        {
+            var task = await _taskService.GetById(taskId);
+            return Ok(task);
+        }
+
         [HttpPost]
-        public async Task<IActionResult> AddTask([FromBody] TaskDto taskDto)
+        public async Task<IActionResult> AddTask([FromBody] TaskCreationViewModel taskDto)
         {
             var dbTask = await _taskService.AddTask(taskDto);
             return Created(string.Empty, dbTask);
@@ -44,7 +52,7 @@ namespace UniversityDeadlineTracker.Controllers
         }
 
         [HttpPut]
-        public async Task<IActionResult> EditTask([FromBody] TaskDto taskDto)
+        public async Task<IActionResult> EditTask([FromBody] TaskUpdateViewModel taskDto)
         {
             var dbTask = await _taskService.EditTask(taskDto);
             return Ok(dbTask);

@@ -3,12 +3,15 @@ using System.Collections.Generic;
 using System.Text;
 using UDT.Repository;
 using UDT.Model.Entities;
+using UDT.Model.ViewModels;
+using UDT.Model.Mappers;
 using System.Threading.Tasks;
 using System.Linq;
+using Microsoft.EntityFrameworkCore;
 
 namespace UDT.Business.Task
 {
-    class ServiceTask : IServiceTask
+    public class ServiceTask : IServiceTask
     {
         private readonly DataContext _dbContext;
 
@@ -17,9 +20,9 @@ namespace UDT.Business.Task
             _dbContext = dbContext;
         }
 
-        public async Task<Model.Entities.Task> AddTask(TaskDto taskDto)
+        public async Task<Model.Entities.Task> AddTask(TaskCreationViewModel taskDto)
         {
-            var task = taskDto.ToTask();
+            var task = TaskMappers.toEntity(taskDto);
             await _dbContext.Tasks.AddAsync(task);
             await _dbContext.SaveChangesAsync();
             return task;
@@ -32,17 +35,22 @@ namespace UDT.Business.Task
             await _dbContext.SaveChangesAsync();
         }
 
-        public async Task<TaskDto> EditTask(TaskDto taskDto)
+        public async Task<UDT.Model.Entities.Task> EditTask(TaskUpdateViewModel taskDto)
         {
-            var task = taskDto.ToTask();
+            var task = TaskMappers.toEntity(taskDto);
             _dbContext.Tasks.Update(task);
             await _dbContext.SaveChangesAsync();
-            return taskDto;
+            return task;
         }
 
         public IAsyncEnumerable<Model.Entities.Task> GetAll()
         {
             return _dbContext.Tasks.AsAsyncEnumerable();
+        }
+
+        public async Task<Model.Entities.Task> GetById(int taskId)
+        {
+            return await _dbContext.Tasks.FirstOrDefaultAsync(task => task.Id == taskId);
         }
     }
 }
