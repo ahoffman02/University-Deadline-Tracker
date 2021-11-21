@@ -4,4 +4,9 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\UDT.Model\UDT.Model.csproj" />
+    <ProjectReference Include="..\UDT.Repository\UDT.Repository.csproj" />
+  </ItemGroup>
+
 </Project>
