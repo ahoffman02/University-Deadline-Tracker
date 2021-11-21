@@ -66,12 +66,12 @@ export const Header = (props) => {
               anchorOrigin={{vertical: 'center', horizontal: 'right'}}
               transformOrigin={{vertical: 'top', horizontal: 'center'}}>
             {props.user ?
-                <React.Fragment>
+                [
                     <MenuItem className="dropdown-logged-user">
                         <p>Logged in as</p>
                         <p className="name">{props.user.username}</p>
-                    </MenuItem>
-                    <Divider light="true"/>
+                    </MenuItem>,
+                    <Divider/>,
                     <MenuItem className="dropdown-item"
                               onClick={() => {
                                   handleClose();
@@ -81,7 +81,7 @@ export const Header = (props) => {
                             <AccountCircle fontSize="small" htmlColor="#9D9D9D" className="icon"/>
                         </ListItemIcon>
                         Profile
-                    </MenuItem>
+                    </MenuItem>,
                     <MenuItem className="dropdown-item"
                               onClick={() => {
                                   handleClose();
@@ -91,7 +91,7 @@ export const Header = (props) => {
                             <Settings fontSize="small" htmlColor="#9D9D9D" className="icon"/>
                         </ListItemIcon>
                         Settings
-                    </MenuItem>
+                    </MenuItem>,
                     <MenuItem className="logout"
                               onClick={() => {
                                   props.setUser(null);
@@ -103,7 +103,7 @@ export const Header = (props) => {
                         </ListItemIcon>
                         Logout
                     </MenuItem>
-                </React.Fragment>
+                ]
                 :
                 <MenuItem className="dropdown-item"
                           onClick={() => {
