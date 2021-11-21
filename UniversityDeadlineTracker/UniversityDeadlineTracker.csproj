@@ -18,6 +18,7 @@
         <PackageReference Include="Swashbuckle.AspNetCore.Swagger" Version="6.2.3" />
         <PackageReference Include="Swashbuckle.AspNetCore.SwaggerGen" Version="6.2.3" />
         <PackageReference Include="Swashbuckle.AspNetCore.SwaggerUI" Version="6.2.3" />
+        <PackageReference Include="System.Linq.Async" Version="5.0.0" />
     </ItemGroup>
 
     <ItemGroup>
@@ -31,6 +32,10 @@
       <ProjectReference Include="..\UDT.Business\UDT.Business.csproj" />
       <ProjectReference Include="..\UDT.Model\UDT.Model.csproj" />
       <ProjectReference Include="..\UDT.Repository\UDT.Repository.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="ClientApp\src\Resources" />
     </ItemGroup>
 
     <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">

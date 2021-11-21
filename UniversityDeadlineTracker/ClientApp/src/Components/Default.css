@@ -1,0 +1,39 @@
+﻿.join-now {
+    font-size: x-large;
+    color: white;
+    width: 70%;
+    margin: auto auto 50px;
+    text-align: center;
+}
+
+.bigger {
+    font-size: xx-large;
+}
+
+.accent {
+    color: var(--ORANGE_ACCENT);
+}
+
+.join-now .button {
+    margin: 50px auto;
+    font-size: medium;
+    color: white;
+    width: 180px;
+    height: 55px;
+    line-height: 50px;
+    border: 1px solid white;
+    background-color: transparent;
+    cursor: pointer;
+    transition-duration: .5s;
+}
+
+.join-now .button:hover {
+    background-color: white;
+    border: none;
+    color: var(--DARKER_GREY);
+}
+
+ul {
+    margin: 10px 20px 10px 15%;
+    text-align: justify;
+}
