@@ -8,6 +8,7 @@ using Microsoft.Extensions.Hosting;
 using UDT.Business.Implementation;
 using UDT.Business.Interfaces;
 using UDT.Repository;
+using UDT.Business.Task;
 
 namespace UniversityDeadlineTracker
 {
@@ -29,8 +30,14 @@ namespace UniversityDeadlineTracker
             
             services.AddScoped<IBoardService, BoardService>();
 
+            services.AddTransient<IServiceTask, ServiceTask>();
+
             // In production, the React files will be served from this directory
             services.AddSpaStaticFiles(configuration => { configuration.RootPath = "ClientApp/build"; });
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("V1", new Microsoft.OpenApi.Models.OpenApiInfo { Title = "UDT", Version = "V1" });
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -39,6 +46,8 @@ namespace UniversityDeadlineTracker
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+                app.UseSwagger();
+                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger", "UDT"));
             }
             else
             {
