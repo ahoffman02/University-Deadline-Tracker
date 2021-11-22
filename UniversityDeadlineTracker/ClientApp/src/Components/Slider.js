@@ -1,6 +1,6 @@
-import React, {Component} from "react";
+import React, {useEffect} from "react";
 import Slider from "react-slick";
-import { TaskCard } from "./TaskCard";
+import {TaskCard} from "./TaskCard";
 
 import "./Slider.css";
 import "./Carousel.css";
@@ -51,245 +51,59 @@ function SamplePrevArrow(props) {
     );
 }
 
-const mockCards = [{title: "LFTC", date:"18.11.2021",
- description:" Description is the pattern of narrative development that aims to make", 
- penalty: "2p/week penalty"}]
-
 export const SimpleSlider = (props) => {
-    const settings = {
-        dots: true,
-        infinite: false,
-        speed: 1200,
-        slidesToShow: 4.3,
-        slidesToScroll: 2,
-        nextArrow: <SampleNextArrow/>,
-        prevArrow: <SamplePrevArrow/>,
-    };
+        const settings = {
+            dots: true,
+            infinite: false,
+            speed: 1200,
+            slidesToShow: 4.3,
+            slidesToScroll: 2,
+            nextArrow: <SampleNextArrow/>,
+            prevArrow: <SamplePrevArrow/>,
+        };
 
-    return (
-        <div className="slider">
-            <div className="long-arrow">
-                <div className="little-arrow">
-                    <ArrowRightTwoToneIcon fontSize="large"/>
-                </div>
-            </div>
-            <Slider {...settings}>
-                <div className="card-list-container">
-                    <span className="date">16.11.2021</span>
+        const getCardList = () => {
+            const groupedTasks = props.tasks?.reduce(function (r, a) {
+                r[a.deadline] = r[a.deadline] || [];
+                r[a.deadline].push(a);
+                return r;
+            }, Object.create(null));
+
+            return Object.values(groupedTasks).map(day => {
+                const taskCards = day.map(task =>
+                    <TaskCard title={task.title} description={task.description} penalty={task.subject}/>);
+                return <div className="card-list-container">
+                    <span className="date">{new Date(day[0].deadline).toDateString()}</span>
                     <span className="dot">
-                            <FiberManualRecordTwoToneIcon fontSize="small"/>
-                        </span>
-                    <div className="card"></div>
-                    <TaskCard 
-                    title={mockCards[0].title} 
-                    description={mockCards[0].description} 
-                    penalty={mockCards[0].penalty}>           
-                    </TaskCard>
-                    <div className="card"></div>
+                    <FiberManualRecordTwoToneIcon fontSize="small"/>
+                </span>
+                    {taskCards}
                 </div>
-                <div className="card-list-container">
-                    <span className="date">17.11.2021</span>
-                    <span className="dot">
-                            <FiberManualRecordTwoToneIcon fontSize="small"/>
-                        </span>
-                    <div className="card"></div>
-                </div>
-                <div className="card-list-container">
-                    <span className="date">18.11.2021</span>
-                    <span className="dot">
-                            <FiberManualRecordTwoToneIcon fontSize="small"/>
-                        </span>
-                    <div className="card"></div>
-                    <div className="card"></div>
-                    <div className="card"></div>
-                </div>
-                <div className="card-list-container">
-                    <span className="date">19.11.2021</span>
-                    <span className="dot">
-                            <FiberManualRecordTwoToneIcon fontSize="small"/>
-                        </span>
-                    <div className="card"></div>
-                    <div className="card"></div>
-                </div>
-                <div className="card-list-container">
-                    <span className="date">20.11.2021</span>
-                    <span className="dot">
-                            <FiberManualRecordTwoToneIcon fontSize="small"/>
-                        </span>
-                    <div className="card"></div>
-                </div>
-                <div className="card-list-container">
-                    <span className="date">21.11.2021</span>
-                    <span className="dot">
-                            <FiberManualRecordTwoToneIcon fontSize="small"/>
-                        </span>
-                    <div className="card"></div>
-                    <div className="card"></div>
-                </div>
-                <div className="card-list-container">
-                    <span className="date">22.11.2021</span>
-                    <span className="dot">
-                            <FiberManualRecordTwoToneIcon fontSize="small"/>
-                        </span>
-                    <div className="card"></div>
-                </div>
-                <div className="card-list-container">
-                    <span className="date">23.11.2021</span>
-                    <span className="dot">
-                            <FiberManualRecordTwoToneIcon fontSize="small"/>
-                        </span>
-                    <div className="card"></div>
-                    <div className="card"></div>
-                    <div className="card"></div>
-                </div>
-                <div className="card-list-container">
-                    <span className="date">24.11.2021</span>
-                    <span className="dot">
-                            <FiberManualRecordTwoToneIcon fontSize="small"/>
-                        </span>
-                    <div className="card"></div>
-                    <div className="card"></div>
-                </div>
-                <div className="card-list-container">
-                    <span className="date">25.11.2021</span>
-                    <span className="dot">
-                            <FiberManualRecordTwoToneIcon fontSize="small"/>
-                        </span>
-                    <div className="card"></div>
-                </div>
-                <div className="card-list-container">
-                    <span className="date">26.11.2021</span>
-                    <span className="dot">
-                            <FiberManualRecordTwoToneIcon fontSize="small"/>
-                        </span>
-                    <div className="card"></div>
-                    <div className="card"></div>
-                </div>
-                <div className="card-list-container">
-                    <span className="date">27.11.2021</span>
-                    <span className="dot">
-                            <FiberManualRecordTwoToneIcon fontSize="small"/>
-                        </span>
-                    <div className="card"></div>
-                </div>
-                <div className="card-list-container">
-                    <span className="date">28.11.2021</span>
-                    <span className="dot">
-                            <FiberManualRecordTwoToneIcon fontSize="small"/>
-                        </span>
-                    <div className="card"></div>
-                    <div className="card"></div>
-                    <div className="card"></div>
-                </div>
-                <div className="card-list-container">
-                    <span className="date">29.11.2021</span>
-                    <span className="dot">
-                            <FiberManualRecordTwoToneIcon fontSize="small"/>
-                        </span>
-                    <div className="card"></div>
-                    <div className="card"></div>
-                </div>
-                <div className="card-list-container">
-                    <span className="date">30.11.2021</span>
-                    <span className="dot">
-                            <FiberManualRecordTwoToneIcon fontSize="small"/>
-                        </span>
-                    <div className="card"></div>
-                </div>
-                <div className="card-list-container">
-                    <span className="date">01.12.2021</span>
-                    <span className="dot">
-                            <FiberManualRecordTwoToneIcon fontSize="small"/>
-                        </span>
-                    <div className="card"></div>
-                </div>
-                <div className="card-list-container">
-                    <span className="date">02.12.2021</span>
-                    <span className="dot">
-                            <FiberManualRecordTwoToneIcon fontSize="small"/>
-                        </span>
-                    <div className="card"></div>
-                    <div className="card"></div>
-                </div>
-                <div className="card-list-container">
-                    <span className="date">03.12.2021</span>
-                    <span className="dot">
-                            <FiberManualRecordTwoToneIcon fontSize="small"/>
-                        </span>
-                    <div className="card"></div>
-                </div>
-                <div className="card-list-container">
-                    <span className="date">04.12.2021</span>
-                    <span className="dot">
-                            <FiberManualRecordTwoToneIcon fontSize="small"/>
-                        </span>
-                    <div className="card"></div>
-                    <div className="card"></div>
-                    <div className="card"></div>
-                </div>
-                <div className="card-list-container">
-                    <span className="date">05.12.2021</span>
-                    <span className="dot">
-                            <FiberManualRecordTwoToneIcon fontSize="small"/>
-                        </span>
-                    <div className="card"></div>
-                    <div className="card"></div>
-                </div>
-                <div className="card-list-container">
-                    <span className="date">06.12.2021</span>
-                    <span className="dot">
-                            <FiberManualRecordTwoToneIcon fontSize="small"/>
-                        </span>
-                    <div className="card"></div>
-                </div>
-                <div className="card-list-container">
-                    <span className="date">07.12.2021</span>
-                    <span className="dot">
-                            <FiberManualRecordTwoToneIcon fontSize="small"/>
-                        </span>
-                    <div className="card"></div>
-                    <div className="card"></div>
-                </div>
-                <div className="card-list-container">
-                    <span className="date">08.12.2021</span>
-                    <span className="dot">
-                            <FiberManualRecordTwoToneIcon fontSize="small"/>
-                        </span>
-                    <div className="card"></div>
-                </div>
-                <div className="card-list-container">
-                    <span className="date">09.12.2021</span>
-                    <span className="dot">
-                            <FiberManualRecordTwoToneIcon fontSize="small"/>
-                        </span>
-                    <div className="card"></div>
-                    <div className="card"></div>
-                    <div className="card"></div>
-                </div>
-                <div className="card-list-container">
-                    <span className="date">10.12.2021</span>
-                    <span className="dot">
-                            <FiberManualRecordTwoToneIcon fontSize="small"/>
-                        </span>
-                    <div className="card"></div>
-                    <div className="card"></div>
-                </div>
-                <div className="card-list-container">
-                    <span className="date">11.12.2021</span>
-                    <span className="dot">
-                            <FiberManualRecordTwoToneIcon fontSize="small"/>
-                        </span>
-                    <div className="card"></div>
-                </div>
-                <div className="card-list-container">
-                    <span className="date">12.12.2012</span>
-                    <span className="dot">
-                            <FiberManualRecordTwoToneIcon fontSize="small"/>
-                        </span>
-                    <div className="card"></div>
-                </div>
-            </Slider>
-        </div>
-    );
-};
+            })
+        }
+
+        useEffect(() => {
+            getCardList()
+        });
+
+        return (
+            <React.Fragment>
+                {props.tasks.length > 0 ?
+                    <div className="slider">
+                        <div className="long-arrow">
+                            <div className="little-arrow">
+                                <ArrowRightTwoToneIcon fontSize="large"/>
+                            </div>
+                        </div>
+                        <Slider {...settings}>
+                            {getCardList()}
+                        </Slider>
+                    </div>
+                    :
+                    <div className="no-tasks">No tasks? Go get <span className="orange">drunk</span>!</div>
+                }
+            </React.Fragment>
+        );
+    }
+;
 export default SimpleSlider;

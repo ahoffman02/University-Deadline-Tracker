@@ -1,4 +1,4 @@
-﻿import React from "react";
+﻿import React, {useEffect, useState} from "react";
 import "./Backlog.css";
 
 import Table from "@mui/material/Table";
@@ -17,10 +17,6 @@ import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import TaskIcon from "@mui/icons-material/Task";
 import {Default} from "./Default";
-
-function createData(id, subject, title, deadline, status, description) {
-    return {id, subject, title, deadline, status, description};
-}
 
 const getStatus = (status) => {
     let color = "transparent";
@@ -74,129 +70,6 @@ const getTitle = (title) => {
     );
 };
 
-const rows = [
-    createData(
-        1,
-        "PPD",
-        getTitle("Lab1 - MPI Varianta1 + Varianta2"),
-        "22.11.2021",
-        getStatus("New"),
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam id lectus dolor. Vestibulum dignissim justo quis sodales congue. Donec luctus gravida est, eu aliquet sem tincidunt placerat. Ut condimentum magna in est elementum tempus. Duis et elit dictum, ultrices erat nec, finibus orci. Integer volutpat est ligula, ac laoreet turpis consectetur vitae. Phasellus consectetur ex ac massa feugiat aliquam. Etiam arcu lorem, pellentesque quis euismod eu, finibus in nisl. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Ut fringilla velit mi, volutpat ultrices elit imperdiet vel. Donec volutpat bibendum sem nec elementum. Donec in aliquam nisl. Fusce congue blandit neque non pellentesque. Pellentesque dictum faucibus cursus. Mauris eu mauris a diam fermentum vulputate."
-    ),
-    createData(
-        2,
-        "LFTC",
-        getTitle("Lab2 - Automat finit"),
-        "22.11.2021",
-        getStatus("Active"),
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam id lectus dolor. Vestibulum dignissim justo quis sodales congue. Donec luctus gravida est, eu aliquet sem tincidunt placerat. Ut condimentum magna in est elementum tempus. Duis et elit dictum, ultrices erat nec, finibus orci. Integer volutpat est ligula, ac laoreet turpis consectetur vitae. Phasellus consectetur ex ac massa feugiat aliquam. Etiam arcu lorem, pellentesque quis euismod eu, finibus in nisl. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Ut fringilla velit mi, volutpat ultrices elit imperdiet vel. Donec volutpat bibendum sem nec elementum. Donec in aliquam nisl. Fusce congue blandit neque non pellentesque. Pellentesque dictum faucibus cursus. Mauris eu mauris a diam fermentum vulputate."
-    ),
-    createData(
-        3,
-        "MA",
-        getTitle("Lab3 - Project idea Native + Non-native implementation"),
-        "23.11.2021",
-        getStatus("Completed"),
-        "a"
-    ),
-    createData(
-        4,
-        "VR",
-        getTitle("Lab4 - Complete template with code"),
-        "24.11.2021",
-        getStatus("Active"),
-        "b"
-    ),
-    createData(
-        5,
-        "PDAV",
-        getTitle("Lab5 - RGB to YUV Encoder + Decoder "),
-        "25.11.2021",
-        getStatus("Active"),
-        "c"
-    ),
-    createData(
-        1,
-        "PPD",
-        getTitle("Lab1 - MPI Varianta1 + Varianta2"),
-        "22.11.2021",
-        getStatus("New"),
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam id lectus dolor. Vestibulum dignissim justo quis sodales congue. Donec luctus gravida est, eu aliquet sem tincidunt placerat. Ut condimentum magna in est elementum tempus. Duis et elit dictum, ultrices erat nec, finibus orci. Integer volutpat est ligula, ac laoreet turpis consectetur vitae. Phasellus consectetur ex ac massa feugiat aliquam. Etiam arcu lorem, pellentesque quis euismod eu, finibus in nisl. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Ut fringilla velit mi, volutpat ultrices elit imperdiet vel. Donec volutpat bibendum sem nec elementum. Donec in aliquam nisl. Fusce congue blandit neque non pellentesque. Pellentesque dictum faucibus cursus. Mauris eu mauris a diam fermentum vulputate."
-    ),
-    createData(
-        2,
-        "LFTC",
-        getTitle("Lab2 - Automat finit"),
-        "22.11.2021",
-        getStatus("Active"),
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam id lectus dolor. Vestibulum dignissim justo quis sodales congue. Donec luctus gravida est, eu aliquet sem tincidunt placerat. Ut condimentum magna in est elementum tempus. Duis et elit dictum, ultrices erat nec, finibus orci. Integer volutpat est ligula, ac laoreet turpis consectetur vitae. Phasellus consectetur ex ac massa feugiat aliquam. Etiam arcu lorem, pellentesque quis euismod eu, finibus in nisl. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Ut fringilla velit mi, volutpat ultrices elit imperdiet vel. Donec volutpat bibendum sem nec elementum. Donec in aliquam nisl. Fusce congue blandit neque non pellentesque. Pellentesque dictum faucibus cursus. Mauris eu mauris a diam fermentum vulputate."
-    ),
-    createData(
-        3,
-        "MA",
-        getTitle("Lab3 - Project idea Native + Non-native implementation"),
-        "23.11.2021",
-        getStatus("Completed"),
-        "a"
-    ),
-    createData(
-        4,
-        "VR",
-        getTitle("Lab4 - Complete template with code"),
-        "24.11.2021",
-        getStatus("Active"),
-        "b"
-    ),
-    createData(
-        5,
-        "PDAV",
-        getTitle("Lab5 - RGB to YUV Encoder + Decoder "),
-        "25.11.2021",
-        getStatus("Active"),
-        "c"
-    ),
-    createData(
-        1,
-        "PPD",
-        getTitle("Lab1 - MPI Varianta1 + Varianta2"),
-        "22.11.2021",
-        getStatus("New"),
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam id lectus dolor. Vestibulum dignissim justo quis sodales congue. Donec luctus gravida est, eu aliquet sem tincidunt placerat. Ut condimentum magna in est elementum tempus. Duis et elit dictum, ultrices erat nec, finibus orci. Integer volutpat est ligula, ac laoreet turpis consectetur vitae. Phasellus consectetur ex ac massa feugiat aliquam. Etiam arcu lorem, pellentesque quis euismod eu, finibus in nisl. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Ut fringilla velit mi, volutpat ultrices elit imperdiet vel. Donec volutpat bibendum sem nec elementum. Donec in aliquam nisl. Fusce congue blandit neque non pellentesque. Pellentesque dictum faucibus cursus. Mauris eu mauris a diam fermentum vulputate."
-    ),
-    createData(
-        2,
-        "LFTC",
-        getTitle("Lab2 - Automat finit"),
-        "22.11.2021",
-        getStatus("Active"),
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam id lectus dolor. Vestibulum dignissim justo quis sodales congue. Donec luctus gravida est, eu aliquet sem tincidunt placerat. Ut condimentum magna in est elementum tempus. Duis et elit dictum, ultrices erat nec, finibus orci. Integer volutpat est ligula, ac laoreet turpis consectetur vitae. Phasellus consectetur ex ac massa feugiat aliquam. Etiam arcu lorem, pellentesque quis euismod eu, finibus in nisl. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Ut fringilla velit mi, volutpat ultrices elit imperdiet vel. Donec volutpat bibendum sem nec elementum. Donec in aliquam nisl. Fusce congue blandit neque non pellentesque. Pellentesque dictum faucibus cursus. Mauris eu mauris a diam fermentum vulputate."
-    ),
-    createData(
-        3,
-        "MA",
-        getTitle("Lab3 - Project idea Native + Non-native implementation"),
-        "23.11.2021",
-        getStatus("Completed"),
-        "a"
-    ),
-    createData(
-        4,
-        "VR",
-        getTitle("Lab4 - Complete template with code"),
-        "24.11.2021",
-        getStatus("Active"),
-        "b"
-    ),
-    createData(
-        5,
-        "PDAV",
-        getTitle("Lab5 - RGB to YUV Encoder + Decoder "),
-        "25.11.2021",
-        getStatus("Active"),
-        "c"
-    ),
-];
-
 const Row = (props) => {
     const {row} = props;
     const [open, setOpen] = React.useState(false);
@@ -234,13 +107,13 @@ const Row = (props) => {
                     {row.subject}
                 </TableCell>
                 <TableCell className="table-body-cell" align="left">
-                    {row.title}
+                    {getTitle(row.title)}
                 </TableCell>
                 <TableCell className="table-body-cell" align="center">
                     {row.deadline}
                 </TableCell>
                 <TableCell className="table-body-cell" align="right">
-                    {row.status}
+                    {getStatus(row.status)}
                 </TableCell>
             </TableRow>
             <TableRow>
@@ -267,6 +140,17 @@ const Row = (props) => {
 };
 
 const Backlog = (props) => {
+    const [tasks, setTasks] = useState([])
+
+    useEffect(() => {
+        fetch('api/tasks').then(data =>
+            data.json().then(data =>
+                setTasks(data.map(task => {
+                    return {...task, status: 'New'}
+                }))
+            ))
+    }, [])
+
     return (
         <React.Fragment>
             {props.user ?
@@ -323,7 +207,7 @@ const Backlog = (props) => {
                             </TableRow>
                         </TableHead>
                         <TableBody className="table-body">
-                            {rows.map((row) => (
+                            {tasks.map((row) => (
                                 <Row key={row.id} row={row}/>
                             ))}
                         </TableBody>

@@ -49,3 +49,16 @@
     right: -17px;
     color: white;
 }
+
+.no-tasks {
+    width: 500px;
+    font-size: x-large;
+    color: white;
+    margin: auto;
+    padding: 50px;
+    text-align: center;
+}
+
+.orange {
+    color: var(--ORANGE_ACCENT)
+}
