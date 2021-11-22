@@ -73,7 +73,7 @@ export const SimpleSlider = (props) => {
                 const taskCards = day.map(task =>
                     <TaskCard title={task.title} description={task.description} penalty={task.subject}/>);
                 return <div className="card-list-container">
-                    <span className="date">{day[0].deadline}</span>
+                    <span className="date">{new Date(day[0].deadline).toDateString()}</span>
                     <span className="dot">
                     <FiberManualRecordTwoToneIcon fontSize="small"/>
                 </span>

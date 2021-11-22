@@ -142,14 +142,14 @@ const Row = (props) => {
 const Backlog = (props) => {
     const [tasks, setTasks] = useState([])
 
-    // useEffect(() => {
-    //     fetch('task').then(data =>
-    //         data.json().then(data =>
-    //             setTasks(data.map(task => {
-    //                 return {...task, status: 'New'}
-    //             }))
-    //         ))
-    // }, [])
+    useEffect(() => {
+        fetch('api/tasks').then(data =>
+            data.json().then(data =>
+                setTasks(data.map(task => {
+                    return {...task, status: 'New'}
+                }))
+            ))
+    }, [])
 
     return (
         <React.Fragment>

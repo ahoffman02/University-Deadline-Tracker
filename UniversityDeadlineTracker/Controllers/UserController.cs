@@ -6,7 +6,7 @@ using UDT.Model.ViewModels;
 using UDT.Model.Mappers;
 using System.Linq;
 
-namespace UDT.Controllers
+namespace UniversityDeadlineTracker.Controllers
 {
     [ApiController]
     [Route("api/users")]
