@@ -56,11 +56,7 @@ namespace UDT.Business.Implementation
 
             if (existingUser != null)
             {
-                existingUser.Name = user.Name;
-                existingUser.GroupId = user.GroupId;
-                existingUser.Email = user.Email;
-                existingUser.Role = user.Role;
-                existingUser.Code = user.Code;
+                _context.Users.Update(user);
 
                 await _context.SaveChangesAsync();
             }

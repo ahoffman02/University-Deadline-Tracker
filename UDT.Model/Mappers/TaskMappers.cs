@@ -16,9 +16,9 @@ namespace UDT.Model.Mappers
                 Id = TaskViewModel.Id,
                 Title = TaskViewModel.Title,
                 Description = TaskViewModel.Description,
-                Subject = TaskViewModel.Subject,
-                GroupName = TaskViewModel.GroupName,
+                SubjectId = TaskViewModel.SubjectId,
                 Deadline = TaskViewModel.Deadline,
+                Penalty = TaskViewModel.Penalty,
             };
 
             return Task;
@@ -31,9 +31,9 @@ namespace UDT.Model.Mappers
                 Id = Task.Id,
                 Title = Task.Title,
                 Description = Task.Description,
-                Subject = Task.Subject,
-                GroupName = Task.GroupName,
+                SubjectId = Task.SubjectId,
                 Deadline = Task.Deadline,
+                Penalty = Task.Penalty,
             };
 
             return TaskViewModel;
@@ -46,9 +46,9 @@ namespace UDT.Model.Mappers
                 Id = TaskUpdateViewModel.Id,
                 Title = TaskUpdateViewModel.Title,
                 Description = TaskUpdateViewModel.Description,
-                Subject = TaskUpdateViewModel.Subject,
-                GroupName = TaskUpdateViewModel.GroupName,
+                SubjectId = TaskUpdateViewModel.SubjectId,
                 Deadline = TaskUpdateViewModel.Deadline,
+                Penalty = TaskUpdateViewModel.Penalty,
             };
 
             return Task;
@@ -60,9 +60,9 @@ namespace UDT.Model.Mappers
             {
                 Title = TaskCreationViewModel.Title,
                 Description = TaskCreationViewModel.Description,
-                Subject = TaskCreationViewModel.Subject,
-                GroupName = TaskCreationViewModel.GroupName,
+                SubjectId = TaskCreationViewModel.SubjectId,
                 Deadline = TaskCreationViewModel.Deadline,
+                Penalty = TaskCreationViewModel.Penalty,
             };
 
             return Task;
