@@ -28,8 +28,6 @@ namespace UniversityDeadlineTracker
 
             services.AddControllersWithViews();
             
-            services.AddScoped<IBoardService, BoardService>();
-
             services.AddTransient<IServiceTask, ServiceTask>();
 
             services.AddTransient<IUserService, UserService>();
