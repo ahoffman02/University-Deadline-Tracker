@@ -25,7 +25,7 @@ namespace UDT.Model.Mappers
                 Code = userViewModel.Code,
                 ProfilePictureURL = userViewModel.ProfilePictureURL,
                 DateOfBirth = userViewModel.DateOfBirth,
-                Subjects = userViewModel.Subjects.Select(id => new Subject {
+                Subjects = userViewModel.Subjects?.Select(id => new Subject {
                     Id = id
                 }).ToList(),
             };
@@ -37,6 +37,7 @@ namespace UDT.Model.Mappers
         {
             UserViewModel userViewModel = new UserViewModel
             {
+                Id = user.Id,
                 Username = user.Username,
                 FirstName = user.FirstName,
                 LastName = user.LastName,
@@ -48,7 +49,7 @@ namespace UDT.Model.Mappers
                 ProfilePictureURL = user.ProfilePictureURL,
                 DateOfBirth = user.DateOfBirth,
 
-                Subjects = user.Subjects.Select(subject => subject.Id).ToList(),
+                Subjects = user.Subjects?.Select(subject => subject.Id).ToList(),
             };
 
             return userViewModel;
@@ -68,7 +69,7 @@ namespace UDT.Model.Mappers
                 Code = userUpdateViewModel.Code,
                 ProfilePictureURL = userUpdateViewModel.ProfilePictureURL,
                 DateOfBirth = userUpdateViewModel.DateOfBirth,
-                Subjects = userUpdateViewModel.Subjects.Select(id => new Subject
+                Subjects = userUpdateViewModel.Subjects?.Select(id => new Subject
                 {
                     Id = id
                 }).ToList(),
@@ -92,7 +93,7 @@ namespace UDT.Model.Mappers
                 Code = userCreationViewModel.Code,
                 ProfilePictureURL = userCreationViewModel.ProfilePictureURL,
                 DateOfBirth = userCreationViewModel.DateOfBirth,
-                Subjects = userCreationViewModel.Subjects.Select(id => new Subject
+                Subjects = userCreationViewModel.Subjects?.Select(id => new Subject
                 {
                     Id = id
                 }).ToList(),
