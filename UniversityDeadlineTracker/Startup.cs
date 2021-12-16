@@ -32,6 +32,10 @@ namespace UniversityDeadlineTracker
 
             services.AddTransient<IUserService, UserService>();
 
+            services.AddScoped<ISubjectService, SubjectService>();
+
+            services.AddScoped<IUserTaskService, UserTaskService>();
+
             // In production, the React files will be served from this directory
             services.AddSpaStaticFiles(configuration => { configuration.RootPath = "ClientApp/build"; });
             services.AddSwaggerGen(c =>
