@@ -29,7 +29,7 @@ export const Header = (props) => {
                 <div className="title" onClick={() => {
                     history.push(Pages.HOME);
                 }}>
-                    University Deadline Tracker
+                    <span className='name'>DEAD</span>LIИE
                 </div>
             </Stack>
             <div className={location.pathname === Pages.BOARD ? "selected" : "link"} onClick={() => {

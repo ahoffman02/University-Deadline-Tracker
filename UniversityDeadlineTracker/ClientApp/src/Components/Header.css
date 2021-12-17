@@ -120,6 +120,11 @@
 
 .name {
     color: var(--ORANGE_ACCENT);
+    transition-duration: .5s;
+}
+
+.title:hover .name{
+    color:white;
 }
 
 .MuiDivider-root {
