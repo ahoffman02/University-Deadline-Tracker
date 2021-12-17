@@ -9,6 +9,8 @@ using UDT.Business.Implementation;
 using UDT.Business.Interfaces;
 using UDT.Repository;
 using UDT.Business.Task;
+using UDT.Business.Helpers;
+using UDT.Model;
 
 namespace UniversityDeadlineTracker
 {
@@ -24,15 +26,20 @@ namespace UniversityDeadlineTracker
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.Configure<AuthorizationSettings>(Configuration.GetSection("AuthorizationSettings"));
             services.AddDbContext<DataContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DbConnection")));
 
             services.AddControllersWithViews();
             
-            services.AddScoped<IBoardService, BoardService>();
-
             services.AddTransient<IServiceTask, ServiceTask>();
-
             services.AddTransient<IUserService, UserService>();
+            services.AddTransient<IAccountService, AccountService>();
+
+            services.AddTransient<IAuthorizationHelper, AuthorizationHelper>();
+
+            services.AddScoped<ISubjectService, SubjectService>();
+
+            services.AddScoped<IUserTaskService, UserTaskService>();
 
             // In production, the React files will be served from this directory
             services.AddSpaStaticFiles(configuration => { configuration.RootPath = "ClientApp/build"; });

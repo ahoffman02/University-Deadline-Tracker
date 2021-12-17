@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using UDT.Model.Entities;
 using UDT.Model.ViewModels;
@@ -14,11 +15,19 @@ namespace UDT.Model.Mappers
             User user = new User
             {
                 Id = userViewModel.Id,
-                Name = userViewModel.Name,
-                GroupId = userViewModel.GroupId,
+                Username = userViewModel.Username,
+                FirstName = userViewModel.FirstName,
+                LastName = userViewModel.LastName,
+                Group = userViewModel.Group,
+                Year = userViewModel.Year,
                 Email = userViewModel.Email,
                 Role = userViewModel.Role,
                 Code = userViewModel.Code,
+                ProfilePictureURL = userViewModel.ProfilePictureURL,
+                DateOfBirth = userViewModel.DateOfBirth,
+                Subjects = userViewModel.Subjects?.Select(id => new Subject {
+                    Id = id
+                }).ToList(),
             };
 
             return user;
@@ -29,11 +38,18 @@ namespace UDT.Model.Mappers
             UserViewModel userViewModel = new UserViewModel
             {
                 Id = user.Id,
-                Name = user.Name,
-                GroupId = user.GroupId,
+                Username = user.Username,
+                FirstName = user.FirstName,
+                LastName = user.LastName,
+                Group = user.Group,
+                Year = user.Year,
                 Email = user.Email,
                 Role = user.Role,
                 Code = user.Code,
+                ProfilePictureURL = user.ProfilePictureURL,
+                DateOfBirth = user.DateOfBirth,
+
+                Subjects = user.Subjects?.Select(subject => subject.Id).ToList(),
             };
 
             return userViewModel;
@@ -43,11 +59,20 @@ namespace UDT.Model.Mappers
         {
             User user = new User
             {
-                Name = userUpdateViewModel.Name,
-                GroupId = userUpdateViewModel.GroupId,
+                Username = userUpdateViewModel.Username,
+                FirstName = userUpdateViewModel.FirstName,
+                LastName = userUpdateViewModel.LastName,
+                Group = userUpdateViewModel.Group,
+                Year = userUpdateViewModel.Year,
                 Email = userUpdateViewModel.Email,
                 Role = userUpdateViewModel.Role,
                 Code = userUpdateViewModel.Code,
+                ProfilePictureURL = userUpdateViewModel.ProfilePictureURL,
+                DateOfBirth = userUpdateViewModel.DateOfBirth,
+                Subjects = userUpdateViewModel.Subjects?.Select(id => new Subject
+                {
+                    Id = id
+                }).ToList(),
             };
 
             return user;
@@ -57,11 +82,17 @@ namespace UDT.Model.Mappers
         {
             User user = new User
             {
-                Name = userCreationViewModel.Name,
-                GroupId = userCreationViewModel.GroupId,
+                Username = userCreationViewModel.Username,
+                Password = userCreationViewModel.Password,
+                FirstName = userCreationViewModel.FirstName,
+                LastName = userCreationViewModel.LastName,
+                Group = userCreationViewModel.Group,
+                Year = userCreationViewModel.Year,
                 Email = userCreationViewModel.Email,
                 Role = userCreationViewModel.Role,
                 Code = userCreationViewModel.Code,
+                ProfilePictureURL = userCreationViewModel.ProfilePictureURL,
+                DateOfBirth = userCreationViewModel.DateOfBirth
             };
 
             return user;

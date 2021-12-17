@@ -12,7 +12,8 @@ namespace UDT.Repository
 
         public DbSet<User> Users { get; set; }
         public DbSet<Task> Tasks { get; set; }
-        public DbSet<Group> Groups { get; set; }
-        public DbSet<Board> Board { get; set; }
+        public DbSet<Subject> Subjects { get; set; }
+        public DbSet<UserTask> UsersTasks { get; set; }
+        
     }
 }
