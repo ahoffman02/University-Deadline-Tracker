@@ -3,10 +3,10 @@ import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 import './App.css'
 import {Header} from "./Components/Header";
 import LoginPage from "./Components/LoginPage";
-import Home from "./Components/Home";
 import Backlog from "./Components/Backlog";
 import Community from "./Components/Community";
 import {Pages} from "./Utils/Enums";
+import {Board} from "./Components/Board";
 
 export const App = () => {
     const [user, setUser] = useState(null);
@@ -21,7 +21,7 @@ export const App = () => {
                         <LoginPage user={user} setUser={setUser} setToken={setToken}/>
                     </Route>
                     <Route path={Pages.BOARD}>
-                        <Home user={user} token={token}/>
+                        <Board user={user} token={token}/>
                     </Route>
                     <Route path={Pages.BACKLOG}>
                         <Backlog user={user} token={token}/>
