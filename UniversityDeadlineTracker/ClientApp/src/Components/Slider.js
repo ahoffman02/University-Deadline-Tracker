@@ -64,16 +64,16 @@ export const SimpleSlider = (props) => {
 
         const getCardList = () => {
             const groupedTasks = props.tasks?.reduce(function (r, a) {
-                r[a.deadline] = r[a.deadline] || [];
-                r[a.deadline].push(a);
+                r[a.task.deadline] = r[a.task.deadline] || [];
+                r[a.task.deadline].push(a);
                 return r;
             }, Object.create(null));
 
             return Object.values(groupedTasks).map(day => {
-                const taskCards = day.map(task =>
-                    <TaskCard title={task.title} description={task.description} penalty={task.subject}/>);
+                const taskCards = day.map(item =>
+                    <TaskCard title={item.task.title} description={item.task.description} penalty={item.task.penalty}/>);
                 return <div className="card-list-container">
-                    <span className="date">{new Date(day[0].deadline).toDateString()}</span>
+                    <span className="date">{new Date(day[0].task.deadline).toDateString()}</span>
                     <span className="dot">
                     <FiberManualRecordTwoToneIcon fontSize="small"/>
                 </span>
@@ -81,10 +81,6 @@ export const SimpleSlider = (props) => {
                 </div>
             })
         }
-
-        useEffect(() => {
-            getCardList()
-        });
 
         return (
             <React.Fragment>

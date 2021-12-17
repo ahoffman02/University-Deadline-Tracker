@@ -2,7 +2,7 @@
 import "./Board.css";
 import SimpleSlider from "./Slider";
 import {Default} from "./Default";
-import {getAllTasks} from "../Utils/Services";
+import {getAllTasks, getAllUserTasks, getTaskById} from "../Utils/Services";
 
 export const Board = (props) => {
     const [tasks, setTasks] = useState([])
@@ -10,10 +10,8 @@ export const Board = (props) => {
     useEffect(() => {
         if (!props.token) return;
 
-        getAllTasks(props.token).then(data => {
-            setTasks(data.map(task => {
-                return {...task, status: 'New'}
-            }))
+        getAllUserTasks(props.token).then(data => {
+            setTasks(data)
         })
     }, [props.token])
 
