@@ -1,8 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using UDT.Business.Interfaces;
 using UDT.Model.Entities;
@@ -52,14 +49,22 @@ namespace UDT.Business.Implementation
 
         public async Task<User> UpdateAsync(User user)
         {
-            User existingUser = await _context.Users.FirstOrDefaultAsync(user => user.Id == user.Id);
+            User existingUser = await _context.Users
+                .Include(u => u.Subjects)
+                .FirstOrDefaultAsync(u => u.Id == user.Id);
 
-            if (existingUser != null)
-            {
-                _context.Users.Update(user);
-
-                await _context.SaveChangesAsync();
-            }
+            if (existingUser == null) return null;
+            
+            _context.Entry(existingUser).CurrentValues.SetValues(user);
+            
+            existingUser.Subjects.Clear();
+            user.Subjects.ForEach(userSubject => 
+                existingUser.Subjects.Add(
+                    _context.Subjects.FirstOrDefaultAsync(subject => subject.Id == userSubject.Id).Result
+                    )
+                );
+                
+            await _context.SaveChangesAsync();
 
             return existingUser;
         }

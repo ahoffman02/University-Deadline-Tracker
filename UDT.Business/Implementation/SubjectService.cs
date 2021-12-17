@@ -25,22 +25,11 @@ namespace UDT.Business.Implementation
         public async Task<Subject> GetByIdAsync(int id)
         {
             return await _dataContext.Subjects
-                .Include(subject => subject.Users)
                 .FirstOrDefaultAsync(subject => subject.Id == id);
         }
 
         public async Task<Subject> AddAsync(Subject subject)
         {
-            for (var i = 0; i < subject.Users.Count; i++)
-            {
-                var user = await _dataContext.Users
-                    .FirstOrDefaultAsync(u => u.Id == subject.Users[i].Id);
-
-                if (user == null) return null;
-
-                subject.Users[i] = user;
-            }
-
             await _dataContext.Subjects.AddAsync(subject);
             await _dataContext.SaveChangesAsync();
 
@@ -68,26 +57,19 @@ namespace UDT.Business.Implementation
 
             if (existingSubject == null) return null;
 
-            existingSubject.Users.RemoveRange(0, existingSubject.Users.Count);
+            _dataContext.Entry(existingSubject).CurrentValues.SetValues(updatedSubject);
+
+            // find users and add them to subject
+            existingSubject.Users.Clear();
+            updatedSubject.Users.ForEach(subjectUser =>
+                existingSubject.Users.Add(
+                        _dataContext.Users.FirstOrDefaultAsync(user => user.Id == subjectUser.Id).Result
+                        )
+                );
 
             await _dataContext.SaveChangesAsync();
 
-            _dataContext.Entry(existingSubject).State = EntityState.Detached;
-
-            for (var i = 0; i < updatedSubject.Users.Count; i++)
-            {
-                var user = await _dataContext.Users
-                    .FirstOrDefaultAsync(u => u.Id == updatedSubject.Users[i].Id);
-
-                if (user == null) return null;
-
-                updatedSubject.Users[i] = user;
-            }
-
-            _dataContext.Subjects.Update(updatedSubject);
-            await _dataContext.SaveChangesAsync();
-
-            return updatedSubject;
+            return existingSubject;
         }
     }
 }

@@ -92,11 +92,7 @@ namespace UDT.Model.Mappers
                 Role = userCreationViewModel.Role,
                 Code = userCreationViewModel.Code,
                 ProfilePictureURL = userCreationViewModel.ProfilePictureURL,
-                DateOfBirth = userCreationViewModel.DateOfBirth,
-                Subjects = userCreationViewModel.Subjects?.Select(id => new Subject
-                {
-                    Id = id
-                }).ToList(),
+                DateOfBirth = userCreationViewModel.DateOfBirth
             };
 
             return user;

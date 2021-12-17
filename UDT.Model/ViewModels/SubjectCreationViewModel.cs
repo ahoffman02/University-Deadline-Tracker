@@ -7,6 +7,5 @@ namespace UDT.Model.ViewModels
     {
         public string Name { get; set; }
         public SubjectType Type { get; set; }
-        public List<int> Users { get; set; }
     }
 }

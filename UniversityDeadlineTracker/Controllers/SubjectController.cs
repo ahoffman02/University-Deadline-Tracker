@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using UDT.Business.Interfaces;
 using UDT.Model.Mappers;
@@ -63,7 +64,14 @@ namespace UniversityDeadlineTracker.Controllers
             var subject = subjectUpdateViewModel.ToEntity();
             subject.Id = id;
 
-            subject = await _subjectService.UpdateAsync(subject);
+            try
+            {
+                subject = await _subjectService.UpdateAsync(subject);
+            }
+            catch (ArgumentNullException)
+            {
+                return NotFound("An user you tried to add does not exist!");
+            }
 
             if (subject == null) return NotFound();
 

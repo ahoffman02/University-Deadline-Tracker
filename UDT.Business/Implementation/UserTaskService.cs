@@ -54,9 +54,7 @@ namespace UDT.Business.Implementation
 
             if (existingUserTask == null) return null;
             
-            _dataContext.Entry(existingUserTask).State = EntityState.Detached;
-
-            _dataContext.UsersTasks.Update(updatedUserTask);
+            _dataContext.Entry(existingUserTask).CurrentValues.SetValues(updatedUserTask);
             await _dataContext.SaveChangesAsync();
 
             return updatedUserTask;
