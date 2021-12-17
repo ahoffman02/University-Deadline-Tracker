@@ -5,6 +5,7 @@ using UDT.Model.Entities;
 using UDT.Model.ViewModels;
 using UDT.Model.Mappers;
 using System.Linq;
+using UniversityDeadlineTracker.Filters;
 
 namespace UniversityDeadlineTracker.Controllers
 {
@@ -21,14 +22,20 @@ namespace UniversityDeadlineTracker.Controllers
 
         [HttpGet]
         [Route("{id:int}")]
+        [AuthorizationFilter]
         public async Task<IActionResult> GetByIdAsync([FromRoute] int id)
         {
+            var user = await _userService.GetByIDAsync(id);
+            if (user == null)
+                return NotFound();
+
             return Ok(
-                (await _userService.GetByIDAsync(id)).toViewModel()
+                user.toViewModel()
             );
         }
 
         [HttpGet]
+        [AuthorizationFilter]
         public async Task<IActionResult> GetAll()
         {
             return Ok(
@@ -48,6 +55,7 @@ namespace UniversityDeadlineTracker.Controllers
 
         [HttpPut]
         [Route("{id:int}")]
+        [AuthorizationFilter]
         public async Task<IActionResult> Update([FromRoute] int id, [FromBody] UserUpdateViewModel userUpdateViewModel)
         {
             User user = userUpdateViewModel.toEntity();
@@ -60,6 +68,7 @@ namespace UniversityDeadlineTracker.Controllers
 
         [HttpDelete]
         [Route("{id:int}")]
+        [AuthorizationFilter]
         public async Task<IActionResult> Delete([FromRoute] int id)
         {
             return Ok(await _userService.DeleteAsync(id));

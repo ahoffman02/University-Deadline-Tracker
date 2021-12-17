@@ -7,6 +7,7 @@ using Microsoft.Extensions.Logging;
 using UDT.Model.Entities;
 using UDT.Model.ViewModels;
 using UDT.Business.Task;
+using UniversityDeadlineTracker.Filters;
 
 namespace UniversityDeadlineTracker.Controllers
 {
@@ -25,12 +26,14 @@ namespace UniversityDeadlineTracker.Controllers
         }
 
         [HttpGet]
+        [AuthorizationFilter]
         public IActionResult GetAll()
         {
             return Ok(_taskService.GetAll());
         }
 
         [HttpGet("{taskId:int}")]
+        [AuthorizationFilter]
         public async Task<IActionResult> GetTaskById([FromRoute] int taskId)
         {
             var task = await _taskService.GetById(taskId);
@@ -38,6 +41,7 @@ namespace UniversityDeadlineTracker.Controllers
         }
 
         [HttpPost]
+        [AuthorizationFilter]
         public async Task<IActionResult> AddTask([FromBody] TaskCreationViewModel taskDto)
         {
             var dbTask = await _taskService.AddTask(taskDto);
@@ -45,6 +49,7 @@ namespace UniversityDeadlineTracker.Controllers
         }
 
         [HttpDelete("{taskId:int}")]
+        [AuthorizationFilter]
         public async Task<IActionResult> DeleteTask([FromRoute] int taskId)
         {
             await _taskService.DeleteTask(taskId);
@@ -52,6 +57,7 @@ namespace UniversityDeadlineTracker.Controllers
         }
 
         [HttpPut]
+        [AuthorizationFilter]
         public async Task<IActionResult> EditTask([FromBody] TaskUpdateViewModel taskDto)
         {
             var dbTask = await _taskService.EditTask(taskDto);
