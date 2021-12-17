@@ -1,6 +1,6 @@
-import React, {useEffect} from "react";
+import React, { useEffect, useState } from "react";
 import Slider from "react-slick";
-import {TaskCard} from "./TaskCard";
+import { TaskCard } from "./TaskCard";
 
 import "./Slider.css";
 import "./Carousel.css";
@@ -12,7 +12,7 @@ import FiberManualRecordTwoToneIcon from "@mui/icons-material/FiberManualRecordT
 import ArrowRightTwoToneIcon from "@mui/icons-material/ArrowRightTwoTone";
 
 function SampleNextArrow(props) {
-    const {className, style, onClick} = props;
+    const { className, style, onClick } = props;
     return (
         <ArrowForwardIosRoundedIcon
             className={className}
@@ -32,7 +32,7 @@ function SampleNextArrow(props) {
 }
 
 function SamplePrevArrow(props) {
-    const {className, style, onClick} = props;
+    const { className, style, onClick } = props;
     return (
         <ArrowBackIosNewRoundedIcon
             className={className}
@@ -52,54 +52,85 @@ function SamplePrevArrow(props) {
 }
 
 export const SimpleSlider = (props) => {
-        const settings = {
+    const [groupedTasks, setGroupedTasks] = useState([]);
+
+    React.useEffect(() => {
+        let tasks = props.tasks?.reduce(function (r, a) {
+            r[a.task.deadline] = r[a.task.deadline] || [];
+            r[a.task.deadline].push(a);
+            return r;
+        }, Object.create(null));
+
+        setGroupedTasks(
+            Object.values(tasks).sort((a, b) => {
+                return (
+                    new Date(a[0].task.deadline) - new Date(b[0].task.deadline)
+                );
+            })
+        );
+    }, [props.tasks]);
+
+    const getSettings = () => {
+        var initial = 0;
+        for (var i = 0; i < groupedTasks.length; i++) {
+            if (new Date(groupedTasks[i][0].task.deadline) >= Date.now()) {
+                initial = i;
+                break;
+            }
+        }
+
+        return {
             dots: true,
             infinite: false,
             speed: 1200,
             slidesToShow: 4.3,
             slidesToScroll: 2,
-            nextArrow: <SampleNextArrow/>,
-            prevArrow: <SamplePrevArrow/>,
+            nextArrow: <SampleNextArrow />,
+            prevArrow: <SamplePrevArrow />,
+            initialSlide: initial + 1,
         };
+    };
 
-        const getCardList = () => {
-            const groupedTasks = props.tasks?.reduce(function (r, a) {
-                r[a.task.deadline] = r[a.task.deadline] || [];
-                r[a.task.deadline].push(a);
-                return r;
-            }, Object.create(null));
-
-            return Object.values(groupedTasks).map(day => {
-                const taskCards = day.map(item =>
-                    <TaskCard title={item.task.title} description={item.task.description} penalty={item.task.penalty}/>);
-                return <div className="card-list-container">
-                    <span className="date">{new Date(day[0].task.deadline).toDateString()}</span>
+    const getCardList = () => {
+        return groupedTasks.map((day) => {
+            const taskCards = day.map((item) => (
+                <TaskCard
+                    title={item.task.title}
+                    description={item.task.description}
+                    penalty={item.task.penalty}
+                />
+            ));
+            return (
+                <div className="card-list-container">
+                    <span className="date">
+                        {new Date(day[0].task.deadline).toDateString()}
+                    </span>
                     <span className="dot">
-                    <FiberManualRecordTwoToneIcon fontSize="small"/>
-                </span>
+                        <FiberManualRecordTwoToneIcon fontSize="small" />
+                    </span>
                     {taskCards}
                 </div>
-            })
-        }
+            );
+        });
+    };
 
-        return (
-            <React.Fragment>
-                {props.tasks.length > 0 ?
-                    <div className="slider">
-                        <div className="long-arrow">
-                            <div className="little-arrow">
-                                <ArrowRightTwoToneIcon fontSize="large"/>
-                            </div>
+    return (
+        <React.Fragment>
+            {props.tasks.length > 0 ? (
+                <div className="slider">
+                    <div className="long-arrow">
+                        <div className="little-arrow">
+                            <ArrowRightTwoToneIcon fontSize="large" />
                         </div>
-                        <Slider {...settings}>
-                            {getCardList()}
-                        </Slider>
                     </div>
-                    :
-                    <div className="no-tasks">No tasks? Go get <span className="orange">drunk</span>!</div>
-                }
-            </React.Fragment>
-        );
-    }
-;
+                    <Slider {...getSettings()}>{getCardList()}</Slider>
+                </div>
+            ) : (
+                <div className="no-tasks">
+                    No tasks? Go get <span className="orange">drunk</span>!
+                </div>
+            )}
+        </React.Fragment>
+    );
+};
 export default SimpleSlider;

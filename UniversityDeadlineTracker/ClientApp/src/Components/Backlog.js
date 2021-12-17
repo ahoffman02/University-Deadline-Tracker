@@ -1,4 +1,4 @@
-﻿import React, {useEffect, useState} from "react";
+﻿import React, { useEffect, useState } from "react";
 import "./Backlog.css";
 
 import Table from "@mui/material/Table";
@@ -16,26 +16,31 @@ import FiberManualRecordIcon from "@mui/icons-material/FiberManualRecord";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import TaskIcon from "@mui/icons-material/Task";
-import {Default} from "./Default";
-import {getAllTasks, getAllUserTasks, getTaskById} from "../Utils/Services";
+import { Default } from "./Default";
+import { getAllTasks, getAllUserTasks, getTaskById } from "../Utils/Services";
+import { Status } from "../Utils/Enums";
 
 const getStatus = (status) => {
     let color = "transparent";
+    let text = "";
     switch (status) {
-        case "New":
+        case Status.NEW:
             color = "#c7c763";
+            text = "New";
             break;
-        case "Active":
+        case Status.ACTIVE:
             color = "#006a91";
+            text = "Active";
             break;
-        case "Completed":
+        case Status.COMPLETED:
             color = "#008768";
+            text = "Completed";
             break;
     }
 
     return (
         <div>
-            {status}
+            {text}
             <FiberManualRecordIcon
                 className="status-dot"
                 htmlColor={color}
@@ -72,14 +77,14 @@ const getTitle = (title) => {
 };
 
 const Row = (props) => {
-    const {row} = props;
+    const { row } = props;
     const [open, setOpen] = React.useState(false);
 
     return (
         <React.Fragment>
             <TableRow
                 className="table-body-row"
-                key={row.name}
+                key={row.task.title}
                 sx={{
                     "&:last-child td, &:last-child th": {
                         border: 0,
@@ -89,11 +94,9 @@ const Row = (props) => {
                 <TableCell className="table-body-cell">
                     <div size="small" onClick={() => setOpen(!open)}>
                         {open ? (
-                            <KeyboardArrowUpIcon
-                                className="arrow"
-                            />
+                            <KeyboardArrowUpIcon className="arrow" />
                         ) : (
-                            <KeyboardArrowDownIcon className="arrow"/>
+                            <KeyboardArrowDownIcon className="arrow" />
                         )}
                     </div>
                 </TableCell>
@@ -102,16 +105,16 @@ const Row = (props) => {
                     component="th"
                     scope="row"
                 >
-                    {row.id}
+                    {row.task.id}
                 </TableCell>
                 <TableCell className="table-body-cell" align="center">
-                    {row.subject}
+                    {row.task.subject}
                 </TableCell>
                 <TableCell className="table-body-cell" align="left">
-                    {getTitle(row.title)}
+                    {getTitle(row.task.title)}
                 </TableCell>
                 <TableCell className="table-body-cell" align="center">
-                    {row.deadline}
+                    {new Date(row.task.deadline).toDateString()}
                 </TableCell>
                 <TableCell className="table-body-cell" align="right">
                     {getStatus(row.status)}
@@ -119,18 +122,18 @@ const Row = (props) => {
             </TableRow>
             <TableRow>
                 <TableCell
-                    style={{paddingBottom: 0, paddingTop: 0}}
+                    style={{ paddingBottom: 0, paddingTop: 0 }}
                     colSpan={6}
                 >
                     <Collapse in={open} timeout="auto" unmountOnExit>
-                        <Box sx={{margin: 1}}>
+                        <Box sx={{ margin: 1 }}>
                             <Typography
                                 className="description"
                                 variant="h6"
                                 gutterBottom
                                 component="div"
                             >
-                                {row.description}
+                                {row.task.description}
                             </Typography>
                         </Box>
                     </Collapse>
@@ -141,24 +144,27 @@ const Row = (props) => {
 };
 
 const Backlog = (props) => {
-    const [tasks, setTasks] = useState([])
+    const [tasks, setTasks] = useState([]);
 
     useEffect(() => {
         if (!props.token) return;
 
-        getAllUserTasks(props.token).then(data => {
-            setTasks(data)
-        })
-    }, [props.token])
+        getAllUserTasks(props.token).then((data) => {
+            data.sort((a, b) => {
+                return new Date(a.task.deadline) - new Date(b.task.deadline);
+            });
+            setTasks(data);
+        });
+    }, [props.token]);
 
     return (
         <React.Fragment>
-            {props.user ?
+            {props.user ? (
                 <TableContainer component={Paper} className="table-container">
                     <Table
                         // stickyHeader
                         aria-label="collapsible table"
-                        sx={{minWidth: 650}}
+                        sx={{ minWidth: 650 }}
                         aria-label="simple table"
                         className="table"
                     >
@@ -208,13 +214,14 @@ const Backlog = (props) => {
                         </TableHead>
                         <TableBody className="table-body">
                             {tasks.map((row) => (
-                                <Row key={row.id} row={row}/>
+                                <Row key={row.id} row={row} />
                             ))}
                         </TableBody>
                     </Table>
                 </TableContainer>
-                :
-                <Default/>}
+            ) : (
+                <Default />
+            )}
         </React.Fragment>
     );
 };
