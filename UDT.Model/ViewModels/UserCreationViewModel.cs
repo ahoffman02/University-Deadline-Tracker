@@ -18,6 +18,5 @@ namespace UDT.Model.ViewModels
         public int? Code { get; set; }
         public string ProfilePictureURL { get; set; }
         public DateTime DateOfBirth { get; set; }
-        public List<int> Subjects { get; set; }
     }
 }

@@ -1,3 +1,4 @@
+using System;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 using UDT.Business.Interfaces;
@@ -61,9 +62,18 @@ namespace UniversityDeadlineTracker.Controllers
             User user = userUpdateViewModel.toEntity();
             user.Id = id;
 
-            return Ok(
-                (await _userService.UpdateAsync(user)).toViewModel()
-            );
+            try
+            {
+                user = await _userService.UpdateAsync(user);
+            }
+            catch (ArgumentNullException)
+            {
+                return NotFound("A subject you tried to add does not exist!");
+            }
+
+            if (user == null) return NotFound();
+            
+            return Ok(user.toViewModel());
         }
 
         [HttpDelete]
