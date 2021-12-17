@@ -2,16 +2,20 @@
 import "./Board.css";
 import SimpleSlider from "./Slider";
 import {Default} from "./Default";
+import {getAllTasks} from "../Utils/Services";
 
 export const Board = (props) => {
     const [tasks, setTasks] = useState([])
 
     useEffect(() => {
-        fetch('api/tasks').then(data =>
-            data.json().then(data =>
-                setTasks(data)
-            ))
-    }, [])
+        if (!props.token) return;
+
+        getAllTasks(props.token).then(data => {
+            setTasks(data.map(task => {
+                return {...task, status: 'New'}
+            }))
+        })
+    }, [props.token])
 
     return (
         <React.Fragment>{props.user ?

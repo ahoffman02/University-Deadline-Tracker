@@ -10,27 +10,24 @@ import {Pages} from "./Utils/Enums";
 
 export const App = () => {
     const [user, setUser] = useState(null);
-
-    // useEffect(() => {
-    //     setUser({username: 'PacoPakkun'})
-    // }, [])
+    const [token, setToken] = useState(null);
 
     return (
         <React.Fragment>
             <Router>
-                <Header user={user} setUser={setUser}/>
+                <Header user={user} setUser={setUser} setToken={setToken}/>
                 <Switch>
                     <Route exact path={Pages.HOME}>
-                        <LoginPage user={user} setUser={setUser}/>
+                        <LoginPage user={user} setUser={setUser} setToken={setToken}/>
                     </Route>
                     <Route path={Pages.BOARD}>
-                        <Home user={user}/>
+                        <Home user={user} token={token}/>
                     </Route>
                     <Route path={Pages.BACKLOG}>
-                        <Backlog user={user}/>
+                        <Backlog user={user} token={token}/>
                     </Route>
                     <Route path={Pages.COMMUNITY}>
-                        <Community user={user}/>
+                        <Community user={user} token={token}/>
                     </Route>
                 </Switch>
             </Router>

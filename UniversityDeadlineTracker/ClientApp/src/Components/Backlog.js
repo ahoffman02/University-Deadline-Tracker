@@ -17,6 +17,7 @@ import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import TaskIcon from "@mui/icons-material/Task";
 import {Default} from "./Default";
+import {getAllTasks} from "../Utils/Services";
 
 const getStatus = (status) => {
     let color = "transparent";
@@ -143,13 +144,14 @@ const Backlog = (props) => {
     const [tasks, setTasks] = useState([])
 
     useEffect(() => {
-        fetch('api/tasks').then(data =>
-            data.json().then(data =>
-                setTasks(data.map(task => {
-                    return {...task, status: 'New'}
-                }))
-            ))
-    }, [])
+        if (!props.token) return;
+
+        getAllTasks(props.token).then(data => {
+            setTasks(data.map(task => {
+                return {...task, status: 'New'}
+            }))
+        })
+    }, [props.token])
 
     return (
         <React.Fragment>

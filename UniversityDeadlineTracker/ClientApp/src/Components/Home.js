@@ -5,7 +5,7 @@ import './Home.css'
 export const Home = (props) => {
     return (
         <div>
-            <Board user={props.user}/>
+            <Board user={props.user} token={props.token}/>
         </div>
     );
 }
