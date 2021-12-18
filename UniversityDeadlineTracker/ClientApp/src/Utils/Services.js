@@ -53,3 +53,23 @@ export const addUser = (token, user) => {
     };
     return fetch('api/users', requestOptions)
 }
+
+// subjects
+
+export const getAllSubjects = async (token) => {
+    const requestOptions = {
+        method: 'GET',
+        headers: {'Authorization': 'Bearer ' + token}
+    };
+    return fetch('api/subjects', requestOptions).then(data =>
+        data.json()
+    )
+}
+
+export const enrollUserToSubject = async (token, userId, subjectId) => {
+    const requestOptions = {
+        method: 'POST',
+        headers: {'Authorization': 'Bearer ' + token}
+    };
+    return fetch(`api/users/${userId}/addsubject/${subjectId}`, requestOptions)
+}
