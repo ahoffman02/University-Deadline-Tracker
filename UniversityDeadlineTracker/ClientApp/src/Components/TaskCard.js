@@ -31,7 +31,7 @@ export const TaskCard = (props) => {
                         {props.description}
                     </Typography>
                 </Box>
-                <Typography align="center" sx={{fontSize: 10}} color="text.secondary" className="subject">
+                <Typography align="center" sx={{fontSize: 10}} color="text.secondary" className="card-subject">
                     {props.penalty}
                 </Typography>
             </CardContent>

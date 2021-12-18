@@ -13,13 +13,14 @@ namespace UDT.Business.Implementation
 {
     public class Service : IService
     {
-        private  IUserService _userService;
+        private IUserService _userService;
         private IServiceTask _taskService;
         private IUserTaskService _userTaskService;
         private ISubjectService _subjectService;
         private readonly DataContext _context;
 
-        public Service(IUserService userService, IServiceTask taskService, IUserTaskService userTaskService, ISubjectService subjectService, DataContext context)
+        public Service(IUserService userService, IServiceTask taskService, IUserTaskService userTaskService,
+            ISubjectService subjectService, DataContext context)
         {
             _userService = userService;
             _taskService = taskService;
@@ -27,6 +28,7 @@ namespace UDT.Business.Implementation
             _subjectService = subjectService;
             _context = context;
         }
+
         public async Task<User> enrollUserToSubject(int userId, int subjectId)
         {
             User user = await _userService.getByIdWithSubject(userId);
@@ -46,11 +48,7 @@ namespace UDT.Business.Implementation
 
         public async Task<IEnumerable<UserTask>> getUserTasksForUser(int user)
         {
-            // List<int> tasksusers = await _context.UsersTasks.Where(us => us.UserId == user).Select(t => t.TaskId)
-            // .ToListAsync();
-            // return _context.Tasks.Where(t => tasksusers.Contains(t.Id)).AsEnumerable();
             return _context.UsersTasks.Where(us => us.UserId == user).AsEnumerable();
         }
-
     }
 }
