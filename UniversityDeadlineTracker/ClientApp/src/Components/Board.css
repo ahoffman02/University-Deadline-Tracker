@@ -5,3 +5,9 @@
     background-color: var(--DARK_GREY);
     border-radius: 10px;
 }
+
+.spinner {
+    width: 100px;
+    margin: 15% auto;
+    text-align: center;
+}

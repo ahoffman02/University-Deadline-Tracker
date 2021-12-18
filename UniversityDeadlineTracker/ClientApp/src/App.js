@@ -15,10 +15,10 @@ export const App = () => {
     return (
         <React.Fragment>
             <Router>
-                <Header user={user} setUser={setUser} setToken={setToken}/>
+                <Header user={user} token={token} setUser={setUser} setToken={setToken}/>
                 <Switch>
                     <Route exact path={Pages.HOME}>
-                        <LoginPage user={user} setUser={setUser} setToken={setToken}/>
+                        <LoginPage user={user} token={token} setUser={setUser} setToken={setToken}/>
                     </Route>
                     <Route path={Pages.BOARD}>
                         <Board user={user} token={token}/>

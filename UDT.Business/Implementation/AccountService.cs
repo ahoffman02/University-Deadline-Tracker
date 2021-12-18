@@ -9,6 +9,7 @@ using System.Text;
 using UDT.Business.Interfaces;
 using UDT.Model;
 using UDT.Model.Entities;
+using UDT.Model.Mappers;
 using UDT.Repository;
 
 namespace UDT.Business.Implementation
@@ -24,10 +25,14 @@ namespace UDT.Business.Implementation
             _authorizationSettings = authorizationSettings.Value;
         }
 
-        public string Authenticate(string username, string password)
+        public AuthenticationResponse Authenticate(string username, string password)
         {
             User loggingInUser = _context.Users.FirstOrDefault(x => x.Username == username && x.Password == password);
-            return loggingInUser == null ? null : GenerateJwtToken(loggingInUser);
+            return new AuthenticationResponse()
+            {
+                Token = loggingInUser == null ? null : GenerateJwtToken(loggingInUser),
+                User = loggingInUser.toViewModel()
+            };
         }
 
         private string GenerateJwtToken(User user)

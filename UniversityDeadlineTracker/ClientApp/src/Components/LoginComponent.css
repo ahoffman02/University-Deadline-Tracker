@@ -1,5 +1,4 @@
-﻿
-.login {
+﻿.login {
     font-family: sans-serif;
     text-align: center;
 }
@@ -33,6 +32,6 @@
     color: var(--RED_ACCENT)
 }
 
-.dialog {
-    background-color: var(--DARKER_GREY);
+.textfield {
+    margin-top: 8px !important;
 }
