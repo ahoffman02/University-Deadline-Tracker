@@ -18,5 +18,7 @@ namespace UDT.Business.Interfaces
 
         Task<User> UpdateAsync(User user);
 
+        Task<User> getByIdWithSubject(int id);
+
     }
 }

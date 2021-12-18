@@ -69,5 +69,10 @@ namespace UDT.Business.Implementation
             return existingUser;
         }
 
+        public async Task<User> getByIdWithSubject(int id)
+        {
+            return await _context.Users.Include(u => u.Subjects).FirstOrDefaultAsync(user => user.Id == id);
+        }
+
     }
 }

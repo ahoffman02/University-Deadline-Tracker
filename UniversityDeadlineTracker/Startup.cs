@@ -34,7 +34,7 @@ namespace UniversityDeadlineTracker
             services.AddTransient<IServiceTask, ServiceTask>();
             services.AddTransient<IUserService, UserService>();
             services.AddTransient<IAccountService, AccountService>();
-
+            services.AddTransient<IService, Service>();
             services.AddTransient<IAuthorizationHelper, AuthorizationHelper>();
 
             services.AddScoped<ISubjectService, SubjectService>();

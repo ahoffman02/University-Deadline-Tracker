@@ -7,6 +7,7 @@ using UDT.Model.ViewModels;
 using UDT.Model.Mappers;
 using System.Linq;
 using UniversityDeadlineTracker.Filters;
+using System.Collections.Generic;
 
 namespace UniversityDeadlineTracker.Controllers
 {
@@ -16,9 +17,12 @@ namespace UniversityDeadlineTracker.Controllers
     {
         private readonly IUserService _userService;
 
-        public UserController(IUserService userService)
+        private readonly IService _service;
+
+        public UserController(IUserService userService, IService service)
         {
             _userService = userService;
+            _service = service;
         }
 
         [HttpGet]
@@ -82,6 +86,30 @@ namespace UniversityDeadlineTracker.Controllers
         public async Task<IActionResult> Delete([FromRoute] int id)
         {
             return Ok(await _userService.DeleteAsync(id));
+        }
+
+
+        [HttpGet]
+        [Route("tasks/{userId:int}")]
+        [AuthorizationFilter]
+        public async Task<IActionResult> GetTasksForUser([FromRoute] int userId)
+        {
+            return Ok((await _service.getTasksForUser(userId)).Select(task => task.toViewModel()));
+        }
+
+        [HttpPost]
+        [Route("{userId:int}/addsubject/{subjectId:int}")]
+        [AuthorizationFilter]
+        public async Task<IActionResult> EnrollUserToSubject([FromRoute] int subjectId, [FromRoute] int userId)
+        {
+            try
+            {
+                User user = await _service.enrollUserToSubject(userId, subjectId);
+                return Ok(user.toViewModel());
+            }
+            catch(Exception e){
+                return NotFound(e.ToString());
+            }
         }
 
     }
