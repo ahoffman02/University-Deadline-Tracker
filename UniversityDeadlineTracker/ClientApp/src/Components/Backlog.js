@@ -108,7 +108,7 @@ const Row = (props) => {
                     {row.task.id}
                 </TableCell>
                 <TableCell className="table-body-cell" align="center">
-                    {row.task.subject}
+                    {row.task.subject.name}
                 </TableCell>
                 <TableCell className="table-body-cell" align="left">
                     {getTitle(row.task.title)}

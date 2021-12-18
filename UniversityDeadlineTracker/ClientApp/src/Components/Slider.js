@@ -95,9 +95,16 @@ export const SimpleSlider = (props) => {
         return groupedTasks.map((day) => {
             const taskCards = day.map((item) => (
                 <TaskCard
+                    token={props.token}
+                    task={item}
                     title={item.task.title}
+                    shortdescription={item.task.description.substring(0, 200)}
                     description={item.task.description}
                     penalty={item.task.penalty}
+                    subject={item.task.subject.name}
+                    status={item.status}
+                    content={item.content}
+                    grade={item.grade}
                 />
             ));
             return (
