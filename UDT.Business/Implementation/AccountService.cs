@@ -25,7 +25,7 @@ namespace UDT.Business.Implementation
             _authorizationSettings = authorizationSettings.Value;
         }
 
-        public AuthenticationResponse Authenticate(string username, string password)
+        public UDT.Model.AuthenticationResponse Authenticate(string username, string password)
         {
             User loggingInUser = _context.Users.FirstOrDefault(x => x.Username == username && x.Password == password);
             return new AuthenticationResponse()

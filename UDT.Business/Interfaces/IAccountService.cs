@@ -7,6 +7,6 @@ namespace UDT.Business.Interfaces
 {
     public interface IAccountService
     {
-        AuthenticationResponse Authenticate(string username, string password);
+        UDT.Model.AuthenticationResponse Authenticate(string username, string password);
     }
 }

@@ -20,7 +20,7 @@ export const Board = (props) => {
             <React.Fragment>{props.user ?
                 (tasks ?
                         <div className="board">
-                            <SimpleSlider user={props.user} tasks={tasks}/>
+                            <SimpleSlider user={props.user} token={props.token} tasks={tasks}/>
                         </div>
                         :
                         <div className="spinner">

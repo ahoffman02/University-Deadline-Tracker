@@ -37,13 +37,23 @@ export const getUserTasksForUser = async (token, userId) => {
     )
     return Promise.all(usertasks.map(async (usertask) => {
         const task = await getTaskById(token, usertask.taskId);
-        return {...usertask, task: task}
+        const subject = await getSubjectById(token, task.subjectId);
+        return { ...usertask, task: { ...task, subject: subject } };
     }))
 }
 
+export const updateUserTask = (token, userTask) => {
+    const requestOptions = {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(userTask),
+    };
+    return fetch(`api/userstasks/${userTask.id}`, requestOptions)
+};
+
 // user
 
-export const addUser = (token, user) => {
+export const addUser = (user) => {
     const requestOptions = {
         method: 'POST',
         headers: {
@@ -55,6 +65,16 @@ export const addUser = (token, user) => {
 }
 
 // subjects
+
+export const getSubjectById = (token, id) => {
+    const requestOptions = {
+        method: 'GET',
+        headers: {'Authorization': 'Bearer ' + token}
+    };
+    return fetch(`api/subjects/${id}`, requestOptions).then(data =>
+        data.json()
+    )
+}
 
 export const getAllSubjects = async (token) => {
     const requestOptions = {
