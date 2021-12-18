@@ -22,23 +22,27 @@ import { Status } from "../Utils/Enums";
 
 const getStatus = (status) => {
     let color = "transparent";
+    let text = "";
     switch (status) {
-        case "New":
+        case Status.NEW:
             color = "#c7c763";
+            text = "New";
             break;
-        case "Active":
+        case Status.ACTIVE:
             color = "#006a91";
+            text = "Active";
             break;
-        case "Completed":
+        case Status.COMPLETED:
             color = "#008768";
+            text = "Completed";
             break;
     }
 
     return (
         <div>
-            {status}
+            {text}
             <FiberManualRecordIcon
-                className="status-dot"
+                className="card-status-dot"
                 htmlColor={color}
                 fontSize="small"
             />
@@ -48,18 +52,6 @@ const getStatus = (status) => {
 
 const getTitle = (title) => {
     let color = "#853c44";
-    // switch (title) {
-    //     case "New":
-    //         color = "#c7c763";
-    //         break;
-    //     case "Active":
-    //         color = "#006a91";
-    //         break;
-    //     case "Completed":
-    //         color = "#008768";
-    //         break;
-    // }
-
     return (
         <div>
             <TaskIcon
@@ -80,7 +72,7 @@ const Row = (props) => {
         <React.Fragment>
             <TableRow
                 className="table-body-row"
-                key={row.name}
+                key={row.task.name}
                 sx={{
                     "&:last-child td, &:last-child th": {
                         border: 0,
@@ -103,16 +95,16 @@ const Row = (props) => {
                     component="th"
                     scope="row"
                 >
-                    {row.id}
+                    {row.task.id}
                 </TableCell>
                 <TableCell className="table-body-cell" align="center">
-                    {row.subject}
+                    {row.task.subject.name}
                 </TableCell>
                 <TableCell className="table-body-cell" align="left">
-                    {getTitle(row.title)}
+                    {getTitle(row.task.title)}
                 </TableCell>
                 <TableCell className="table-body-cell" align="center">
-                    {row.deadline}
+                    {new Date(row.task.deadline).toDateString()}
                 </TableCell>
                 <TableCell className="table-body-cell" align="right">
                     {getStatus(row.status)}
@@ -131,7 +123,7 @@ const Row = (props) => {
                                 gutterBottom
                                 component="div"
                             >
-                                {row.description}
+                                {row.task.description}
                             </Typography>
                         </Box>
                     </Collapse>
