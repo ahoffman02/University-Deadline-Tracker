@@ -17,7 +17,7 @@ import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import TaskIcon from "@mui/icons-material/Task";
 import {Default} from "./Default";
-import {getAllTasks, getAllUserTasks, getTaskById} from "../Utils/Services";
+import {getAllTasks, getAllUserTasks, getTaskById, getUserTasksForUser} from "../Utils/Services";
 
 const getStatus = (status) => {
     let color = "transparent";
@@ -146,7 +146,7 @@ const Backlog = (props) => {
     useEffect(() => {
         if (!props.token) return;
 
-        getAllUserTasks(props.token).then(data => {
+        getUserTasksForUser(props.token, props.user.id).then(data => {
             setTasks(data)
         })
     }, [props.token])

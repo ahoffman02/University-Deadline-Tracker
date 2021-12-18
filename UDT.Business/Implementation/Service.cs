@@ -44,11 +44,12 @@ namespace UDT.Business.Implementation
             return user;
         }
 
-        public async Task<IEnumerable<Model.Entities.Task>> getTasksForUser(int user)
+        public async Task<IEnumerable<UserTask>> getUserTasksForUser(int user)
         {
-            List<int> tasksusers = await _context.UsersTasks.Where(us => us.UserId == user).Select(t => t.TaskId)
-            .ToListAsync();
-            return _context.Tasks.Where(t => tasksusers.Contains(t.Id)).AsEnumerable();
+            // List<int> tasksusers = await _context.UsersTasks.Where(us => us.UserId == user).Select(t => t.TaskId)
+            // .ToListAsync();
+            // return _context.Tasks.Where(t => tasksusers.Contains(t.Id)).AsEnumerable();
+            return _context.UsersTasks.Where(us => us.UserId == user).AsEnumerable();
         }
 
     }

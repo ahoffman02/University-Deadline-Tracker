@@ -22,12 +22,10 @@ export const LoginComponent = (props) => {
     const inputFile = useRef(null)
 
     const onLogin = () => {
-        login(user.username, user.password).then(response => {
-            if (response.status === 200) {
-                props.setUser({username: user.username})
-                response.text().then(token => {
-                    props.setToken(token.substring(1, token.length - 1))
-                })
+        login(user.username, user.password).then(data => {
+            if (data) {
+                props.setUser(data.user)
+                props.setToken(data.token)
             } else
                 setError(true)
         })

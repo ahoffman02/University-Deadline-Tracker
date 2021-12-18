@@ -4,20 +4,16 @@
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify({Username: username, Password: password})
     };
-    return fetch('api/account/login', requestOptions)
+    return fetch('api/account/login', requestOptions).then(response => {
+            if (response.status === 200) {
+                return response.json()
+            } else
+                return null
+        }
+    )
 }
 
 // tasks
-
-export const getAllTasks = (token) => {
-    const requestOptions = {
-        method: 'GET',
-        headers: {'Authorization': 'Bearer ' + token}
-    };
-    return fetch('api/tasks', requestOptions).then(data =>
-        data.json()
-    )
-}
 
 export const getTaskById = (token, id) => {
     const requestOptions = {
@@ -31,12 +27,12 @@ export const getTaskById = (token, id) => {
 
 // usertasks
 
-export const getAllUserTasks = async (token) => {
+export const getUserTasksForUser = async (token, userId) => {
     const requestOptions = {
         method: 'GET',
         headers: {'Authorization': 'Bearer ' + token}
     };
-    const usertasks = await fetch('api/userstasks', requestOptions).then(data =>
+    const usertasks = await fetch(`api/users/usertasks/${userId}`, requestOptions).then(data =>
         data.json()
     )
     return Promise.all(usertasks.map(async (usertask) => {
