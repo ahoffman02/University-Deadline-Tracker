@@ -27,9 +27,9 @@ namespace UniversityDeadlineTracker.Controllers
         public IActionResult Login([FromBody] AuthenticationRequest login)
         {
             IActionResult response = Unauthorized();
-            var token = _accountService.Authenticate(login.Username, login.Password);
-            if (token != null)
-                response = Ok(token);
+            var data = _accountService.Authenticate(login.Username, login.Password);
+            if (data.Token != null)
+                response = Ok(data);
 
             return response;
         }

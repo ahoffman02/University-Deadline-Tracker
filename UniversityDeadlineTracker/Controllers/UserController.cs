@@ -76,7 +76,7 @@ namespace UniversityDeadlineTracker.Controllers
             }
 
             if (user == null) return NotFound();
-            
+
             return Ok(user.toViewModel());
         }
 
@@ -90,11 +90,11 @@ namespace UniversityDeadlineTracker.Controllers
 
 
         [HttpGet]
-        [Route("tasks/{userId:int}")]
+        [Route("usertasks/{userId:int}")]
         [AuthorizationFilter]
         public async Task<IActionResult> GetTasksForUser([FromRoute] int userId)
         {
-            return Ok((await _service.getTasksForUser(userId)).Select(task => task.toViewModel()));
+            return Ok((await _service.getUserTasksForUser(userId)).Select(usertask => usertask.ToViewModel()));
         }
 
         [HttpPost]
@@ -107,10 +107,10 @@ namespace UniversityDeadlineTracker.Controllers
                 User user = await _service.enrollUserToSubject(userId, subjectId);
                 return Ok(user.toViewModel());
             }
-            catch(Exception e){
+            catch (Exception e)
+            {
                 return NotFound(e.ToString());
             }
         }
-
     }
 }
