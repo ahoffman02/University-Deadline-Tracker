@@ -97,11 +97,11 @@
 
 /* dropdown */
 
-.MuiPaper-root {
+.dropdown .MuiPaper-root {
     background-color: transparent !important;
 }
 
-.MuiMenu-list {
+.dropdown .MuiMenu-list {
     background-color: var(--DARKER_GREY);
     border-radius: 5px;
     border: .2px solid var(--LIGHT_GREY);
@@ -122,7 +122,7 @@
     color: var(--ORANGE_ACCENT);
 }
 
-.MuiDivider-root {
+.dropdown .MuiDivider-root {
     background-color: var(--LIGHT_GREY);
 }
 

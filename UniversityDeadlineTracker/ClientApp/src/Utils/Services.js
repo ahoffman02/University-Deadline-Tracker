@@ -7,6 +7,8 @@
     return fetch('api/account/login', requestOptions)
 }
 
+// tasks
+
 export const getAllTasks = (token) => {
     const requestOptions = {
         method: 'GET',
@@ -27,6 +29,8 @@ export const getTaskById = (token, id) => {
     )
 }
 
+// usertasks
+
 export const getAllUserTasks = async (token) => {
     const requestOptions = {
         method: 'GET',
@@ -39,4 +43,17 @@ export const getAllUserTasks = async (token) => {
         const task = await getTaskById(token, usertask.taskId);
         return {...usertask, task: task}
     }))
+}
+
+// user
+
+export const addUser = (token, user) => {
+    const requestOptions = {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(user)
+    };
+    return fetch('api/users', requestOptions)
 }
