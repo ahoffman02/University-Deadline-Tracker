@@ -2,7 +2,7 @@
     font-size: x-large;
     color: white;
     width: 40%;
-    margin: 3% auto;
+    margin: 2% auto;
     text-align: center;
 }
 
@@ -39,7 +39,7 @@
 
 .subject-board {
     width: 17vw;
-    margin: 25px auto 0;
+    margin: 40px auto 0;
     padding-top: 1px;
     height: 45vh;
     background-color: var(--LIGHT_GREY);
@@ -49,7 +49,7 @@
 }
 
 .subject-board .filter {
-    position: fixed;
+    position: absolute;
     width: 17vw;
     height: 45vh;
     border-radius: 5px;

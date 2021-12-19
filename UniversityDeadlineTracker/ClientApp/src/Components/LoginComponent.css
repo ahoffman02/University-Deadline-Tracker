@@ -35,3 +35,8 @@
 .textfield {
     margin-top: 8px !important;
 }
+
+.spinner-dialog .css-1t1j96h-MuiPaper-root-MuiDialog-paper{
+    background-color: transparent !important;
+    box-shadow: none !important;
+}
