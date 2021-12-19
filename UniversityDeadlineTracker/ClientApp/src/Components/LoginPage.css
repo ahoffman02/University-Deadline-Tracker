@@ -49,7 +49,7 @@
 }
 
 .subject-board .filter {
-    position: fixed;
+    position: absolute;
     width: 17vw;
     height: 45vh;
     border-radius: 5px;

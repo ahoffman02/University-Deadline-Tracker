@@ -50,19 +50,19 @@ const getStatus = (status) => {
 };
 
 export const TaskCard = (props) => {
-    const [status, setStatus] = React.useState(props.status);
+    const [status, setStatus] = React.useState(props.item.status);
 
     React.useEffect(() => {
-        setStatus(props.status);
-    }, [props.status]);
+        setStatus(props.item.status);
+    }, [props.item.status]);
 
     const handleChange = (event) => {
-        setStatus(event.target.checked ? Status.COMPLETED : Status.NEW);
         updateUserTask(props.token, {
             ...props.task,
             task: null,
-            status: status,
+            status: event.target.checked ? Status.COMPLETED : Status.NEW,
         });
+        setStatus(event.target.checked ? Status.COMPLETED : Status.NEW);
     };
 
     return (
@@ -79,20 +79,20 @@ export const TaskCard = (props) => {
                 <div className="cardd">
                     <div className="cardheader">
                         <div align="left" className="subject-dot">
-                            {props.subject}
+                            {props.item.task.subject.name}
                         </div>
-                        <div className="card-title">{props.title}</div>
+                        <div className="card-title">
+                            {props.item.task.title}
+                        </div>
                     </div>
                     <div className="cardfooter">
                         <div className="card-penalty">
-                            {props.penalty} p/week penalty
+                            {props.item.task.penalty} p/week penalty
                         </div>
-                        <div className="card-status">
-                            {getStatus(status)}
-                        </div>
+                        <div className="card-status">{getStatus(status)}</div>
                     </div>
                     <div className="card-description">
-                        {props.shortdescription} ...
+                        {props.item.task.description.substring(0, 200)} ...
                     </div>
                     <FormControlLabel
                         className="card-checkbox"
