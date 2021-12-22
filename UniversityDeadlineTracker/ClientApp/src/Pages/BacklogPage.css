@@ -6,16 +6,16 @@
     border-radius: 10px !important;
 }
 
-.table {
+.table-container .table {
 }
 
-.table-head {
+.table-container .table-head {
 }
 
-.table-head-row {
+.table-container .table-head-row {
 }
 
-.table-head-cell {
+.table-container .table-head-cell {
     border-right: 0.5px solid var(--LIGHT_GREY) !important;
     border-top: none !important;
     border-bottom: 1px solid var(--LIGHTER_GREY) !important;
@@ -23,73 +23,73 @@
     color: white !important;
 }
 
-.table-body {
+.table-container .table-body {
 }
 
-.table-body-row {
+.table-container .table-body-row {
 }
 
-.table-body-cell {
+.table-container .table-body-cell {
     border-top: 0.5px solid var(--LIGHT_GREY) !important;
     border-bottom: 0.5px solid var(--LIGHT_GREY) !important;
     color: white !important;
 }
 
-.status-dot {
+.table-container .status-dot {
     margin-left: 10px;
 }
 
-.title-task-icon {
+.table-container .title-task-icon {
     margin-right: 10px;
 }
 
-#arrow {
+.table-container #Arrow {
     width: 5%;
     border-right: none !important;
 }
 
-#id {
+.table-container #Id {
     width: 7%;
 }
 
-#subject {
+.table-container #Subject {
     width: 15%;
 }
 
-#title {
+.table-container #Title {
 }
 
-#deadline {
+.table-container #Deadline {
     width: 20%;
 }
 
-#status {
+.table-container #Status {
     width: 13%;
 }
 
-.arrow {
+.table-container .arrow {
     color: white;
     border-radius: 50%;
     cursor: pointer;
 }
 
-.arrow:hover {
+.table-container .arrow:hover {
     background-color: var(--LIGHT_GREY);
     color: var(--ORANGE_ACCENT);
 }
 
-.table th {
+.table-container .table th {
     vertical-align: middle !important;
 }
 
-.table td {
+.table-container .table td {
     border-top: 0.5px solid var(--LIGHT_GREY) !important;
     border-bottom: 0.5px solid var(--LIGHT_GREY) !important;
 
     vertical-align: middle !important;
 }
 
-.description {
+.table-container .description {
     color: white;
     font-size: 12px !important;
     padding: 10px;

@@ -1,4 +1,4 @@
-﻿.join-now {
+﻿.default-component {
     font-size: x-large;
     color: white;
     width: 70%;
@@ -6,15 +6,15 @@
     text-align: center;
 }
 
-.bigger {
+.default-component .bigger {
     font-size: xx-large;
 }
 
-.accent {
+.default-component .accent {
     color: var(--ORANGE_ACCENT);
 }
 
-.join-now .button {
+.default-component .button {
     margin: 50px auto;
     font-size: medium;
     color: white;
@@ -27,13 +27,13 @@
     transition-duration: .5s;
 }
 
-.join-now .button:hover {
+.default-component .button:hover {
     background-color: white;
     border: none;
     color: var(--DARKER_GREY);
 }
 
-ul {
+.default-component ul {
     margin: 10px 20px 10px 15%;
     text-align: justify;
 }

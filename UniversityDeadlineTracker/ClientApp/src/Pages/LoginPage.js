@@ -1,19 +1,19 @@
-﻿import React, {useState} from 'react';
+﻿import React from 'react';
 import "./LoginPage.css"
-import {Button, CircularProgress, FormControl, Input, InputAdornment, InputLabel, Stack} from "@mui/material";
-import {useHistory} from "react-router-dom";
-import {AccountCircle, Visibility, VisibilityOff} from "@mui/icons-material";
-import {Default} from "./Default";
 import {Pages} from "../Utils/Enums";
-import {LoginComponent} from "./LoginComponent";
+import {useHistory} from "react-router-dom";
 import {enrollUserToSubject, getAllSubjects} from "../Utils/Services";
+import {CircularProgress} from "@mui/material";
+import {Default} from "../Components/Default";
+import {Login} from "../Components/Login";
+import {getUser} from "../Utils/Token";
 
 export const LoginPage = (props) => {
         let history = useHistory();
         const [subjects, setSubjects] = React.useState(null)
 
         React.useEffect(() => {
-            getAllSubjects(props.token).then(data => {
+            getAllSubjects().then(data => {
                 setSubjects(data)
             })
         }, [])
@@ -21,8 +21,7 @@ export const LoginPage = (props) => {
         const getSubjectButtons = () => {
             return subjects?.map(subject => {
                 return <div className="subject" onClick={() => {
-                    console.log('call made')
-                    enrollUserToSubject(props.token, props.user.id, subject.id).then(r => {
+                    enrollUserToSubject(subject.id).then(r => {
                         console.log(r.status)
                     })
                 }}>{subject.name}</div>
@@ -31,9 +30,9 @@ export const LoginPage = (props) => {
 
         return (
             <React.Fragment>{
-                props.user ?
-                    <div className="welcome">
-                        <p className="hello">Hello <span>{props.user.username}</span>!</p>
+                props.token ?
+                    <div className="login-page">
+                        <p className="hello">Hello <span>{getUser().username}</span>!</p>
                         <p>Welcome back to your University Deadline Tracker!</p>
                         <div className="button" onClick={() => history.push(Pages.BOARD)}>Check your Boards!</div>
                         <p className="enroll">Enroll to subjects to stay up to date with upcoming tasks!</p>
@@ -42,7 +41,7 @@ export const LoginPage = (props) => {
                             {subjects ?
                                 getSubjectButtons()
                                 :
-                                <div className="spinner">
+                                <div className="board-spinner">
                                     <CircularProgress color="inherit"/>
                                 </div>
                             }
@@ -51,7 +50,7 @@ export const LoginPage = (props) => {
                     :
                     <React.Fragment>
                         <Default main/>
-                        <LoginComponent setUser={props.setUser} token={props.token} setToken={props.setToken}/>
+                        <Login token={props.token} setToken={props.setToken}/>
                     </React.Fragment>
             }
             </React.Fragment>

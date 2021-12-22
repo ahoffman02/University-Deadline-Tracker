@@ -1,15 +1,12 @@
-import Card from "@mui/material/Card";
-import Box from "@mui/material/Box";
 import * as React from "react";
-import CardContent from "@mui/material/CardContent";
-import Typography from "@mui/material/Typography";
 import "./TaskCard.css";
+import {updateUserTask} from "../Utils/Services";
+import {Status} from "../Utils/Enums";
+import Card from "@mui/material/Card";
+import CardContent from "@mui/material/CardContent";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
-
 import FiberManualRecordIcon from "@mui/icons-material/FiberManualRecord";
-import { Status } from "../Utils/Enums";
-import { updateUserTask } from "../Utils/Services";
 
 const style = {
     minWidth: 230,
@@ -17,36 +14,6 @@ const style = {
     backgroundColor: "#b4dce0",
     display: "flex",
     flexDirection: "column",
-};
-
-const getStatus = (status) => {
-    let color = "transparent";
-    let text = "";
-    switch (status) {
-        case Status.NEW:
-            color = "#c7c763";
-            text = "New";
-            break;
-        case Status.ACTIVE:
-            color = "#006a91";
-            text = "Active";
-            break;
-        case Status.COMPLETED:
-            color = "#008768";
-            text = "Completed";
-            break;
-    }
-
-    return (
-        <div>
-            {text}
-            <FiberManualRecordIcon
-                className="card-status-dot"
-                htmlColor={color}
-                fontSize="small"
-            />
-        </div>
-    );
 };
 
 export const TaskCard = (props) => {
@@ -57,12 +24,43 @@ export const TaskCard = (props) => {
     }, [props.item.status]);
 
     const handleChange = (event) => {
-        updateUserTask(props.token, {
+        updateUserTask({
             ...props.task,
             task: null,
             status: event.target.checked ? Status.COMPLETED : Status.NEW,
+        }).then(r => {
         });
         setStatus(event.target.checked ? Status.COMPLETED : Status.NEW);
+    };
+
+    const getStatus = (status) => {
+        let color = "transparent";
+        let text = "";
+        switch (status) {
+            case Status.NEW:
+                color = "#c7c763";
+                text = "New";
+                break;
+            case Status.ACTIVE:
+                color = "#006a91";
+                text = "Active";
+                break;
+            case Status.COMPLETED:
+                color = "#008768";
+                text = "Completed";
+                break;
+        }
+
+        return (
+            <div>
+                {text}
+                <FiberManualRecordIcon
+                    className="card-status-dot"
+                    htmlColor={color}
+                    fontSize="small"
+                />
+            </div>
+        );
     };
 
     return (
@@ -76,7 +74,7 @@ export const TaskCard = (props) => {
             }}
         >
             <CardContent sx={style}>
-                <div className="cardd">
+                <div className="card-component">
                     <div className="cardheader">
                         <div align="left" className="subject-dot">
                             {props.item.task.subject.name}

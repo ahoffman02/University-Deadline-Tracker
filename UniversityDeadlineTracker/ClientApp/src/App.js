@@ -1,33 +1,33 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 import './App.css'
-import {Header} from "./Components/Header";
-import LoginPage from "./Components/LoginPage";
-import Backlog from "./Components/Backlog";
-import Community from "./Components/Community";
+import {useToken} from "./Utils/Token";
 import {Pages} from "./Utils/Enums";
-import {Board} from "./Components/Board";
+import {Header} from "./Components/Header";
+import LoginPage from "./Pages/LoginPage";
+import {BoardPage} from "./Pages/BoardPage";
+import BacklogPage from "./Pages/BacklogPage";
+import CommunityPage from "./Pages/CommunityPage";
 
 export const App = () => {
-    const [user, setUser] = useState(null);
-    const [token, setToken] = useState(null);
-
+    const {token, setToken} = useToken();
+    
     return (
         <React.Fragment>
             <Router>
-                <Header user={user} token={token} setUser={setUser} setToken={setToken}/>
+                <Header token={token} setToken={setToken}/>
                 <Switch>
                     <Route exact path={Pages.HOME}>
-                        <LoginPage user={user} token={token} setUser={setUser} setToken={setToken}/>
+                        <LoginPage token={token} setToken={setToken}/>
                     </Route>
                     <Route path={Pages.BOARD}>
-                        <Board user={user} token={token}/>
+                        <BoardPage token={token}/>
                     </Route>
                     <Route path={Pages.BACKLOG}>
-                        <Backlog user={user} token={token}/>
+                        <BacklogPage token={token}/>
                     </Route>
                     <Route path={Pages.COMMUNITY}>
-                        <Community user={user} token={token}/>
+                        <CommunityPage token={token}/>
                     </Route>
                 </Switch>
             </Router>

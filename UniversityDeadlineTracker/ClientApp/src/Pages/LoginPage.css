@@ -1,20 +1,20 @@
-﻿.welcome {
+﻿.login-page {
     font-size: x-large;
     color: white;
     width: 40%;
-    margin: 3% auto;
+    margin: 2% auto;
     text-align: center;
 }
 
-.welcome .hello {
+.login-page .hello {
     font-size: xx-large;
 }
 
-.welcome span {
+.login-page span {
     color: var(--ORANGE_ACCENT);
 }
 
-.welcome .button {
+.login-page .button {
     margin: 25px auto;
     font-size: medium;
     color: white;
@@ -27,19 +27,19 @@
     transition-duration: .5s;
 }
 
-.welcome .button:hover {
+.login-page .button:hover {
     background-color: white;
     border: 1px solid transparent;
     color: var(--DARKER_GREY);
 }
 
-.welcome .enroll {
+.login-page .enroll {
     font-size: large;
 }
 
-.subject-board {
+.login-page .subject-board {
     width: 17vw;
-    margin: 25px auto 0;
+    margin: 40px auto 0;
     padding-top: 1px;
     height: 45vh;
     background-color: var(--LIGHT_GREY);
@@ -48,7 +48,7 @@
     overflow: auto;
 }
 
-.subject-board .filter {
+.login-page .subject-board .filter {
     position: absolute;
     width: 17vw;
     height: 45vh;
@@ -57,7 +57,7 @@
     pointer-events: none;
 }
 
-.subject-board .subject {
+.login-page .subject-board .subject {
     width: 80%;
     height: 40px;
     margin: 10px auto;
@@ -72,7 +72,7 @@
     transition-duration: .5s;
 }
 
-.subject-board .subject:hover {
+.login-page .subject-board .subject:hover {
     color: black;
     background-color: white;
     border: 1px solid transparent;
