@@ -25,7 +25,7 @@ export const TaskCard = (props) => {
 
     const handleChange = (event) => {
         updateUserTask({
-            ...props.task,
+            ...props.item,
             task: null,
             status: event.target.checked ? Status.COMPLETED : Status.NEW,
         }).then(r => {
