@@ -82,7 +82,7 @@ namespace UniversityDeadlineTracker.Controllers
 
         [HttpDelete]
         [Route("{id:int}")]
-        [AuthorizationFilter]
+        [AuthorizationFilter(roles: "Teacher")]
         public async Task<IActionResult> Delete([FromRoute] int id)
         {
             return Ok(await _userService.DeleteAsync(id));

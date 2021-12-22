@@ -28,7 +28,7 @@ namespace UniversityDeadlineTracker.Controllers
         {
             IActionResult response = Unauthorized();
             var data = _accountService.Authenticate(login.Username, login.Password);
-            if (data.Token != null)
+            if (data.Token != null && data.User != null)
                 response = Ok(data);
 
             return response;

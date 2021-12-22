@@ -35,7 +35,7 @@ namespace UDT.Model.Mappers
 
         public static UserViewModel toViewModel(this User user)
         {
-            UserViewModel userViewModel = new UserViewModel
+            UserViewModel userViewModel = user != null ? new UserViewModel
             {
                 Id = user.Id,
                 Username = user.Username,
@@ -50,7 +50,7 @@ namespace UDT.Model.Mappers
                 DateOfBirth = user.DateOfBirth,
 
                 Subjects = user.Subjects?.Select(subject => subject.Id).ToList(),
-            };
+            } : null;
 
             return userViewModel;
         }

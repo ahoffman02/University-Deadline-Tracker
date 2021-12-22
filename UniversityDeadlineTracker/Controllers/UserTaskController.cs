@@ -4,11 +4,13 @@ using Microsoft.AspNetCore.Mvc;
 using UDT.Business.Interfaces;
 using UDT.Model.Mappers;
 using UDT.Model.ViewModels;
+using UniversityDeadlineTracker.Filters;
 
 namespace UniversityDeadlineTracker.Controllers
 {
     [ApiController]
     [Route("api/usersTasks")]
+    [AuthorizationFilter]
     public class UserTaskController : ControllerBase
     {
         private readonly IUserTaskService _usersTasksService;
@@ -47,6 +49,7 @@ namespace UniversityDeadlineTracker.Controllers
 
         [HttpDelete]
         [Route("{id:int}")]
+        [AuthorizationFilter(roles: "Teacher")]
         public async Task<IActionResult> Delete([FromRoute] int id)
         {
             var result = await _usersTasksService.DeleteAsync(id);
@@ -58,6 +61,7 @@ namespace UniversityDeadlineTracker.Controllers
 
         [HttpPut]
         [Route("{id:int}")]
+        [AuthorizationFilter(roles: "Teacher")]
         public async Task<IActionResult> Update([FromRoute] int id,
             [FromBody] UserTaskUpdateViewModel userTaskUpdateViewModel)
         {
