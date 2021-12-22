@@ -45,7 +45,10 @@ export const getUserTasksForUser = async () => {
 export const updateUserTask = (userTask) => {
     const requestOptions = {
         method: "PUT",
-        headers: {"Content-Type": "application/json"},
+        headers: {
+            "Content-Type": "application/json",
+            'Authorization': 'Bearer ' + sessionStorage.getItem('token')
+        },
         body: JSON.stringify(userTask),
     };
     return fetch(`api/userstasks/${userTask.id}`, requestOptions)
