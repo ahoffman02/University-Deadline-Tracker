@@ -1,9 +1,9 @@
-﻿.login {
+﻿.login-component {
     font-family: sans-serif;
     text-align: center;
 }
 
-.form {
+.login-component .form {
     max-width: 330px;
     margin: 20px auto;
     display: flex;
@@ -13,30 +13,30 @@
     border-radius: 15px;
 }
 
-.input {
+.login-component .input {
     margin-bottom: 10px !important;
 }
 
-.form .button {
+.login-component .form .button {
     margin-top: 30px;
     width: 50%;
 }
 
-.form a {
+.login-component .form a {
     color: var(--DARKER_GREY);
     text-decoration: none;
 }
 
-.form span {
+.login-component .form span {
     margin-top: 2px;
     color: var(--RED_ACCENT)
 }
 
-.textfield {
+.login-component .textfield {
     margin-top: 8px !important;
 }
 
-.spinner-dialog .css-1t1j96h-MuiPaper-root-MuiDialog-paper{
+.login-component .spinner-dialog .css-1t1j96h-MuiPaper-root-MuiDialog-paper{
     background-color: transparent !important;
     box-shadow: none !important;
 }

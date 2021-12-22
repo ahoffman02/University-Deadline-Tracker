@@ -1,4 +1,6 @@
 ﻿import React, {useRef, useState} from "react";
+import "./Login.css";
+import {addUser, login} from "../Utils/Services";
 import {
     Button, CircularProgress,
     Dialog,
@@ -14,8 +16,6 @@ import {
     TextField,
 } from "@mui/material";
 import {AccountCircle, Visibility, VisibilityOff} from "@mui/icons-material";
-import "./LoginComponent.css";
-import {addUser, login} from "../Utils/Services";
 
 const getGenericUser = () => {
     return {
@@ -48,11 +48,7 @@ const isUserValid = (user) => {
         !isNaN(user.code)
 }
 
-const getSignupFields = () => {
-
-}
-
-export const LoginComponent = (props) => {
+export const Login = (props) => {
     const [user, setUser] = useState(getGenericUser);
     const [showPassword, setShowPassword] = useState(false);
     const [loginError, setLoginError] = useState(false);
@@ -64,8 +60,7 @@ export const LoginComponent = (props) => {
     const onLogin = () => {
         login(user.username, user.password).then((data) => {
             if (data) {
-                props.setUser(data.user);
-                props.setToken(data.token);
+                props.setToken(data.token, data.user);
             } else setLoginError(true);
         });
     };
@@ -205,7 +200,7 @@ export const LoginComponent = (props) => {
     };
 
     return (
-        <div className="login">
+        <div className="login-component">
             <form className="form">
                 <FormControl variant="standard" className="input">
                     <InputLabel>Username</InputLabel>
@@ -270,7 +265,7 @@ export const LoginComponent = (props) => {
                             setShouldSignUp(false);
                         }}>
                     <Dialog className="spinner-dialog" open={isSigningUp} color="error">
-                        <div className="spinner">
+                        <div className="board-spinner">
                             <CircularProgress color="warning"/>
                         </div>
                     </Dialog>

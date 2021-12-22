@@ -1,4 +1,4 @@
-﻿.board {
+﻿.board-page {
     margin: 30px auto;
     width: 90vw;
     height: 80%;
@@ -6,7 +6,7 @@
     border-radius: 10px;
 }
 
-.spinner {
+.board-spinner {
     width: 100px;
     margin: 15% auto;
     text-align: center;

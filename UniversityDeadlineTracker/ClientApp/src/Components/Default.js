@@ -7,7 +7,7 @@ export const Default = (props) => {
     const history = useHistory();
 
     return (
-        <div className="join-now" style={{marginTop: props.main ? '3%' : '7%'}}>
+        <div className="default-component" style={{marginTop: props.main ? '3%' : '7%'}}>
             {props.main ?
                 <p className="bigger">Welcome to <span className="accent">University Deadline Tracker</span>!</p>
                 :
