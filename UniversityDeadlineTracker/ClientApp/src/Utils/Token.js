@@ -1,9 +1,15 @@
 ﻿import {useState} from 'react';
 
+export const getToken = () => {
+    
+    return sessionStorage.getItem('token');
+};
+
+export const getUser = () => {
+    return JSON.parse(sessionStorage.getItem('user'));
+};
+
 export const useToken = () => {
-    const getToken = () => {
-        return sessionStorage.getItem('token');
-    };
 
     const [token, setToken] = useState(getToken());
 
@@ -22,7 +28,3 @@ export const useToken = () => {
         setToken: saveToken
     }
 }
-
-export const getUser = () => {
-    return JSON.parse(sessionStorage.getItem('user'));
-};

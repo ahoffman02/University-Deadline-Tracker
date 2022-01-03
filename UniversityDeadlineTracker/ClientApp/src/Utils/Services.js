@@ -1,4 +1,8 @@
-﻿export const login = (username, password) => {
+﻿import {getToken, getUser} from "./Token";
+
+// user
+
+export const login = (username, password) => {
     const requestOptions = {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
@@ -13,16 +17,15 @@
     )
 }
 
-// tasks
-
-export const getTaskById = (id) => {
+export const addUser = (user) => {
     const requestOptions = {
-        method: 'GET',
-        headers: {'Authorization': 'Bearer ' + sessionStorage.getItem('token')}
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(user)
     };
-    return fetch(`api/tasks/${id}`, requestOptions).then(data =>
-        data.json()
-    )
+    return fetch('api/users', requestOptions)
 }
 
 // usertasks
@@ -30,9 +33,9 @@ export const getTaskById = (id) => {
 export const getUserTasksForUser = async () => {
     const requestOptions = {
         method: 'GET',
-        headers: {'Authorization': 'Bearer ' + sessionStorage.getItem('token')}
+        headers: {'Authorization': 'Bearer ' + getToken()}
     };
-    const usertasks = await fetch(`api/users/usertasks/${JSON.parse(sessionStorage.getItem('user')).id}`, requestOptions).then(data =>
+    const usertasks = await fetch(`api/users/usertasks/${getUser().id}`, requestOptions).then(data =>
         data.json()
     )
     return Promise.all(usertasks.map(async (usertask) => {
@@ -47,24 +50,23 @@ export const updateUserTask = (userTask) => {
         method: "PUT",
         headers: {
             "Content-Type": "application/json",
-            'Authorization': 'Bearer ' + sessionStorage.getItem('token')
+            'Authorization': 'Bearer ' + getToken()
         },
         body: JSON.stringify(userTask),
     };
     return fetch(`api/userstasks/${userTask.id}`, requestOptions)
 };
 
-// user
+// tasks
 
-export const addUser = (user) => {
+export const getTaskById = (id) => {
     const requestOptions = {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(user)
+        method: 'GET',
+        headers: {'Authorization': 'Bearer ' + getToken()}
     };
-    return fetch('api/users', requestOptions)
+    return fetch(`api/tasks/${id}`, requestOptions).then(data =>
+        data.json()
+    )
 }
 
 // subjects
@@ -72,7 +74,7 @@ export const addUser = (user) => {
 export const getSubjectById = (id) => {
     const requestOptions = {
         method: 'GET',
-        headers: {'Authorization': 'Bearer ' + sessionStorage.getItem('token')}
+        headers: {'Authorization': 'Bearer ' + getToken()}
     };
     return fetch(`api/subjects/${id}`, requestOptions).then(data =>
         data.json()
@@ -82,7 +84,7 @@ export const getSubjectById = (id) => {
 export const getAllSubjects = async () => {
     const requestOptions = {
         method: 'GET',
-        headers: {'Authorization': 'Bearer ' + sessionStorage.getItem('token')}
+        headers: {'Authorization': 'Bearer ' + getToken()}
     };
     return fetch('api/subjects', requestOptions).then(data =>
         data.json()
@@ -92,7 +94,16 @@ export const getAllSubjects = async () => {
 export const enrollUserToSubject = async (subjectId) => {
     const requestOptions = {
         method: 'POST',
-        headers: {'Authorization': 'Bearer ' + sessionStorage.getItem('token')}
+        headers: {'Authorization': 'Bearer ' + getToken()}
     };
-    return fetch(`api/users/${JSON.parse(sessionStorage.getItem('user')).id}/addsubject/${subjectId}`, requestOptions)
+    return fetch(`api/users/${getUser().id}/addsubject/${subjectId}`, requestOptions)
+}
+
+export const getTeacherforSubject=(subjectId)=>{
+    const requestOptions = {
+        method: 'GET',
+        headers: {'Authorization': 'Bearer ' + getToken()}
+    };
+    // return fetch(`api/subjects/teacher/${subjectId}`, requestOptions)
+    return 'Mihis Andreea'
 }

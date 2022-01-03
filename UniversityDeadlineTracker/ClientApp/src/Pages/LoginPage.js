@@ -1,12 +1,15 @@
 ﻿import React from 'react';
 import "./LoginPage.css"
-import {Pages} from "../Utils/Enums";
+import {Pages, SubjectType} from "../Utils/Enums";
 import {useHistory} from "react-router-dom";
-import {enrollUserToSubject, getAllSubjects} from "../Utils/Services";
+import {enrollUserToSubject, getAllSubjects, getTeacherforSubject} from "../Utils/Services";
 import {CircularProgress} from "@mui/material";
 import {Default} from "../Components/Default";
 import {Login} from "../Components/Login";
 import {getUser} from "../Utils/Token";
+import {CSSTransition, TransitionGroup} from "react-transition-group";
+import {grey, orange} from "@mui/material/colors";
+import {LIGHT_GREY, LIGHTER_GREY, ORANGE_ACCENT} from "../Utils/Constants";
 
 export const LoginPage = (props) => {
         let history = useHistory();
@@ -19,20 +22,31 @@ export const LoginPage = (props) => {
         }, [])
 
         const getSubjectButtons = () => {
-            return subjects?.map(subject => {
-                return <div className="subject" onClick={() => {
-                    enrollUserToSubject(subject.id).then(r => {
-                        console.log(r.status)
-                    })
-                }}>{subject.name}</div>
-            })
+            return <TransitionGroup>
+                {subjects?.map(subject => {
+                    return <CSSTransition key={subject.id} timeout={450} classNames="subject-transition">
+                        <div className="subject" onClick={() => {
+                            enrollUserToSubject(subject.id).then(r => {
+                                setSubjects(subjects.filter(s => s.id !== subject.id))
+                            })
+                        }}>
+                            <div className="subject-type"
+                                 style={{backgroundColor: subject.type === SubjectType.OBLIGATORIU ? ORANGE_ACCENT : LIGHTER_GREY}}>
+                                {subject.type === SubjectType.OBLIGATORIU ? 'OB' : 'OP'}
+                            </div>
+                            <div className="subject-name">{subject.name}</div>
+                            <div className="subject-teacher">{`Teacher: ${getTeacherforSubject(subject.id)}`}</div>
+                        </div>
+                    </CSSTransition>
+                })}
+            </TransitionGroup>
         }
 
         return (
             <React.Fragment>{
                 props.token ?
                     <div className="login-page">
-                        <p className="hello">Hello <span>{getUser().username}</span>!</p>
+                        <p className="hello">Hello <span className="orange">{getUser().username}</span>!</p>
                         <p>Welcome back to your University Deadline Tracker!</p>
                         <div className="button" onClick={() => history.push(Pages.BOARD)}>Check your Boards!</div>
                         <p className="enroll">Enroll to subjects to stay up to date with upcoming tasks!</p>

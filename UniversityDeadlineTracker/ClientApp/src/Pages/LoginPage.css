@@ -10,7 +10,7 @@
     font-size: xx-large;
 }
 
-.login-page span {
+.login-page .orange {
     color: var(--ORANGE_ACCENT);
 }
 
@@ -39,7 +39,7 @@
 
 .login-page .subject-board {
     width: 17vw;
-    margin: 40px auto 0;
+    margin: 25px auto 0;
     padding-top: 1px;
     height: 45vh;
     background-color: var(--LIGHT_GREY);
@@ -55,11 +55,13 @@
     border-radius: 5px;
     background: linear-gradient(transparent, transparent, #101010bb);
     pointer-events: none;
+    z-index: 1;
 }
 
 .login-page .subject-board .subject {
+    position: relative;
     width: 80%;
-    height: 40px;
+    height: 60px;
     margin: 10px auto;
     background-color: var(--DARKER_GREY);
     color: white;
@@ -67,7 +69,6 @@
     text-align: center;
     border: 1px solid var(--LIGHTER_GREY);
     border-radius: 5px;
-    line-height: 35px;
     cursor: pointer;
     transition-duration: .5s;
 }
@@ -76,4 +77,37 @@
     color: black;
     background-color: white;
     border: 1px solid transparent;
+}
+
+.login-page .subject-board .subject-transition-exit-active {
+    opacity: 0;
+    height: 0;
+    width: 0;
+    transition: all 450ms ease-in-out;
+}
+
+.login-page .subject-board .subject .subject-name {
+    color: var(--ORANGE_ACCENT);
+    transition-duration: .5s;
+    margin-top: 3px;
+}
+
+.login-page .subject-board .subject:hover .subject-name {
+    color: black;
+}
+
+.login-page .subject-board .subject .subject-teacher {
+    font-size: small;
+}
+
+.login-page .subject-board .subject .subject-type {
+    position: absolute;
+    margin: 5px;
+    border: .5px solid var(--DARKEST_GREY);
+    border-radius: 50px;
+    height: 18px;
+    width: 18px;
+    right: 0;
+    font-size: x-small;
+    color: black;
 }
