@@ -6,13 +6,6 @@
     padding-right: 50px;
 }
 
-.slider-component .css-12fosfy-MuiCardContent-root {
-    transition-duration: .7s;
-}
-.slider-component .css-12fosfy-MuiCardContent-root:hover {
-    background-color: #5a6263;
-}
-
 .slider-component .date {
     display: block;
     font-size: 16px;

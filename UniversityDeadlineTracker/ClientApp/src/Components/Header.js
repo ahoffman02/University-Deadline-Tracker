@@ -8,6 +8,7 @@ import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import {AccountCircle, Logout, Settings, Login} from "@mui/icons-material";
 import Logo from '../Resources/timetable.png'
 import {getUser} from "../Utils/Token";
+import {LIGHT_GREY} from "../Utils/Constants";
 
 export const Header = (props) => {
     let history = useHistory();

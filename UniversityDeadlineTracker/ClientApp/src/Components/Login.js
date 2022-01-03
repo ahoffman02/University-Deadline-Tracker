@@ -264,10 +264,8 @@ export const Login = (props) => {
                         onClose={() => {
                             setShouldSignUp(false);
                         }}>
-                    <Dialog className="spinner-dialog" open={isSigningUp} color="error">
-                        <div className="board-spinner">
-                            <CircularProgress color="warning"/>
-                        </div>
+                    <Dialog className="login-component-spinner-dialog" open={isSigningUp} color="error">
+                        <CircularProgress color="warning"/>
                     </Dialog>
                     <DialogTitle>Create Account</DialogTitle>
                     <DialogContent>

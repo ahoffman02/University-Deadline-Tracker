@@ -1,3 +1,40 @@
+.slider-component .MuiCard-root {
+    max-width: 230px;
+    max-height: 150px;
+    margin-bottom: 15px;
+    border-radius: 15px;
+    position: relative;
+}
+
+.slider-component .MuiCardContent-root {
+    min-width: 230px;
+    min-height: 150px;
+    background-color: #a9c7ca;
+    display: flex;
+    flex-direction: column;
+    transition-duration: .7s;
+}
+
+.slider-component .MuiCardContent-root:hover {
+    background-color: #5a6263;
+}
+
+.slider-component .MuiCardContent-root:hover .cardheader {
+    display: none;
+}
+
+.slider-component .MuiCardContent-root:hover .cardfooter {
+    display: none;
+}
+
+.slider-component .MuiCardContent-root:hover .card-description {
+    display: block;
+}
+
+.slider-component .MuiCardContent-root:hover .card-checkbox {
+    display: block !important;
+}
+
 .card-component {
     display: flex;
     flex-direction: column;
@@ -13,19 +50,24 @@
 .card-component .subject-dot {
     background-color: var(--ORANGE_ACCENT);
     border-radius: 50%;
-    box-shadow: 2px 2px 11px 0px var(--LIGHTER_GREY),
-    7px 7px 18px -13px var(--RED_ACCENT) inset;
-    width: 40px;
-    height: 40px;
-    line-height: 40px;
+    /*box-shadow: 2px 2px 11px 0 var(--LIGHTER_GREY),*/
+    /*7px 7px 18px -13px var(--DARKEST_GREY) inset;*/
+    width: 38px;
+    height: 38px;
+    line-height: 38px;
     font-size: 12px;
     font-weight: 600;
     text-align: center;
+    color: white;
 }
 
-.card-component .card-title {
+.card-component .card-titlee {
     margin-left: 20px;
-    width: 70%;
+}
+
+.card-component .card-subtitle {
+    margin-left: 20px;
+    font-size: small;
 }
 
 .card-component .cardfooter {
@@ -44,7 +86,12 @@
 }
 
 .card-component .card-status-dot {
-    margin-left: 5px;
+    display: inline-block;
+    border: 1px solid;
+    border-radius: 50%;
+    margin-right: 5px;
+    height: 8px;
+    width: 8px;
 }
 
 .card-component .card-component:hover {
@@ -69,23 +116,7 @@
     padding: 0;
 }
 
-.css-12fosfy-MuiCardContent-root:hover .cardheader {
-    display: none;
-}
-
-.css-12fosfy-MuiCardContent-root:hover .cardfooter {
-    display: none;
-}
-
-.css-12fosfy-MuiCardContent-root:hover .card-description {
-    display: block;
-}
-
-.css-12fosfy-MuiCardContent-root:hover .card-checkbox {
-    display: block !important;
-}
-
-.css-ahj2mt-MuiTypography-root {
+.card-component .card-checkbox .MuiTypography-root {
     font-size: 10px !important;
     color: white;
 }

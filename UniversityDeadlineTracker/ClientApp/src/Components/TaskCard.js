@@ -7,14 +7,8 @@ import CardContent from "@mui/material/CardContent";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
 import FiberManualRecordIcon from "@mui/icons-material/FiberManualRecord";
-
-const style = {
-    minWidth: 230,
-    minHeight: 150,
-    backgroundColor: "#b4dce0",
-    display: "flex",
-    flexDirection: "column",
-};
+import {DARK_GREY, DARKER_GREY, LIGHTER_GREY} from "../Utils/Constants";
+import {Stack} from "@mui/material";
 
 export const TaskCard = (props) => {
     const [status, setStatus] = React.useState(props.item.status);
@@ -33,61 +27,55 @@ export const TaskCard = (props) => {
         setStatus(event.target.checked ? Status.COMPLETED : Status.NEW);
     };
 
-    const getStatus = (status) => {
-        let color = "transparent";
-        let text = "";
-        switch (status) {
-            case Status.NEW:
-                color = "#c7c763";
-                text = "New";
-                break;
-            case Status.ACTIVE:
-                color = "#006a91";
-                text = "Active";
-                break;
-            case Status.COMPLETED:
-                color = "#008768";
-                text = "Completed";
-                break;
+    const getSubjectColor = (subject) => {
+        const number = subject % 6
+        switch (number) {
+            case 0:
+                return '#a56d24'
+            case 1:
+                return '#983a59'
+            case 2:
+                return '#7b7d2a'
+            case 3:
+                return '#2d5b6b'
+            case 4:
+                return '#8f4731'
+            case 5:
+                return '#52494c'
         }
-
-        return (
-            <div>
-                {text}
-                <FiberManualRecordIcon
-                    className="card-status-dot"
-                    htmlColor={color}
-                    fontSize="small"
-                />
-            </div>
-        );
-    };
+    }
 
     return (
-        <Card
-            sx={{
-                maxWidth: 230,
-                maxHeight: 150,
-                marginBottom: "15px",
-                borderRadius: "20px",
-                position: "relative",
-            }}
-        >
-            <CardContent sx={style}>
+        <Card>
+            <CardContent>
                 <div className="card-component">
                     <div className="cardheader">
-                        <div align="left" className="subject-dot">
+                        <div align="left" className="subject-dot"
+                             style={{backgroundColor: getSubjectColor(props.item.task.subject.id)}}>
                             {props.item.task.subject.name}
                         </div>
-                        <div className="card-title">
-                            {props.item.task.title}
-                        </div>
+                        <Stack>
+                            <div className="card-titlee">
+                                {props.item.task.title.split('-')[0]}
+                            </div>
+                            <div className="card-subtitle">
+                                {props.item.task.title.split('-')[1]}
+                            </div>
+                        </Stack>
                     </div>
                     <div className="cardfooter">
                         <div className="card-penalty">
                             {props.item.task.penalty} p/week penalty
                         </div>
-                        <div className="card-status">{getStatus(status)}</div>
+                        <div className="card-status">
+                            <div className="card-status-dot"
+                                 style={{
+                                     backgroundColor: status === Status.NEW ? '#ffffa1' : '#008768',
+                                     borderColor: status === Status.NEW ? LIGHTER_GREY : DARK_GREY
+                                 }}
+                            />
+                            {status === Status.NEW ? "New" : "Completed"}
+                        </div>
                     </div>
                     <div className="card-description">
                         {props.item.task.description.substring(0, 200)} ...
@@ -97,7 +85,7 @@ export const TaskCard = (props) => {
                         control={
                             <Checkbox
                                 size="small"
-                                checked={status === Status.NEW ? false : true}
+                                checked={status !== Status.NEW}
                                 onChange={handleChange}
                                 sx={{
                                     color: "#02af8e",
