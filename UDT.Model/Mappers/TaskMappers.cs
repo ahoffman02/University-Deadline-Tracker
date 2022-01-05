@@ -15,6 +15,7 @@ namespace UDT.Model.Mappers
             {
                 Id = TaskViewModel.Id,
                 Title = TaskViewModel.Title,
+                Subtitle = TaskViewModel.Subtitle,
                 Description = TaskViewModel.Description,
                 SubjectId = TaskViewModel.SubjectId,
                 Deadline = TaskViewModel.Deadline,
@@ -30,6 +31,7 @@ namespace UDT.Model.Mappers
             {
                 Id = Task.Id,
                 Title = Task.Title,
+                Subtitle = Task.Subtitle,
                 Description = Task.Description,
                 SubjectId = Task.SubjectId,
                 Deadline = Task.Deadline,
@@ -45,6 +47,7 @@ namespace UDT.Model.Mappers
             {
                 Id = TaskUpdateViewModel.Id,
                 Title = TaskUpdateViewModel.Title,
+                Subtitle = TaskUpdateViewModel.Subtitle,
                 Description = TaskUpdateViewModel.Description,
                 SubjectId = TaskUpdateViewModel.SubjectId,
                 Deadline = TaskUpdateViewModel.Deadline,
@@ -59,6 +62,7 @@ namespace UDT.Model.Mappers
             Task Task = new Task
             {
                 Title = TaskCreationViewModel.Title,
+                Subtitle = TaskCreationViewModel.Subtitle,
                 Description = TaskCreationViewModel.Description,
                 SubjectId = TaskCreationViewModel.SubjectId,
                 Deadline = TaskCreationViewModel.Deadline,

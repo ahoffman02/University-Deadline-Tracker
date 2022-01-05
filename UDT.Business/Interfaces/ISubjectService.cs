@@ -8,6 +8,8 @@ namespace UDT.Business.Interfaces
     {
         IAsyncEnumerable<Subject> GetAllAsync();
 
+        IAsyncEnumerable<Subject> GetAllSubjectUserIsAssignedTo(int id);
+
         Task<Subject> GetByIdAsync(int id);
 
         Task<Subject> AddAsync(Subject subject);
