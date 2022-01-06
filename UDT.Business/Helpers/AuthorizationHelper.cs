@@ -3,20 +3,26 @@ using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
+using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 using UDT.Business.Interfaces;
 using UDT.Model;
+using UDT.Model.Entities;
 
 namespace UDT.Business.Helpers
 {
 	public class AuthorizationHelper : IAuthorizationHelper
 	{
 		private readonly AuthorizationSettings _authorizationSettings;
+		private readonly IUserService _userService;
 
-		public AuthorizationHelper(IOptions<AuthorizationSettings> authorizationSettings)
+		public AuthorizationHelper(IOptions<AuthorizationSettings> authorizationSettings, IUserService userService)
 		{
 			_authorizationSettings = authorizationSettings.Value;
+			_userService = userService;
 		}
+
 		public bool IsTokenValid(string token)
 		{
 			SecurityToken validatedToken;
@@ -45,5 +51,16 @@ namespace UDT.Business.Helpers
 
 			return true;
 		}
+
+		public async Task<bool> IsUsersRoleAuthorized(string token, string allowedRoles)
+        {
+			var tokenHandler = new JwtSecurityTokenHandler();
+			var jwtToken = (JwtSecurityToken)tokenHandler.ReadToken(token);
+
+			var userId = int.Parse(jwtToken.Subject);
+			var user = await _userService.GetByIDAsync(userId);
+
+			return allowedRoles.Split(",").Any(role => role.Equals(user.Role.ToString()));
+        }
 	}
 }

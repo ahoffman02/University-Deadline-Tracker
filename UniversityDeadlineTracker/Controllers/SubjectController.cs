@@ -4,11 +4,13 @@ using Microsoft.AspNetCore.Mvc;
 using UDT.Business.Interfaces;
 using UDT.Model.Mappers;
 using UDT.Model.ViewModels;
+using UniversityDeadlineTracker.Filters;
 
 namespace UniversityDeadlineTracker.Controllers
 {
     [ApiController]
     [Route("api/subjects")]
+    [AuthorizationFilter]
     public class SubjectController : ControllerBase
     {
         private readonly ISubjectService _subjectService;
@@ -36,6 +38,7 @@ namespace UniversityDeadlineTracker.Controllers
         }
 
         [HttpPost]
+        [AuthorizationFilter(roles: "Teacher")]
         public async Task<IActionResult> Add([FromBody] SubjectCreationViewModel subjectCreationViewModel)
         {
             var subject = await _subjectService.AddAsync(subjectCreationViewModel.ToEntity());
@@ -47,6 +50,7 @@ namespace UniversityDeadlineTracker.Controllers
 
         [HttpDelete]
         [Route("{id:int}")]
+        [AuthorizationFilter(roles: "Teacher")]
         public async Task<IActionResult> Delete([FromRoute] int id)
         {
             var result = await _subjectService.DeleteAsync(id);
@@ -58,6 +62,7 @@ namespace UniversityDeadlineTracker.Controllers
 
         [HttpPut]
         [Route("{id:int}")]
+        [AuthorizationFilter(roles: "Teacher")]
         public async Task<IActionResult> Update([FromRoute] int id,
             [FromBody] SubjectUpdateViewModel subjectUpdateViewModel)
         {
