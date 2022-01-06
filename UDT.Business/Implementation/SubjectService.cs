@@ -31,6 +31,14 @@ namespace UDT.Business.Implementation
                 .AsAsyncEnumerable();
         }
 
+        public IAsyncEnumerable<Subject> GetAllSubjectUserIsUnAssignedTo(int id)
+        {
+            return _dataContext.Subjects
+                .Where(subj =>
+                    subj.Users.All(user => user.Id != id))
+                .AsAsyncEnumerable();
+        }
+
         public async Task<Subject> GetByIdAsync(int id)
         {
             return await _dataContext.Subjects
