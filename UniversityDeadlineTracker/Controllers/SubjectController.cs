@@ -79,7 +79,7 @@ namespace UniversityDeadlineTracker.Controllers
         }
 
         [HttpGet]
-        [Route("/assigned/{id:int}")]
+        [Route("assigned/{id:int}")]
         public IActionResult GetAllSubjectUserIsAssigned([FromRoute] int id)
         {
             return Ok(_subjectService.GetAllSubjectUserIsAssignedTo(id));
