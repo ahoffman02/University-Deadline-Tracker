@@ -8,6 +8,7 @@ namespace UDT.Model.ViewModels
         public int Id { get; set; }
         public string Name { get; set; }
         public SubjectType Type { get; set; }
+        public int Year { get; set; }
         public List<int> Users { get; set; }
     }
 }

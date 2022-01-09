@@ -82,5 +82,19 @@ namespace UniversityDeadlineTracker.Controllers
 
             return Ok(subject.ToViewModel());
         }
+
+        [HttpGet]
+        [Route("assigned/{id:int}")]
+        public IActionResult GetAllSubjectUserIsAssigned([FromRoute] int id)
+        {
+            return Ok(_subjectService.GetAllSubjectUserIsAssignedTo(id));
+        }
+
+        [HttpGet]
+        [Route("notAssigned/{id:int}")]
+        public IActionResult GetAllSubjectUserIsNotAssigned([FromRoute] int id)
+        {
+            return Ok(_subjectService.GetAllSubjectUserIsUnAssignedTo(id));
+        }
     }
 }

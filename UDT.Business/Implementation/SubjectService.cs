@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using UDT.Business.Interfaces;
 using UDT.Model.Entities;
@@ -19,6 +20,22 @@ namespace UDT.Business.Implementation
         public IAsyncEnumerable<Subject> GetAllAsync()
         {
             return _dataContext.Subjects
+                .AsAsyncEnumerable();
+        }
+
+        public IAsyncEnumerable<Subject> GetAllSubjectUserIsAssignedTo(int id)
+        {
+            return _dataContext.Subjects
+                .Where(subj =>
+                subj.Users.Any(user => user.Id == id))
+                .AsAsyncEnumerable();
+        }
+
+        public IAsyncEnumerable<Subject> GetAllSubjectUserIsUnAssignedTo(int id)
+        {
+            return _dataContext.Subjects
+                .Where(subj =>
+                    subj.Users.All(user => user.Id != id))
                 .AsAsyncEnumerable();
         }
 
