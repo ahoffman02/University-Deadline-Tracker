@@ -6,9 +6,8 @@ import Avatar from '@mui/material/Avatar';
 import {Divider, ListItemIcon, Menu, MenuItem, Stack} from "@mui/material";
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import {AccountCircle, Logout, Settings, Login} from "@mui/icons-material";
-import Logo from '../Resources/timetable.png'
+import Logo from '../Resources/timetable.png';
 import {getUser} from "../Utils/Token";
-import {LIGHT_GREY} from "../Utils/Constants";
 
 export const Header = (props) => {
     let history = useHistory();
@@ -65,7 +64,7 @@ export const Header = (props) => {
                    onClick={handleClick}>
                 <div className="avatar">
                     <Avatar alt="User"
-                            src="https://www.pngkey.com/png/full/230-2301779_best-classified-apps-default-user-profile.png"
+                            src={props.token && getUser().profilePictureURL ? '/' + getUser().profilePictureURL : "https://www.pngkey.com/png/full/230-2301779_best-classified-apps-default-user-profile.png"}
                             sx={{width: 30, height: 30}}/>
                 </div>
                 <div className="dropdown-icon">

@@ -92,7 +92,7 @@ const BacklogPage = (props) => {
         }
 
         const getHeaderCells = () => {
-            const header = ["Arrow", "Id", "Subject", "Title", "Deadline", "Status"]
+            const header = ["Arrow", "Id", "Subject", "Title", "Subtitle", "Deadline", "Status"]
             return header.map(column => {
                     return (
                         <TableCell
@@ -259,6 +259,9 @@ const Row = (props) => {
                     </TableCell>
                     <TableCell className="table-body-cell" align="left">
                         {getTitle(row.task.title)}
+                    </TableCell>
+                    <TableCell className="table-body-cell" align="left">
+                        {row.task.subtitle}
                     </TableCell>
                     <TableCell className="table-body-cell" align="center">
                         {new Date(row.task.deadline).toDateString()}

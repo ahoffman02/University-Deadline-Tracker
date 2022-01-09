@@ -56,10 +56,10 @@ export const TaskCard = (props) => {
                         </div>
                         <Stack>
                             <div className="card-titlee">
-                                {props.item.task.title.split('-')[0]}
+                                {props.item.task.title}
                             </div>
                             <div className="card-subtitle">
-                                {props.item.task.title.split('-')[1]}
+                                {props.item.task.subtitle}
                             </div>
                         </Stack>
                     </div>
