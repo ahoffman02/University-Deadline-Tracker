@@ -8,8 +8,7 @@ import {Default} from "../Components/Default";
 import {Login} from "../Components/Login";
 import {getUser} from "../Utils/Token";
 import {CSSTransition, TransitionGroup} from "react-transition-group";
-import {grey, orange} from "@mui/material/colors";
-import {LIGHT_GREY, LIGHTER_GREY, ORANGE_ACCENT} from "../Utils/Constants";
+import {LIGHTER_GREY, ORANGE_ACCENT} from "../Utils/Constants";
 
 export const LoginPage = (props) => {
         let history = useHistory();
@@ -19,7 +18,7 @@ export const LoginPage = (props) => {
             getAllSubjects().then(data => {
                 setSubjects(data)
             })
-        }, [])
+        }, [props.token])
 
         const getSubjectButtons = () => {
             return <TransitionGroup>

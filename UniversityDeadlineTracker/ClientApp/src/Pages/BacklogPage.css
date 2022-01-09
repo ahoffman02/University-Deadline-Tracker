@@ -1,5 +1,17 @@
+.table-header * {
+    color: white !important;
+    border: none !important;
+}
+
+.table-header .MuiTextField-root {
+    float: right;
+    background-color: var(--LIGHT_GREY);
+    border-radius: 5px;
+    margin: 10px 20px;
+}
+
 .table-container {
-    margin: 30px auto !important;
+    margin: 65px auto 10px !important;
     width: 90vw !important;
     height: 80% !important;
     background-color: var(--DARK_GREY) !important;
@@ -19,8 +31,19 @@
     border-right: 0.5px solid var(--LIGHT_GREY) !important;
     border-top: none !important;
     border-bottom: 1px solid var(--LIGHTER_GREY) !important;
+}
 
+.table-container .table-head-cell .MuiTableSortLabel-root, .MuiTableSortLabel-icon {
     color: white !important;
+    transition-duration: .3s;
+}
+
+.table-container .table-head-cell .MuiTableSortLabel-root:hover .MuiTableSortLabel-icon {
+    color: var(--LIGHTER_GREY) !important;
+}
+
+.table-container .table-head-cell .MuiTableSortLabel-root:hover {
+    color: var(--LIGHTER_GREY) !important;
 }
 
 .table-container .table-body {
@@ -93,4 +116,24 @@
     color: white;
     font-size: 12px !important;
     padding: 10px;
+}
+
+.table-footer {
+    margin-right: 70px;
+}
+
+.table-footer p {
+    margin: 0;
+}
+
+.table-footer .MuiTablePagination-root, .table-footer .MuiSelect-icon {
+    color: white;
+}
+
+.table-footer .Mui-disabled {
+    color: var(--DARK_GREY) !important;
+}
+
+.table-footer .MuiSvgIcon-root:hover, .table-footer .MuiSelect-root:hover, .table-footer .MuiSelect-root:hover .MuiSelect-icon {
+    color: grey;
 }
