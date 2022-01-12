@@ -14,6 +14,6 @@ namespace UDT.Repository
         public DbSet<Task> Tasks { get; set; }
         public DbSet<Subject> Subjects { get; set; }
         public DbSet<UserTask> UsersTasks { get; set; }
-
+        public DbSet<TaskComment> TaskComments { get; set; }
     }
 }
