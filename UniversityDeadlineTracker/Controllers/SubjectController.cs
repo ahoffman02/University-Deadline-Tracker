@@ -96,5 +96,17 @@ namespace UniversityDeadlineTracker.Controllers
         {
             return Ok(_subjectService.GetAllSubjectUserIsUnAssignedTo(id));
         }
+
+        [HttpGet]
+        [Route("teacher/{id:int}")]
+        public async Task<IActionResult> GetTeacherForSubject([FromRoute] int id)
+        {
+
+            var teacher = await _subjectService.GetTeacherForSubject(id);
+
+            if (teacher == null) return NotFound();
+
+            return Ok(teacher.toViewModel());
+        }
     }
 }

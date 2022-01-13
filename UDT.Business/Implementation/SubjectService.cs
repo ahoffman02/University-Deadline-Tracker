@@ -4,6 +4,7 @@ using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using UDT.Business.Interfaces;
 using UDT.Model.Entities;
+using UDT.Model.Enums;
 using UDT.Repository;
 
 namespace UDT.Business.Implementation
@@ -87,6 +88,17 @@ namespace UDT.Business.Implementation
             await _dataContext.SaveChangesAsync();
 
             return existingSubject;
+        }
+
+        public async Task<User> GetTeacherForSubject(int id)
+        {
+            var existingSubject = await _dataContext.Subjects
+                .Include(subject => subject.Users)
+                .FirstOrDefaultAsync(subject => subject.Id == id);
+
+            if (existingSubject is null) return null;
+
+            return existingSubject.Users.Find(user => user.Role == UserRole.Teacher);
         }
     }
 }
