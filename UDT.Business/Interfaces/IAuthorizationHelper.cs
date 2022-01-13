@@ -8,5 +8,6 @@ namespace UDT.Business.Interfaces
     {
         bool IsTokenValid(string token);
         Task<bool> IsUsersRoleAuthorized(string token, string authorizedRoles);
+        int ExtractUserIdFromToken(string token);
     }
 }

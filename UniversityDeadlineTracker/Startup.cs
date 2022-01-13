@@ -11,6 +11,7 @@ using UDT.Repository;
 using UDT.Business.Task;
 using UDT.Business.Helpers;
 using UDT.Model;
+using UniversityDeadlineTracker.Middlewares;
 
 namespace UniversityDeadlineTracker
 {
@@ -30,10 +31,11 @@ namespace UniversityDeadlineTracker
             services.AddDbContext<DataContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DbConnection")));
 
             services.AddControllersWithViews();
-            
+
             services.AddTransient<IServiceTask, ServiceTask>();
             services.AddTransient<IUserService, UserService>();
             services.AddTransient<IAccountService, AccountService>();
+            services.AddTransient<ITaskCommentService, TaskCommentService>();
             services.AddTransient<IService, Service>();
             services.AddTransient<IAuthorizationHelper, AuthorizationHelper>();
 
@@ -70,6 +72,8 @@ namespace UniversityDeadlineTracker
             app.UseSpaStaticFiles();
 
             app.UseRouting();
+
+            app.UseMiddleware<AttachUserToContextMiddleware>();
 
             app.UseEndpoints(endpoints =>
             {

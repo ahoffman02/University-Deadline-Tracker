@@ -53,14 +53,19 @@ namespace UDT.Business.Helpers
 		}
 
 		public async Task<bool> IsUsersRoleAuthorized(string token, string allowedRoles)
-        {
-			var tokenHandler = new JwtSecurityTokenHandler();
-			var jwtToken = (JwtSecurityToken)tokenHandler.ReadToken(token);
-
-			var userId = int.Parse(jwtToken.Subject);
+		{
+			var userId = ExtractUserIdFromToken(token);
 			var user = await _userService.GetByIDAsync(userId);
 
 			return allowedRoles.Split(",").Any(role => role.Equals(user.Role.ToString()));
-        }
+		}
+
+		public int ExtractUserIdFromToken(string token)
+		{
+			var tokenHandler = new JwtSecurityTokenHandler();
+			var jwtToken = (JwtSecurityToken)tokenHandler.ReadToken(token);
+
+			return int.Parse(jwtToken.Subject);
+		}
 	}
 }
