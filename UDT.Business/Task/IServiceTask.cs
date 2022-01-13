@@ -15,5 +15,7 @@ namespace UDT.Business.Task
         public Task<UDT.Model.Entities.Task> AddTask(TaskCreationViewModel taskDto);
         public System.Threading.Tasks.Task DeleteTask(int taskId);
         public Task<UDT.Model.Entities.Task> EditTask(TaskUpdateViewModel taskDto);
+
+        public IAsyncEnumerable<UDT.Model.Entities.Task> GetTaskFromGivenSubject(int subject);
     }
 }

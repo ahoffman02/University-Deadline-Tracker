@@ -52,5 +52,10 @@ namespace UDT.Business.Task
         {
             return await _dbContext.Tasks.FirstOrDefaultAsync(task => task.Id == taskId);
         }
+
+        public IAsyncEnumerable<Model.Entities.Task> GetTaskFromGivenSubject(int subject)
+        {
+            return  _dbContext.Tasks.Where(task => task.SubjectId == subject).AsAsyncEnumerable();
+        }
     }
 }

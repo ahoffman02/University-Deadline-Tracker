@@ -43,6 +43,21 @@ namespace UDT.Business.Implementation
                 throw new Exception("The user already has this subject!");
             user.Subjects.Add(subject);
             await _context.SaveChangesAsync();
+            IAsyncEnumerable<UDT.Model.Entities.Task> tasks_list = _taskService.GetTaskFromGivenSubject(subject.Id);
+            await foreach (Model.Entities.Task task in tasks_list)
+            {
+                UserTask userTask = new UserTask { 
+                    Task = task, 
+                    User = user,
+                    TaskId = task.Id,
+                    UserId = user.Id,
+                    Status = Model.Enums.TaskStatus.ToDo,
+                    Content = "",
+                    Grade = 0
+                };
+                _userTaskService.AddAsync(userTask);
+            }
+            await _context.SaveChangesAsync();
             return user;
         }
 

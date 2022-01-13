@@ -33,13 +33,11 @@ namespace UniversityDeadlineTracker
             
             services.AddTransient<IServiceTask, ServiceTask>();
             services.AddTransient<IUserService, UserService>();
+            services.AddScoped<ISubjectService, SubjectService>();
+            services.AddScoped<IUserTaskService, UserTaskService>();
             services.AddTransient<IAccountService, AccountService>();
             services.AddTransient<IService, Service>();
             services.AddTransient<IAuthorizationHelper, AuthorizationHelper>();
-
-            services.AddScoped<ISubjectService, SubjectService>();
-
-            services.AddScoped<IUserTaskService, UserTaskService>();
 
             // In production, the React files will be served from this directory
             services.AddSpaStaticFiles(configuration => { configuration.RootPath = "ClientApp/build"; });

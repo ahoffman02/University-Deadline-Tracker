@@ -7,6 +7,7 @@ namespace UDT.Model.Entities
 {
     public class UserTask
     {
+    
         public int Id { get; set; }
         public int TaskId { get; set; }
         public Task Task { get; set; }
@@ -16,4 +17,5 @@ namespace UDT.Model.Entities
         public string Content { get; set; }
         public double Grade { get; set; }
     }
+
 }
