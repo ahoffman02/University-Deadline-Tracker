@@ -10,6 +10,8 @@ namespace UDT.Business.Interfaces
 
         Task<UserTask> GetByIdAsync(int id);
 
+        Task<UserTask> GetByUserAndTask(int user, int task);
+
         Task<UserTask> AddAsync(UserTask userTask);
 
         Task<bool> DeleteAsync(int id);

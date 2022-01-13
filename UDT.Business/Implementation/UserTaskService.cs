@@ -59,5 +59,10 @@ namespace UDT.Business.Implementation
 
             return updatedUserTask;
         }
+
+        public async Task<UserTask> GetByUserAndTask(int user, int task)
+        {
+            return await _dataContext.UsersTasks.FirstOrDefaultAsync(userTask => userTask.UserId == user && userTask.TaskId == task);
+        }
     }
 }

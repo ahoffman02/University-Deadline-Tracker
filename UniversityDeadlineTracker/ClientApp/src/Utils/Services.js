@@ -81,12 +81,12 @@ export const getSubjectById = (id) => {
     )
 }
 
-export const getAllSubjects = async () => {
+export const getUnassignedSubjects = async () => {
     const requestOptions = {
         method: 'GET',
         headers: {'Authorization': 'Bearer ' + getToken()}
     };
-    return fetch('api/subjects', requestOptions).then(data =>
+    return fetch(`api/subjects/notAssigned/${getUser().id}`, requestOptions).then(data =>
         data.json()
     )
 }
@@ -99,7 +99,7 @@ export const enrollUserToSubject = async (subjectId) => {
     return fetch(`api/users/${getUser().id}/addsubject/${subjectId}`, requestOptions)
 }
 
-export const getTeacherforSubject=(subjectId)=>{
+export const getTeacherforSubject = (subjectId) => {
     const requestOptions = {
         method: 'GET',
         headers: {'Authorization': 'Bearer ' + getToken()}

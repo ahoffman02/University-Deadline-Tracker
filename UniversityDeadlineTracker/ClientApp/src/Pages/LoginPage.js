@@ -2,7 +2,7 @@
 import "./LoginPage.css"
 import {Pages, SubjectType} from "../Utils/Enums";
 import {useHistory} from "react-router-dom";
-import {enrollUserToSubject, getAllSubjects, getTeacherforSubject} from "../Utils/Services";
+import {enrollUserToSubject, getUnassignedSubjects, getTeacherforSubject} from "../Utils/Services";
 import {CircularProgress} from "@mui/material";
 import {Default} from "../Components/Default";
 import {Login} from "../Components/Login";
@@ -15,7 +15,9 @@ export const LoginPage = (props) => {
         const [subjects, setSubjects] = React.useState(null)
 
         React.useEffect(() => {
-            getAllSubjects().then(data => {
+            if (!props.token) return;
+
+            getUnassignedSubjects().then(data => {
                 setSubjects(data)
             })
         }, [props.token])
@@ -29,9 +31,9 @@ export const LoginPage = (props) => {
                                 setSubjects(subjects.filter(s => s.id !== subject.id))
                             })
                         }}>
-                            <div className="subject-type"
+                            <div className="subject-year"
                                  style={{backgroundColor: subject.type === SubjectType.OBLIGATORIU ? ORANGE_ACCENT : LIGHTER_GREY}}>
-                                {subject.type === SubjectType.OBLIGATORIU ? 'OB' : 'OP'}
+                                y{subject.year}
                             </div>
                             <div className="subject-name">{subject.name}</div>
                             <div className="subject-teacher">{`Teacher: ${getTeacherforSubject(subject.id)}`}</div>
