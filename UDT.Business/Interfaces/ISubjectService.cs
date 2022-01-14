@@ -18,5 +18,7 @@ namespace UDT.Business.Interfaces
         Task<bool> DeleteAsync(int id);
 
         Task<Subject> UpdateAsync(Subject subject);
+
+        Task<User> GetTeacherForSubject(int id);
     }
 }
