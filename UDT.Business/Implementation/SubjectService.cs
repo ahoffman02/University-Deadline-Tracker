@@ -98,7 +98,7 @@ namespace UDT.Business.Implementation
 
             if (existingSubject is null) return null;
 
-            return existingSubject.Users.Find(user => user.Role == UserRole.Teacher);
+            return existingSubject.Users.FirstOrDefault(user => user.Role == UserRole.Teacher);
         }
     }
 }
