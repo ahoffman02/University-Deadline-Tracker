@@ -20,5 +20,7 @@ namespace UDT.Model.Entities
         public string ProfilePictureURL { get; set; }
         public DateTime DateOfBirth { get; set; }
         public List<Subject> Subjects { get; set; }
+        public string RefreshToken { get; set; }
+        public DateTime? RefreshTokenExpiryTime { get; set; }
     }
 }

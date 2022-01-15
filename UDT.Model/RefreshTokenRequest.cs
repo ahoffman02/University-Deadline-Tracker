@@ -1,12 +1,12 @@
-﻿using UDT.Model.ViewModels;
+﻿using System;
+using System.Collections.Generic;
+using System.Text;
 
 namespace UDT.Model
 {
-    public class AuthenticationResponse
+    public class RefreshTokenRequest
     {
-        
         public string AccessToken { get; set; }
         public string RefreshToken { get; set; }
-        public UserViewModel User { get; set; }
     }
 }
