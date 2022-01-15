@@ -55,7 +55,7 @@ namespace UniversityDeadlineTracker.Controllers
         }
 
         [HttpPut]
-        [AuthorizationFilter(roles: "Teacher")]
+        [AuthorizationFilter]
         public async Task<IActionResult> EditTask([FromBody] TaskUpdateViewModel taskDto)
         {
             var dbTask = await _taskService.EditTask(taskDto);
