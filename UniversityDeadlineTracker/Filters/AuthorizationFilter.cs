@@ -28,7 +28,7 @@ namespace UniversityDeadlineTracker.Filters
             var authorizationHelper = (IAuthorizationHelper)context.HttpContext.RequestServices.GetService(typeof(IAuthorizationHelper));
 
             if (token != null &&
-                authorizationHelper.IsTokenValid(token) &&
+                authorizationHelper.IsAccessTokenValid(token) &&
                 await authorizationHelper.IsUsersRoleAuthorized(token, _allowedRoles))
             {
                 await next.Invoke();

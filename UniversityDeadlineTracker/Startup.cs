@@ -28,6 +28,8 @@ namespace UniversityDeadlineTracker
         public void ConfigureServices(IServiceCollection services)
         {
             services.Configure<AuthorizationSettings>(Configuration.GetSection("AuthorizationSettings"));
+            services.Configure<EncryptionSettings>(Configuration.GetSection("EncryptionSettings"));
+
             services.AddDbContext<DataContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DbConnection")));
 
             services.AddControllersWithViews();
@@ -40,6 +42,7 @@ namespace UniversityDeadlineTracker
             services.AddTransient<ITaskCommentService, TaskCommentService>();
             services.AddTransient<IService, Service>();
             services.AddTransient<IAuthorizationHelper, AuthorizationHelper>();
+            services.AddTransient<IHashingHelper, HashingHelper>();
 
             // In production, the React files will be served from this directory
             services.AddSpaStaticFiles(configuration => { configuration.RootPath = "ClientApp/build"; });

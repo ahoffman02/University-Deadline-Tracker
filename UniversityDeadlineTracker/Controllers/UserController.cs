@@ -51,11 +51,13 @@ namespace UniversityDeadlineTracker.Controllers
         [HttpPost]
         public async Task<IActionResult> Add([FromBody] UserCreationViewModel userCreationViewModel)
         {
-            return Ok(
-                (await _userService.AddAsync(
-                    userCreationViewModel.toEntity())
-                ).toViewModel()
-            );
+            var addedUser = await _userService.AddAsync(userCreationViewModel.toEntity());
+            if(addedUser == null)
+            {
+                return BadRequest("Username already exists!");
+            }
+            
+            return Ok(addedUser.toViewModel());
         }
 
         [HttpPut]
@@ -63,6 +65,10 @@ namespace UniversityDeadlineTracker.Controllers
         [AuthorizationFilter]
         public async Task<IActionResult> Update([FromRoute] int id, [FromBody] UserUpdateViewModel userUpdateViewModel)
         {
+            var userIdFromContext = (int)HttpContext.Items["UserId"];
+            if (userIdFromContext != id)
+                return Unauthorized();
+
             User user = userUpdateViewModel.toEntity();
             user.Id = id;
 
@@ -102,6 +108,10 @@ namespace UniversityDeadlineTracker.Controllers
         [AuthorizationFilter]
         public async Task<IActionResult> EnrollUserToSubject([FromRoute] int subjectId, [FromRoute] int userId)
         {
+            var userIdFromContext = (int)HttpContext.Items["UserId"];
+            if (userIdFromContext != userId)
+                return Unauthorized();
+
             try
             {
                 User user = await _service.enrollUserToSubject(userId, subjectId);

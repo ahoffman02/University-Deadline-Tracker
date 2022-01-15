@@ -6,6 +6,7 @@ using UDT.Model.ViewModels;
 using UDT.Model.Mappers;
 using System.Linq;
 using UDT.Model;
+using UniversityDeadlineTracker.Filters;
 
 namespace UniversityDeadlineTracker.Controllers
 {
@@ -24,15 +25,52 @@ namespace UniversityDeadlineTracker.Controllers
         [HttpPost]
         [Route("login")]
         [Produces("application/json")]
-        public IActionResult Login([FromBody] AuthenticationRequest login)
+        public async Task<IActionResult> LoginAsync([FromBody] AuthenticationRequest loginModel)
         {
             IActionResult response = Unauthorized();
-            var data = _accountService.Authenticate(login.Username, login.Password);
-            if (data.Token != null && data.User != null)
+            var data = await _accountService.AuthenticateAsync(loginModel.Username, loginModel.Password);
+            if (data.AccessToken != null && data.User != null)
                 response = Ok(data);
 
             return response;
         }
 
+        [HttpPut]
+        [Route("refresh-token")]
+        public async Task<IActionResult> RefreshTokenAsync(RefreshTokenRequest refreshTokenModel)
+        {
+            if(refreshTokenModel == null || 
+                string.IsNullOrEmpty(refreshTokenModel.AccessToken) ||
+                string.IsNullOrEmpty(refreshTokenModel.RefreshToken))
+            {
+                return Unauthorized();
+            }
+
+            var response = await _accountService.RefreshAsync(refreshTokenModel);
+
+            if(response == null ||
+                string.IsNullOrEmpty(response.AccessToken) ||
+                string.IsNullOrEmpty(response.RefreshToken))
+            {
+                return Unauthorized();
+            }
+
+            return Ok(response);
+        }
+
+        [HttpPost]
+        [Route("logout")]
+        [Produces("application/json")]
+        [AuthorizationFilter]
+        public async Task<IActionResult> LogoutAsync()
+        {
+            var userId = (int)HttpContext.Items["UserId"];
+
+            IActionResult response = Unauthorized();
+            
+            return Ok(
+                await _accountService.RevokeRefreshToken(userId)
+            );
+        }
     }
 }
