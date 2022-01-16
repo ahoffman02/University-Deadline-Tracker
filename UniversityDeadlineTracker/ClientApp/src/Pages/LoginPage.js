@@ -36,7 +36,8 @@ export const LoginPage = (props) => {
                                 y{subject.year}
                             </div>
                             <div className="subject-name">{subject.name}</div>
-                            <div className="subject-teacher">{`Teacher: ${getTeacherforSubject(subject.id)}`}</div>
+                            <div
+                                className="subject-teacher">{`Teacher: ${subject.teacher?.lastName} ${subject.teacher?.firstName}`}</div>
                         </div>
                     </CSSTransition>
                 })}

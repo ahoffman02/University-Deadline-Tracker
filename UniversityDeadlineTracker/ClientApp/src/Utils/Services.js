@@ -71,6 +71,16 @@ export const getTaskById = (id) => {
 
 // subjects
 
+export const getTeacherforSubject = (subjectId) => {
+    const requestOptions = {
+        method: 'GET',
+        headers: {'Authorization': 'Bearer ' + getToken()}
+    };
+    return fetch(`api/subjects/teacher/${subjectId}`, requestOptions).then(data =>
+        data.json()
+    )
+}
+
 export const getSubjectById = (id) => {
     const requestOptions = {
         method: 'GET',
@@ -86,9 +96,13 @@ export const getUnassignedSubjects = async () => {
         method: 'GET',
         headers: {'Authorization': 'Bearer ' + getToken()}
     };
-    return fetch(`api/subjects/notAssigned/${getUser().id}`, requestOptions).then(data =>
+    const subjects = await fetch(`api/subjects/notAssigned/${getUser().id}`, requestOptions).then(data =>
         data.json()
     )
+    return Promise.all(subjects.map(async (subject) => {
+        const teacher = await getTeacherforSubject(subject.id);
+        return {...subject, teacher: teacher};
+    }))
 }
 
 export const enrollUserToSubject = async (subjectId) => {
@@ -97,13 +111,4 @@ export const enrollUserToSubject = async (subjectId) => {
         headers: {'Authorization': 'Bearer ' + getToken()}
     };
     return fetch(`api/users/${getUser().id}/addsubject/${subjectId}`, requestOptions)
-}
-
-export const getTeacherforSubject = (subjectId) => {
-    const requestOptions = {
-        method: 'GET',
-        headers: {'Authorization': 'Bearer ' + getToken()}
-    };
-    // return fetch(`api/subjects/teacher/${subjectId}`, requestOptions)
-    return 'Mihis Andreea'
 }
