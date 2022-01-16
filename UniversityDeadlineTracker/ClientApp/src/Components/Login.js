@@ -60,7 +60,7 @@ export const Login = (props) => {
     const onLogin = () => {
         login(user.username, user.password).then((data) => {
             if (data) {
-                props.setToken(data.token, data.user);
+                props.setToken(data.accessToken, data.refreshToken, data.user);
             } else setLoginError(true);
         });
     };

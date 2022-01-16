@@ -41,6 +41,8 @@ const BacklogPage = (props) => {
         }, [props.token])
 
         const onSearch = (event) => {
+            setPage(0);
+
             if (event.target.value === '') {
                 setFilteredTasks(tasks);
                 return;
@@ -189,19 +191,14 @@ const Row = (props) => {
         const getStatus = (status) => {
             let color = "transparent";
             let text = "";
-            switch (status) {
-                case Status.NEW:
-                    color = "#c7c763";
-                    text = "New";
-                    break;
-                case Status.ACTIVE:
-                    color = "#006a91";
-                    text = "Active";
-                    break;
-                case Status.COMPLETED:
-                    color = "#008768";
-                    text = "Completed";
-                    break;
+            
+            if (status === Status.COMPLETED) {
+                color = "#008768";
+                text = "Completed";
+            } else {
+
+                color = "#c7c763";
+                text = "New";
             }
 
             return (

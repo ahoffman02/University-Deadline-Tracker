@@ -70,11 +70,11 @@ export const TaskCard = (props) => {
                         <div className="card-status">
                             <div className="card-status-dot"
                                  style={{
-                                     backgroundColor: status === Status.NEW ? '#ffffa1' : '#008768',
-                                     borderColor: status === Status.NEW ? LIGHTER_GREY : DARK_GREY
+                                     backgroundColor: status === Status.COMPLETED ? '#008768' : '#ffffa1',
+                                     borderColor: status === Status.COMPLETED ? DARK_GREY : LIGHTER_GREY
                                  }}
                             />
-                            {status === Status.NEW ? "New" : "Completed"}
+                            {status === Status.COMPLETED ? "Completed" : "New"}
                         </div>
                     </div>
                     <div className="card-description">
@@ -85,7 +85,7 @@ export const TaskCard = (props) => {
                         control={
                             <Checkbox
                                 size="small"
-                                checked={status !== Status.NEW}
+                                checked={status === Status.COMPLETED}
                                 onChange={handleChange}
                                 sx={{
                                     color: "#02af8e",
